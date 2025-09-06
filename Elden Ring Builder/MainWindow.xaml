@@ -47,7 +47,12 @@
                     <MenuItem Header="Open GitHub" Click="github_btn_Click" Foreground="White"/>
                     <MenuItem Header="Project's GitHub" Click="author_github_btn_Click" Foreground="White"/>
                 </MenuItem>
+
+                <MenuItem Header="Support" x:Name="support_btn" Foreground="White">
+                    <MenuItem Header="Telegram" Click="telegram_btn_Click" Foreground="White"/>
+                </MenuItem>
             </Menu>
+            <TextBlock x:Name="date_and_time_txt" Text="Time" HorizontalAlignment="Right" Foreground="White" FontSize="15" Margin="0,20,10,0"/>
         </Grid>
 
         <!--Left tools side 1x0-->
@@ -62,15 +67,16 @@
         <!-- Main sscreen 1x1-->
         <Grid Grid.Row="1" Grid.Column="1">
             <!-- <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" Margin="10"/>  -->
-            
-            <StackPanel x:Name="welcome_text_stackpanel" Margin="0,100,0,0" VerticalAlignment="Top">
+            <Image Source="/img/renni1.png" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
+            <StackPanel x:Name="welcome_text_stackpanel" Margin="0,30,0,0" VerticalAlignment="Top">
                 <TextBlock Text="Welcome to Elden Ring Builder" HorizontalAlignment="Center" FontSize="30" Foreground="White" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold"/>
                 <TextBlock x:Name="welcome_user_txt" HorizontalAlignment="Center" FontSize="30" Foreground="#047DD3" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold"/>
                 <ComboBox Name="select_char_combobox" Width="300" HorizontalAlignment="Center" Margin="0,20,0,0" Foreground="White">
                     <ComboBoxItem Content="Select your character" IsSelected="True" Foreground="White"/>
                 </ComboBox>
+                <Image Source="/img/knight1.png" Width="100" HorizontalAlignment="Right" Margin="0,0,20,0"/>
             </StackPanel>
+            <Image Source="/img/elden_ring_logo.png" Width="150" VerticalAlignment="Bottom" Margin="0,0,0,20"/>
         </Grid>
-        
     </Grid>
 </Window>

@@ -23,7 +23,8 @@ namespace Elden_Ring_Builder
             InitializeComponent();
             AppDbContext db = new AppDbContext();
             //LoadData();
-            welcome_user_txt.Text = Environment.UserName;
+            date_and_time_Tick();
+            welcome_user_text();
         }
 
         //private void LoadData()
@@ -34,7 +35,8 @@ namespace Elden_Ring_Builder
         //         dataGrid.ItemsSource = builds;
         //    }
         //}
-
+        private void welcome_user_text() => welcome_user_txt.Text = Environment.UserName;
+        private void date_and_time_Tick() => date_and_time_txt.Text = DateTime.Now.ToString("dd.MM.yyyy");
         private void exit_btn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -120,6 +122,23 @@ namespace Elden_Ring_Builder
             catch
             {
                 MessageBox.Show("Error, while github opening");
+            }
+        }
+
+        private void telegram_btn_Click(object sender, RoutedEventArgs e)
+        {
+            var url = "https://t.me/d1xer_231";
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                });
+            }
+            catch
+            {
+                MessageBox.Show("Error, while telegram opening");
             }
         }
     }
