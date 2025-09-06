@@ -22,13 +22,32 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="35"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         
-        <!--Icon + top 0x0-->
-        <Grid Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="2">
+        <!--Icon 0x0-->
+        <Grid Grid.Row="0">
             <Image Source="/img/icons/ico100.png" Stretch="Uniform" Height="30" Width="30" HorizontalAlignment="Left"/>
+        </Grid>
+        
+        <!-- Tools top 0x1-->
+        <Grid Grid.Column="1">
+            <Menu>
+                <MenuItem Header="App" x:Name="app_btn" Foreground="White">
+                    <MenuItem Header="About" Click="about_app_Click" Foreground="Black"/>
+                </MenuItem>
+                
+                <MenuItem Header="Steam" x:Name="steam_btn" Foreground="White">
+                    <MenuItem Header="Open Steam" Click="steam_btn_Click" Foreground="Black"/>
+                    <MenuItem Header="Author Steam" Click="author_steam_btn_Click" Foreground="Black"/>
+                </MenuItem>
+
+                <MenuItem Header="GitHub" x:Name="github_btn" Foreground="White">
+                    <MenuItem Header="Open GitHub" Click="github_btn_Click" Foreground="Black"/>
+                    <MenuItem Header="Project's GitHub" Click="author_github_btn_Click" Foreground="Black"/>
+                </MenuItem>
+            </Menu>
         </Grid>
 
         <!--Left tools side 1x0-->
