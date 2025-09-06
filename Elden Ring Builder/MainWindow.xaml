@@ -35,28 +35,42 @@
         <Grid Grid.Column="1">
             <Menu>
                 <MenuItem Header="App" x:Name="app_btn" Foreground="White">
-                    <MenuItem Header="About" Click="about_app_Click" Foreground="Black"/>
+                    <MenuItem Header="About" Click="about_app_Click" Foreground="White"/>
                 </MenuItem>
                 
                 <MenuItem Header="Steam" x:Name="steam_btn" Foreground="White">
-                    <MenuItem Header="Open Steam" Click="steam_btn_Click" Foreground="Black"/>
-                    <MenuItem Header="Author Steam" Click="author_steam_btn_Click" Foreground="Black"/>
+                    <MenuItem Header="Open Steam" Click="steam_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Author Steam" Click="author_steam_btn_Click" Foreground="White"/>
                 </MenuItem>
 
                 <MenuItem Header="GitHub" x:Name="github_btn" Foreground="White">
-                    <MenuItem Header="Open GitHub" Click="github_btn_Click" Foreground="Black"/>
-                    <MenuItem Header="Project's GitHub" Click="author_github_btn_Click" Foreground="Black"/>
+                    <MenuItem Header="Open GitHub" Click="github_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Project's GitHub" Click="author_github_btn_Click" Foreground="White"/>
                 </MenuItem>
             </Menu>
         </Grid>
 
         <!--Left tools side 1x0-->
         <Grid Grid.Row="1" Grid.Column="0">
-            <Button x:Name="exit_btn" Content="" Margin="2" VerticalAlignment="Bottom" BorderBrush="{x:Null}" Click="exit_btn_Click">
+            <Button x:Name="exit_btn" Content="" Margin="5,2,2,10" VerticalAlignment="Bottom" BorderBrush="{x:Null}" Click="exit_btn_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="/img/icons/exit.png" Stretch="Uniform"/>
                 </Button.Background>
             </Button>
         </Grid>
+        
+        <!-- Main sscreen 1x1-->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <!-- <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" Margin="10"/>  -->
+            
+            <StackPanel x:Name="welcome_text_stackpanel" Margin="0,100,0,0" VerticalAlignment="Top">
+                <TextBlock Text="Welcome to Elden Ring Builder" HorizontalAlignment="Center" FontSize="30" Foreground="White" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold"/>
+                <TextBlock x:Name="welcome_user_txt" HorizontalAlignment="Center" FontSize="30" Foreground="#047DD3" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold"/>
+                <ComboBox Name="select_char_combobox" Width="300" HorizontalAlignment="Center" Margin="0,20,0,0" Foreground="White">
+                    <ComboBoxItem Content="Select your character" IsSelected="True" Foreground="White"/>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+        
     </Grid>
 </Window>

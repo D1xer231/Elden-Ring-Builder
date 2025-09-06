@@ -17,10 +17,23 @@ namespace Elden_Ring_Builder
     /// </summary>
     public partial class MainWindow : Window
     {
+        private AppDbContext db;
         public MainWindow()
         {
             InitializeComponent();
+            AppDbContext db = new AppDbContext();
+            //LoadData();
+            welcome_user_txt.Text = Environment.UserName;
         }
+
+        //private void LoadData()
+        //{
+        //    using (var db = new AppDbContext())
+        //    {
+        //        var builds = db.Builds.ToList();
+        //         dataGrid.ItemsSource = builds;
+        //    }
+        //}
 
         private void exit_btn_Click(object sender, RoutedEventArgs e)
         {
