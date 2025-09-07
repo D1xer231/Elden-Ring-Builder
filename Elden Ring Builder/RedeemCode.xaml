@@ -27,7 +27,7 @@
                        Margin="0,20,0,20"/>
                 <TextBox x:Name="CodeTextBox"
                          Width="150"
-                         Height="30"
+                         Height="35"
                          FontSize="15"
                          Margin="0,0,0,20"
                          HorizontalAlignment="Center"
