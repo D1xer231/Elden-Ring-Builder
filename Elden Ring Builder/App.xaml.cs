@@ -10,5 +10,4 @@ namespace Elden_Ring_Builder
     public partial class App : Application
     {
     }
-
 }

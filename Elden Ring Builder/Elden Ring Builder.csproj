@@ -14,8 +14,14 @@
     <None Remove="img\icons\exit.png" />
     <None Remove="img\icons\ico100.png" />
     <None Remove="img\icons\ico33.png" />
+    <None Remove="img\icons\show.png" />
     <None Remove="img\knight1.png" />
     <None Remove="img\renni.jpg" />
+    <None Remove="img\weapons\aliketh_klinok.png" />
+    <None Remove="img\weapons\carian_weapon.png" />
+    <None Remove="img\weapons\maliketh_klinok.png" />
+    <None Remove="img\weapons\reki_krofi.png" />
+    <None Remove="img\weapons\two_handed_sword.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,8 +42,15 @@
     <Resource Include="img\icons\ico33.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="img\icons\show.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\knight1.png" />
     <Resource Include="img\renni1.png" />
+    <Resource Include="img\weapons\carian_weapon.png" />
+    <Resource Include="img\weapons\maliketh_klinok.png" />
+    <Resource Include="img\weapons\reki_krofi.png" />
+    <Resource Include="img\weapons\two_handed_sword.png" />
   </ItemGroup>
 
 </Project>

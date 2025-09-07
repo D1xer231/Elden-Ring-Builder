@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using Elden_Ring_Builder.models;
+using Microsoft.VisualBasic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static MaterialDesignThemes.Wpf.Theme.ToolBar;
 
 namespace Elden_Ring_Builder
 {
@@ -25,6 +28,10 @@ namespace Elden_Ring_Builder
             //LoadData();
             date_and_time_Tick();
             welcome_user_text();
+
+            List<builds> builds = db.Builds.ToList(); // Получаем список товаров из базы данных
+
+            BuildsList.ItemsSource = builds; // Устанавливаем источник данных для ListBox
         }
 
         //private void LoadData()
@@ -141,5 +148,24 @@ namespace Elden_Ring_Builder
                 MessageBox.Show("Error, while telegram opening");
             }
         }
+
+        private void redeemcode_btn_Click(object sender, RoutedEventArgs e)
+        {
+            string input = Interaction.InputBox("Enter code:", "Elden Ring Builder");
+
+            if (!string.IsNullOrEmpty(input))
+            {
+                if(input == "kapitan_Moshonka")
+                {
+                    MessageBox.Show("Life if like dick\nsomethimes its hard\nsomethimes its soft\nbut you must always keep it hard\nand never give up");
+                }
+            }
+        }
+
+        //private void show_hide_btn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    welcome_text.Visibility =
+        //        (welcome_text.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;
+        //}
     }
 }
