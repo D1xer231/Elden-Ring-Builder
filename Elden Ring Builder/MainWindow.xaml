@@ -56,6 +56,7 @@
 
                 <MenuItem Header="Support" x:Name="support_btn" Foreground="White">
                     <MenuItem Header="Telegram" Click="telegram_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Send Email" Click="send_email_btn_Click" Foreground="White"/>
                 </MenuItem>
 
                 <MenuItem Header="Code" x:Name="redeemcode_btn" Foreground="White">
@@ -77,6 +78,16 @@
             <Button x:Name="exit_btn" Content="" Margin="5,2,2,10" VerticalAlignment="Bottom" BorderBrush="{x:Null}" Click="exit_btn_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="/img/icons/exit.png" Stretch="Uniform"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="email_btn" VerticalAlignment="Bottom" Margin="0,0,0,50" Click="send_email_btn_Click" Cursor="Hand" BorderBrush="{x:Null}">
+                <Button.Background>
+                    <ImageBrush Stretch="Uniform" ImageSource="/img/icons/letter.png"/>
+                </Button.Background>
+            </Button>
+            <Button BorderBrush="{x:Null}" VerticalAlignment="Bottom" Margin="0,0,0,100" Width="30" Height="32" Cursor="Hand" Click="steam_btn_Click">
+                <Button.Background>
+                    <ImageBrush Stretch="Uniform" ImageSource="/img/icons/steam_icon.png"/>
                 </Button.Background>
             </Button>
         </Grid>

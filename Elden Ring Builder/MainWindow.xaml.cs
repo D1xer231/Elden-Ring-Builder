@@ -1,17 +1,9 @@
 ﻿using Elden_Ring_Builder.models;
 using Microsoft.VisualBasic;
 using System.Diagnostics;
-using System.Text;
+using System.Diagnostics.Eventing.Reader;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static MaterialDesignThemes.Wpf.Theme.ToolBar;
 
 namespace Elden_Ring_Builder
 {
@@ -25,23 +17,14 @@ namespace Elden_Ring_Builder
         {
             InitializeComponent();
             AppDbContext db = new AppDbContext();
-            //LoadData();
+
             date_and_time_Tick();
             welcome_user_text();
 
-            List<builds> builds = db.Builds.ToList(); // Получаем список товаров из базы данных
+            List<builds> builds = db.Builds.ToList();
 
-            BuildsList.ItemsSource = builds; // Устанавливаем источник данных для ListBox
+            BuildsList.ItemsSource = builds;
         }
-
-        //private void LoadData()
-        //{
-        //    using (var db = new AppDbContext())
-        //    {
-        //        var builds = db.Builds.ToList();
-        //         dataGrid.ItemsSource = builds;
-        //    }
-        //}
         private void welcome_user_text() => welcome_user_txt.Text = Environment.UserName;
         private void date_and_time_Tick() => date_and_time_txt.Text = DateTime.Now.ToString("dd.MM.yyyy");
         private void exit_btn_Click(object sender, RoutedEventArgs e)
@@ -77,6 +60,19 @@ namespace Elden_Ring_Builder
             catch
             {
                 MessageBox.Show("Error, while steam opening");
+                var url = "https://store.steampowered.com/login/";
+                try
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = url,
+                        UseShellExecute = true
+                    });
+                }
+                catch
+                {
+                    MessageBox.Show("Error, while steam opening");
+                }
             }
         }
 
@@ -151,21 +147,17 @@ namespace Elden_Ring_Builder
 
         private void redeemcode_btn_Click(object sender, RoutedEventArgs e)
         {
-            string input = Interaction.InputBox("Enter code:", "Elden Ring Builder");
-
-            if (!string.IsNullOrEmpty(input))
-            {
-                if(input == "kapitan_Moshonka")
-                {
-                    MessageBox.Show("Life if like dick\nsomethimes its hard\nsomethimes its soft\nbut you must always keep it hard\nand never give up");
-                }
-            }
+            RedeemCode redeemCode = new RedeemCode();
+            redeemCode.Show();
         }
 
-        //private void show_hide_btn_Click(object sender, RoutedEventArgs e)
-        //{
-        //    welcome_text.Visibility =
-        //        (welcome_text.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;
-        //}
+        private void send_email_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "mailto:aalexandr397@gmail.com?subject=APP_PROBLEM_OR_ETC&body= Describe the problem",
+                UseShellExecute = true
+            });
+        }
     }
 }

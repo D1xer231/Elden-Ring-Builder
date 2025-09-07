@@ -17,7 +17,7 @@
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Image Source="/img/icons/ico100.png"  Width="100" Height="100"/>
 
-                <TextBlock Text="Elden Ring Builds"
+                <TextBlock Text="Elden Ring Builder"
                        FontSize="22"
                        Foreground="#047DD3"
                        FontWeight="Bold"

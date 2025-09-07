@@ -14,7 +14,10 @@
     <None Remove="img\icons\exit.png" />
     <None Remove="img\icons\ico100.png" />
     <None Remove="img\icons\ico33.png" />
+    <None Remove="img\icons\info.png" />
+    <None Remove="img\icons\letter.png" />
     <None Remove="img\icons\show.png" />
+    <None Remove="img\icons\steam_icon.png" />
     <None Remove="img\knight1.png" />
     <None Remove="img\renni.jpg" />
     <None Remove="img\weapons\aliketh_klinok.png" />
@@ -29,6 +32,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
     <PackageReference Include="MySql.Data" Version="9.4.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
+    <PackageReference Include="Telegram.Bot" Version="22.7.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,7 +46,14 @@
     <Resource Include="img\icons\ico33.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="img\icons\info.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\icons\letter.png" />
     <Resource Include="img\icons\show.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\icons\steam_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\knight1.png" />
