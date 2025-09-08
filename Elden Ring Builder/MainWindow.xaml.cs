@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Elden_Ring_Builder
 {
@@ -158,6 +159,11 @@ namespace Elden_Ring_Builder
                 FileName = "mailto:aalexandr397@gmail.com?subject=APP_PROBLEM_OR_ETC&body= Describe the problem",
                 UseShellExecute = true
             });
+        }
+
+        private void apptheme_btn_Click(object sender, RoutedEventArgs e)
+        {
+            // create change theme window to light or dark
         }
     }
 }
