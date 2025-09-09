@@ -12,7 +12,7 @@ namespace Elden_Ring_Builder
     internal class AppDbContext : DbContext
     {
         public DbSet<builds> Builds { get; set; }
-
+        public DbSet<weapons> Weapons { get; set; }
         public AppDbContext()
         {
             Database.EnsureCreated();

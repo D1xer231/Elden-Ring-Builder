@@ -23,8 +23,10 @@ namespace Elden_Ring_Builder
             welcome_user_text();
 
             List<builds> builds = db.Builds.ToList();
+            List<weapons> weapons = db.Weapons.ToList();
 
             BuildsList.ItemsSource = builds;
+            WeaponsList.ItemsSource = weapons;
         }
         private void welcome_user_text() => welcome_user_txt.Text = Environment.UserName;
         private void date_and_time_Tick() => date_and_time_txt.Text = DateTime.Now.ToString("dd.MM.yyyy");
@@ -164,6 +166,20 @@ namespace Elden_Ring_Builder
         private void apptheme_btn_Click(object sender, RoutedEventArgs e)
         {
             // create change theme window to light or dark
+           
         }
+
+        private void weapons_screen_Click(object sender, RoutedEventArgs e)
+        {
+            main_screen_grid.Visibility = Visibility.Hidden;
+            weapons_grid.Visibility = Visibility.Visible;
+        }
+
+        private void change_to_mainscreen_click(object sender, RoutedEventArgs e)
+        {
+            weapons_grid.Visibility = Visibility.Hidden;
+            main_screen_grid.Visibility = Visibility.Visible;
+        }
+
     }
 }
