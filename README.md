@@ -18,9 +18,9 @@ Elden Ring Builder helps players create, test, and optimize character builds. Us
 
 ## ⚡ Features
 
-- **Build Creation**: Customize character stats, equipment, and spells.  
-- **Build Testing**: Simulate scenarios to test your builds’ efficiency.  
-- **Save Builds**: Store and share your builds with other players.  
+- **New UI**: new UI in future
+- **More functuions**: more helpful and interesting functions in future
+- **Telegram**: telegram bot support
 
 ---
 
