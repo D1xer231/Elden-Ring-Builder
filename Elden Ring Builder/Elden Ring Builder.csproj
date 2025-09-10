@@ -17,6 +17,7 @@
     <None Remove="img\icons\ico33.png" />
     <None Remove="img\icons\info.png" />
     <None Remove="img\icons\letter.png" />
+    <None Remove="img\icons\rectangle-list.png" />
     <None Remove="img\icons\show.png" />
     <None Remove="img\icons\steam_icon.png" />
     <None Remove="img\icons\sword.png" />
@@ -55,6 +56,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\icons\letter.png" />
+    <Resource Include="img\icons\rectangle-list.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\icons\show.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

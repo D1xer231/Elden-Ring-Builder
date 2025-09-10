@@ -13,6 +13,7 @@ namespace Elden_Ring_Builder
     {
         public DbSet<builds> Builds { get; set; }
         public DbSet<weapons> Weapons { get; set; }
+        public DbSet<runes> Runes { get; set; }
         public AppDbContext()
         {
             Database.EnsureCreated();

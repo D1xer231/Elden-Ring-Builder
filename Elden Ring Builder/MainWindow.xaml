@@ -97,9 +97,14 @@
                     <ImageBrush Stretch="Uniform" ImageSource="/img/icons/sword.png"/>
                 </Button.Background>
             </Button>
-            <Button BorderBrush="{x:Null}" Width="30" Height="32" VerticalAlignment="Bottom" Margin="0,0,0,210" Cursor="Hand" Click="change_to_mainscreen_click">
+            <Button BorderBrush="{x:Null}" Width="30" Height="32" VerticalAlignment="Bottom" Margin="0,0,0,260" Cursor="Hand" Click="change_to_mainscreen_click">
                 <Button.Background>
                     <ImageBrush Stretch="Uniform" ImageSource="/img/icons/house-chimney.png"/>
+                </Button.Background>
+            </Button>
+            <Button Width="30" Height="32" VerticalAlignment="Bottom" Margin="0,0,0,210" BorderBrush="{x:Null}" Click="runeslist_btn_Click" Cursor="Hand">
+                <Button.Background>
+                    <ImageBrush ImageSource="/img/icons/rectangle-list.png"/>
                 </Button.Background>
             </Button>
         </Grid>
@@ -136,7 +141,7 @@
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
 
-                        <!-- Шаблон карточки -->
+                        <!-- layaout -->
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Border Margin="10"
@@ -147,7 +152,7 @@
                         Width="150">
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
-                                        <!-- Картинка -->
+                                        <!-- img -->
                                         <Image Source="{Binding img_path}"
                                Height="120"
                                Width="220"
@@ -155,7 +160,7 @@
                                Margin="0,0,0,10"
                                HorizontalAlignment="Center"/>
 
-                                        <!-- Название -->
+                                        <!-- name -->
                                         <TextBlock Text="{Binding Name}"
                                    Foreground="#D9D9D9"
                                    FontSize="13"
@@ -163,7 +168,7 @@
                                    TextAlignment="Center"
                                    Margin="0,0,0,5"/>
 
-                                        <!-- Таблица статов -->
+                                        <!-- stats table -->
                                         <Grid Margin="0,5,0,0">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
@@ -205,7 +210,7 @@
                                             <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Arcane}" Foreground="#FFD700" FontSize="13" Margin="5,0,0,0"/>
                                         </Grid>
 
-                                        <!-- Уровень -->
+                                        <!-- lvl -->
                                         <TextBlock Text="{Binding LVL}"
                                    Foreground="#D9D9D9"
                                    FontSize="10"
@@ -229,14 +234,16 @@
         <!-- weapons screen + stats -->
         <Grid Grid.Row="1" Grid.Column="1" x:Name="weapons_grid" Visibility="Hidden">
             <StackPanel>
+                <TextBlock Text="Weapons and Stats" HorizontalAlignment="Center" FontSize="30" Foreground="White" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold" Margin="0,30,0,0"/>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                          VerticalScrollBarVisibility="Disabled"
                          CanContentScroll="False"
                          Grid.Column="1"
                          Grid.Row="1"
-                         PanningMode="HorizontalOnly">
+                         PanningMode="HorizontalOnly"
+                         Margin="20">
                     <ListBox x:Name="WeaponsList"
-                        Margin="10"
+                        Margin="40"
                         ItemsSource="{Binding weapons}"
                         Background="Transparent"
                         BorderThickness="0"
@@ -250,7 +257,7 @@
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
 
-                        <!-- Шаблон карточки -->
+                        <!-- layaout -->
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Border Margin="10"
@@ -261,7 +268,7 @@
                                            Width="150" >
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
-                                        <!-- Картинка -->
+                                        <!-- img -->
                                         <Image Source="{Binding image_path}"
                                           Height="120"
                                           Width="220"
@@ -269,7 +276,7 @@
                                           Margin="0,0,0,10"
                                           HorizontalAlignment="Center"/>
 
-                                        <!-- Название -->
+                                        <!-- name -->
                                         <TextBlock Text="{Binding name}"
                                               Foreground="#D9D9D9"
                                               FontSize="13"
@@ -277,7 +284,7 @@
                                               TextAlignment="Center"
                                               Margin="0,0,0,5"/>
 
-                                        <!-- Таблица статов -->
+                                        <!-- stats table -->
                                         <Grid Margin="0,5,0,0">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
@@ -312,19 +319,100 @@
                                             <TextBlock Grid.Row="5" Grid.Column="0" Text="Critical:" Foreground="#D9D9D9" FontSize="13"/>
                                             <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding crift}" Foreground="#FFD700" FontSize="13" Margin="5,0,0,0"/>
                                         </Grid>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+            </StackPanel>
+            <TextBlock Text="*Weapon stats are approximate and may vary based on upgrades and player stats." HorizontalAlignment="Center" FontSize="10" Foreground="White" VerticalAlignment="Bottom" FontFamily="Sitka Heading Semibold" Margin="0,0,0,20"/>
+        </Grid>
+        
+        <!-- runes info screen 1x1-->
+        <Grid Grid.Column="1" Grid.Row="1" Visibility="Hidden" x:Name="runes_list_grid">
+            <StackPanel>
+                <TextBlock Text="Runes" HorizontalAlignment="Center" FontSize="30" Foreground="White" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold" Margin="0,10,0,0"/>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                     VerticalScrollBarVisibility="Disabled"
+                     CanContentScroll="False"
+                     Grid.Column="1"
+                     Grid.Row="1"
+                     PanningMode="HorizontalOnly"
+                     Margin="10">
+                    <ListBox x:Name="RunesList"
+                        Margin="10"
+                        ItemsSource="{Binding runes}"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        ScrollViewer.VerticalScrollBarVisibility="Disabled">
 
-                                        <!-- Уровень -->
+                        <!-- Горизонтальная раскладка -->
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+
+                        <!-- layout -->
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="10"
+                               Padding="10"
+                               Background="#005592"
+                               CornerRadius="10"
+                               BorderBrush="Transparent"
+                               Width="150" >
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+
+                                        <!-- img -->
+                                        <Image Source="{Binding image_path}"
+                                          Height="120"
+                                          Width="220"
+                                          Stretch="Uniform"
+                                          Margin="0,0,0,10"
+                                          HorizontalAlignment="Center"/>
+
+                                        <!-- name -->
+                                        <TextBlock Text="{Binding name}"
+                                          Foreground="#FFD700"
+                                          FontSize="13"
+                                          FontWeight="Bold"
+                                          TextAlignment="Center"
+                                          Margin="0,0,0,5"/>
+
+                                        <!-- description -->
+                                        <TextBlock Text="{Binding description}"
+                                          Foreground="#D9D9D9"
+                                          FontSize="10"
+                                          TextAlignment="Center"
+                                          TextWrapping="Wrap"
+                                          Margin="0,5,0,0"/>
+
+                                        <!-- location -->
+                                        <TextBlock Text="{Binding location}"
+                                          Foreground="#D9D9D9"
+                                          FontSize="10"
+                                          TextAlignment="Center"
+                                          TextWrapping="Wrap"
+                                          Margin="0,5,0,0"/>
                                         
-                                        <!-- <TextBlock Text="{Binding LVL}"
-                                              Foreground="#D9D9D9"
-                                              FontSize="10"
-                                              FontWeight="Bold"
-                                              Margin="0,10,0,0"
-                                              HorizontalAlignment="Center"
-                                              x:Name="lvl_textblock"/> -->
+                                        <!-- type -->
+                                        <TextBlock Text="{Binding type}"
+                                          Foreground="#D9D9D9"
+                                          FontSize="10"
+                                          TextAlignment="Center"
+                                          TextWrapping="Wrap"
+                                          Margin="0,5,0,0"/>
 
-                                        
-
+                                        <!-- type -->
+                                        <TextBlock Text="{Binding effect}"
+                                          Foreground="#D9D9D9"
+                                          FontSize="10"
+                                          TextAlignment="Center"
+                                          TextWrapping="Wrap"
+                                          Margin="0,5,0,0"/>
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
