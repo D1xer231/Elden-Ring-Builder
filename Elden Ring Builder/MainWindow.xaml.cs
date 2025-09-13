@@ -19,7 +19,7 @@ namespace Elden_Ring_Builder
             InitializeComponent();
             AppDbContext db = new AppDbContext();
 
-            date_and_time_Tick();
+            //date_and_time_Tick();
             welcome_user_text();
 
             List<builds> builds = db.Builds.ToList();
@@ -30,8 +30,10 @@ namespace Elden_Ring_Builder
             WeaponsList.ItemsSource = weapons;
             RunesList.ItemsSource = runes;
         }
+
+
         private void welcome_user_text() => welcome_user_txt.Text = Environment.UserName;
-        private void date_and_time_Tick() => date_and_time_txt.Text = DateTime.Now.ToString("dd.MM.yyyy");
+        //private void date_and_time_Tick() => date_and_time_txt.Text = DateTime.Now.ToString("dd.MM.yyyy");
         private void exit_btn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -49,7 +51,8 @@ namespace Elden_Ring_Builder
                                "Version: 1.0.0\n";
             string descriptionText = "A simple application to help you build your character in Elden Ring.\n" +
                                      "This application is not affiliated with FromSoftware or Bandai Namco Entertainment.";
-            MessageBox.Show(aboutText + "\n" + descriptionText);
+            DateTime dateTime = DateTime.Now;
+            MessageBox.Show(aboutText + "\n" + descriptionText + "\n\n" + dateTime);
         }
 
         private void steam_btn_Click(object sender, RoutedEventArgs e)
