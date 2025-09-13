@@ -66,7 +66,7 @@
 
             <!--<TextBlock x:Name="date_and_time_txt" Text="Time" HorizontalAlignment="Right" Foreground="White" FontSize="15" Margin="0,20,10,0" Grid.Column="2"/> -->
 
-            <Button HorizontalAlignment="Right" Margin="0,0,30,0" Background="White" BorderBrush="{x:Null}" x:Name="apptheme_btn" Click="apptheme_btn_Click"/>
+            <Button Visibility="Hidden"  HorizontalAlignment="Right" Margin="0,0,30,0" Background="White" BorderBrush="{x:Null}" x:Name="apptheme_btn" Click="apptheme_btn_Click"/>
         </Grid>
 
         <!--Left tools side 1x0-->

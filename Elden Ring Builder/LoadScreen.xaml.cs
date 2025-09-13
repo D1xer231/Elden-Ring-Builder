@@ -23,7 +23,7 @@ namespace Elden_Ring_Builder
         {
             
             InitializeComponent();
-            Task.Delay(1000).ContinueWith(_ => Dispatcher.Invoke(ShowMainWindow));
+            Task.Delay(3000).ContinueWith(_ => Dispatcher.Invoke(ShowMainWindow));
         }
 
         private void ShowMainWindow()
