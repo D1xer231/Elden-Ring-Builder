@@ -1,0 +1,5 @@
+{
+	"ConnectionStrings": {
+		"DefaultDb": "server=<host>;username=<user>;password=<password>;database=defaultdb;SslMode=Required;"
+	}
+}

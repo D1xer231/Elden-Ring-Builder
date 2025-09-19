@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Elden_Ring_Builder.models
 {
+    [Table("weapons")] // точное имя из MySQL
     class weapons
     {
         public int id { get; set; }

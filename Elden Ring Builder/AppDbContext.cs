@@ -1,11 +1,8 @@
 ﻿using Elden_Ring_Builder.models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using System.IO;
 
 namespace Elden_Ring_Builder
 {
@@ -14,19 +11,30 @@ namespace Elden_Ring_Builder
         public DbSet<builds> Builds { get; set; }
         public DbSet<weapons> Weapons { get; set; }
         public DbSet<runes> Runes { get; set; }
+
         public AppDbContext()
         {
+            // Создаём базу, если её нет
             Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            var connectionString = "server=localhost;port=3306;username=root;password=root;database=elden_ring_builder";
+            // Строим конфигурацию только из JSON файлов
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsetings.json", optional: false) // шаблон для GitHub
+                .AddJsonFile("appsettings.Development.json", optional: true) // реальные секреты
+                .Build();
+
+            // Берём строку подключения из конфигурации
+            var connectionString = configuration.GetConnectionString("DefaultDb");
 
             options.UseMySql(
                 connectionString,
                 ServerVersion.AutoDetect(connectionString)
             );
         }
+
     }
 }
