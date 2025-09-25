@@ -1,5 +1,9 @@
 ﻿using Elden_Ring_Builder.models;
 using Microsoft.VisualBasic;
+using QRCoder;
+using System.Drawing;
+using System.IO;
+using System.Windows.Media.Imaging;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Windows;
@@ -178,6 +182,7 @@ namespace Elden_Ring_Builder
         {
             main_screen_grid.Visibility = Visibility.Hidden;
             runes_list_grid.Visibility = Visibility.Hidden;
+            settings_screen_grid.Visibility = Visibility.Hidden;
             weapons_grid.Visibility = Visibility.Visible;
         }
 
@@ -185,6 +190,7 @@ namespace Elden_Ring_Builder
         {
             weapons_grid.Visibility = Visibility.Hidden;
             runes_list_grid.Visibility = Visibility.Hidden;
+            settings_screen_grid.Visibility = Visibility.Hidden;
             main_screen_grid.Visibility = Visibility.Visible;
         }
 
@@ -192,7 +198,43 @@ namespace Elden_Ring_Builder
         {
             main_screen_grid.Visibility = Visibility.Hidden;
             weapons_grid.Visibility = Visibility.Hidden;
+            settings_screen_grid.Visibility = Visibility.Hidden;
             runes_list_grid.Visibility = Visibility.Visible;
         }
+
+        private static BitmapImage GenerateQr(string text)
+        {
+            using var qrGenerator = new QRCodeGenerator();
+            using var qrData = qrGenerator.CreateQrCode(text, QRCodeGenerator.ECCLevel.Q);
+            using var qrCode = new QRCode(qrData);
+            using Bitmap qrBitmap = qrCode.GetGraphic(20);
+
+            return BitmapToImageSource(qrBitmap);
+        }
+
+        private static BitmapImage BitmapToImageSource(Bitmap bitmap)
+        {
+            using MemoryStream ms = new MemoryStream();
+            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+
+            BitmapImage img = new BitmapImage();
+            img.BeginInit();
+            img.CacheOption = BitmapCacheOption.OnLoad;
+            img.StreamSource = ms;
+            img.EndInit();
+            return img;
+        }
+
+        private void settings_btn_Click(object sender, RoutedEventArgs e)
+        {
+            QrImage.Source = GenerateQr("https://i.pinimg.com/736x/2a/f1/cd/2af1cde161d06fe92a1239f70c01154a.jpg");
+
+            main_screen_grid.Visibility = Visibility.Hidden;
+            weapons_grid.Visibility = Visibility.Hidden;
+            runes_list_grid.Visibility = Visibility.Hidden;
+            settings_screen_grid.Visibility = Visibility.Visible;
+        }
     }
+
 }

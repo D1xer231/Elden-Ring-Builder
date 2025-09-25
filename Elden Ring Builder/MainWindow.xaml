@@ -91,7 +91,7 @@
                     <ImageBrush Stretch="Uniform" ImageSource="/img/icons/sword.png"/>
                 </Button.Background>
             </Button>
-            <Button BorderBrush="{x:Null}" Width="30" Height="32" VerticalAlignment="Bottom" Margin="0,0,0,260" Cursor="Hand" Click="change_to_mainscreen_click">
+            <Button BorderBrush="{x:Null}" Width="30" Height="32" VerticalAlignment="Bottom" Margin="0,0,0,310" Cursor="Hand" Click="change_to_mainscreen_click">
                 <Button.Background>
                     <ImageBrush Stretch="Uniform" ImageSource="/img/icons/house-chimney.png"/>
                 </Button.Background>
@@ -101,7 +101,14 @@
                     <ImageBrush ImageSource="/img/icons/rectangle-list.png"/>
                 </Button.Background>
             </Button>
+            <Button x:Name="settings_btn" BorderBrush="{x:Null}" VerticalAlignment="Bottom" Margin="0,0,0,260" Cursor="Hand" Click="settings_btn_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/img/icons/settings.png" Stretch="Uniform"/>
+                </Button.Background>
+            </Button>
         </Grid>
+
+
 
         <!-- Main sscreen 1x1-->
         <Grid Grid.Row="1" Grid.Column="1" x:Name="main_screen_grid" Visibility="Visible">
@@ -368,6 +375,11 @@
                     </ListBox>
                 </ScrollViewer>
             </StackPanel>
+        </Grid>
+        
+        <!--settings  -->
+        <Grid Grid.Row="1" Grid.Column="1" x:Name="settings_screen_grid" Visibility="Visible">
+            <Image x:Name="QrImage" Grid.Row="1" Grid.Column="1" Width="100" Height="100"/>
         </Grid>
     </Grid>
 </Window>
