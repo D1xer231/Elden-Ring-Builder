@@ -48,7 +48,7 @@ namespace Elden_Ring_Builder
         private void about_app_Click(object sender, RoutedEventArgs e)
         {
             string aboutText = "Elden Ring Builder\n" +
-                               "Version: 1.0.0\n";
+                               "Version: 1.0.1\n";
             string descriptionText = "A simple application to help you build your character in Elden Ring.\n" +
                                      "This application is not affiliated with FromSoftware or Bandai Namco Entertainment.";
             DateTime dateTime = DateTime.Now;
