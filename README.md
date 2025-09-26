@@ -1,13 +1,15 @@
 # Elden Ring Builder
 
-![.NET](https://img.shields.io/badge/.NET-8.0-blue) 
-![MySQL](https://img.shields.io/badge/MySQL-8.0-orange) 
+![.NET](https://img.shields.io/badge/.NET-9.0-blue) 
+![MySQL](https://img.shields.io/badge/MySQL-9.0-orange) 
 ![Entity Framework](https://img.shields.io/badge/Entity_Framework-Core-green) 
 ![Material Design](https://img.shields.io/badge/Material_Design-lightgrey) 
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 **Elden Ring Builder** is a practical application designed to help players create optimal builds in *Elden Ring*. Experiment with different stats, weapons, and spells to craft the most effective builds for your playstyle.
 
+
+For DB connection FILE go to https://t.me/d1xer_231
 ---
 
 ## 📄 Overview
@@ -26,8 +28,8 @@ Elden Ring Builder helps players create, test, and optimize character builds. Us
 
 ## 🛠️ Tech Stack
 
-- **.NET 8** – backend logic and app framework  
-- **MySQL 8** – database storage for builds and user data  
+- **.NET 9** – backend logic and app framework  
+- **MySQL 9** – database storage for builds and user data  
 - **Entity Framework Core** – ORM for database interactions  
 - **Material Design** – UI framework for a modern look  
 
