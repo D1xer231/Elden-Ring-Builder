@@ -7,13 +7,14 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <PackageIcon>ico100.png</PackageIcon>
+    <RepositoryUrl>https://github.com/D1xer231/Elden-Ring-Builder</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="img\elden_ring_logo.png" />
     <None Remove="img\icons\exit.png" />
     <None Remove="img\icons\house-chimney.png" />
-    <None Remove="img\icons\ico100.png" />
     <None Remove="img\icons\ico33.png" />
     <None Remove="img\icons\info.png" />
     <None Remove="img\icons\letter.png" />
@@ -29,6 +30,10 @@
     <None Remove="img\weapons\maliketh_klinok.png" />
     <None Remove="img\weapons\reki_krofi.png" />
     <None Remove="img\weapons\two_handed_sword.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="img\icons\ico100.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -90,6 +95,10 @@
     </None>
     <None Update="appsettings.Development.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\icons\ico100.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 

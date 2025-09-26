@@ -1,4 +1,4 @@
-import telebot
+﻿import telebot
 import webbrowser
 from telebot import types
 

@@ -1,14 +1,15 @@
 ﻿using Elden_Ring_Builder.models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using QRCoder;
-using System.Drawing;
-using System.IO;
-using System.Windows.Media.Imaging;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
+using System.Drawing;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Elden_Ring_Builder
 {
@@ -90,71 +91,26 @@ namespace Elden_Ring_Builder
 
         private void author_steam_btn_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                string steamProfileUrl = "steam://openurl/https://steamcommunity.com/profiles/76561199220453620/";
-
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = steamProfileUrl,
-                    UseShellExecute = true
-                });
-            }
-            catch
-            {
-                MessageBox.Show("Error, while steam opening");
-            }
+            url_openning("steam://openurl/https://steamcommunity.com/profiles/76561199220453620/");
         }
 
         private void github_btn_Click(object sender, RoutedEventArgs e)
         {
-            var url = "https://github.com/D1xer231";
-            try
-            {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = url,
-                    UseShellExecute = true
-                });
-            }
-            catch
-            {
-                MessageBox.Show("Error, while github opening");
-            }
+            url_openning("https://github.com/D1xer231");
         }
 
         private void author_github_btn_Click(object sender, RoutedEventArgs e)
         {
-            var url = "https://github.com/D1xer231/Elden-Ring-Builder";
-            try
-            {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = url,
-                    UseShellExecute = true
-                });
-            }
-            catch
-            {
-                MessageBox.Show("Error, while github opening");
-            }
+            url_openning("https://github.com/D1xer231/Elden-Ring-Builder");
         }
 
         private void telegram_btn_Click(object sender, RoutedEventArgs e)
         {
-            var url = "https://t.me/d1xer_231";
-            try
-            {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = url,
-                    UseShellExecute = true
-                });
-            }
-            catch
-            {
-                MessageBox.Show("Error, while telegram opening");
-            }
+            url_openning("https://t.me/d1xer_231");
+        }
+        private void tg_bot_Click(object sender, RoutedEventArgs e)
+        {
+            url_openning("https://t.me/elden_builder_bot");
         }
 
         private void redeemcode_btn_Click(object sender, RoutedEventArgs e)
@@ -175,7 +131,7 @@ namespace Elden_Ring_Builder
         private void apptheme_btn_Click(object sender, RoutedEventArgs e)
         {
             // create change theme window to light or dark
-           
+
         }
 
         private void weapons_screen_Click(object sender, RoutedEventArgs e)
@@ -235,6 +191,48 @@ namespace Elden_Ring_Builder
             runes_list_grid.Visibility = Visibility.Hidden;
             settings_screen_grid.Visibility = Visibility.Visible;
         }
-    }
 
+        private void refresh_data_btn_Click(object sender, RoutedEventArgs e)
+        {
+           refreshData();
+        }
+
+        private void refreshData() 
+        {
+            using (var db = new AppDbContext())
+            {
+                BuildsList.ItemsSource = db.Builds.ToList();
+                WeaponsList.ItemsSource = db.Weapons.ToList();
+                RunesList.ItemsSource = db.Runes.ToList();
+
+                MessageBox.Show("Updated!\n\nUse support button\nif any problems", "Elden Ring Builder", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void hide_app_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void check_for_updates_btn_Click(object sender, RoutedEventArgs e)
+        {
+           url_openning("https://github.com/D1xer231/Elden-Ring-Builder/releases");
+        }
+
+        private void url_openning (string url)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                });
+            }
+            catch
+            {
+                MessageBox.Show("Error, while opening");
+            }
+        }
+    }
 }

@@ -11,7 +11,7 @@
         Icon="/img/icons/ico100.png"
         
         Title="Elden Ring Builder" Height="600" Width="900" Cursor="">
-    <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+    <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" x:Name="MainSCREEN_1">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#FF131521"/>
@@ -42,6 +42,7 @@
             <Menu Grid.ColumnSpan="3">
                 <MenuItem Header="App" x:Name="app_btn" Foreground="White">
                     <MenuItem Header="About" Click="about_app_Click" Foreground="White"/>
+                    <MenuItem Header="Hide App" Click="hide_app_btn_Click" Foreground="White"/>
                 </MenuItem>
 
                 <MenuItem Header="Steam" x:Name="steam_btn" Foreground="White">
@@ -56,11 +57,17 @@
 
                 <MenuItem Header="Support" x:Name="support_btn" Foreground="White">
                     <MenuItem Header="Telegram" Click="telegram_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Telegram Bot" Click="tg_bot_Click" Foreground="White"/>
                     <MenuItem Header="Send Email" Click="send_email_btn_Click" Foreground="White"/>
                 </MenuItem>
 
                 <MenuItem Header="Code" x:Name="redeemcode_btn" Foreground="White">
                     <MenuItem Header="Redeem Code" Click="redeemcode_btn_Click" Foreground="White"/>
+                </MenuItem>
+
+                <MenuItem Header="Rrefresh" x:Name="refresh_data_btn" Foreground="White">
+                    <MenuItem Header="Refresh Data" Click="refresh_data_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Check for UPDATES" Click="check_for_updates_btn_Click" Foreground="White"/>
                 </MenuItem>
             </Menu>
 
@@ -231,7 +238,7 @@
             <Image Source="/img/renni1.png" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,400,0,0"/>
             <Image Source="/img/elden_ring_logo.png" Width="150" VerticalAlignment="Bottom" Margin="360,0,250,20"/>
         </Grid>
-        
+
         <!-- weapons screen + stats -->
         <Grid Grid.Row="1" Grid.Column="1" x:Name="weapons_grid" Visibility="Hidden">
             <StackPanel>
@@ -329,7 +336,7 @@
             </StackPanel>
             <TextBlock Text="*Weapon stats are approximate and may vary based on upgrades and player stats." HorizontalAlignment="Center" FontSize="10" Foreground="White" VerticalAlignment="Bottom" FontFamily="Sitka Heading Semibold" Margin="0,0,0,20"/>
         </Grid>
-        
+
         <!-- runes info screen 1x1-->
         <Grid Grid.Column="1" Grid.Row="1" Visibility="Hidden" x:Name="runes_list_grid">
             <StackPanel>
@@ -376,10 +383,10 @@
                 </ScrollViewer>
             </StackPanel>
         </Grid>
-        
+
         <!--settings  -->
         <Grid Grid.Row="1" Grid.Column="1" x:Name="settings_screen_grid" Visibility="Visible">
-            <Image x:Name="QrImage" Grid.Row="1" Grid.Column="1" Width="100" Height="100"/>
+            <Image x:Name="QrImage" Grid.Row="1" Grid.Column="1" Width="200" Height="200"/>
         </Grid>
     </Grid>
 </Window>
