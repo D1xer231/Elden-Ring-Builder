@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
+using System.Printing;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -24,13 +25,14 @@ namespace Elden_Ring_Builder
             InitializeComponent();
             AppDbContext db = new AppDbContext();
 
-            //date_and_time_Tick();
             welcome_user_text();
+            
+            web_open("https://en.bandainamcoent.eu/elden-ring/elden-ring");
+            webView2.Visibility = Visibility.Visible;
 
             List<builds> builds = db.Builds.ToList();
             List<weapons> weapons = db.Weapons.ToList();
             List<runes> runes = db.Runes.ToList();
-
             BuildsList.ItemsSource = builds;
             WeaponsList.ItemsSource = weapons;
             RunesList.ItemsSource = runes;
@@ -38,7 +40,7 @@ namespace Elden_Ring_Builder
 
 
         private void welcome_user_text() => welcome_user_txt.Text = Environment.UserName;
-        //private void date_and_time_Tick() => date_and_time_txt.Text = DateTime.Now.ToString("dd.MM.yyyy");
+
         private void exit_btn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -128,17 +130,12 @@ namespace Elden_Ring_Builder
             });
         }
 
-        private void apptheme_btn_Click(object sender, RoutedEventArgs e)
-        {
-            // create change theme window to light or dark
-
-        }
-
         private void weapons_screen_Click(object sender, RoutedEventArgs e)
         {
             main_screen_grid.Visibility = Visibility.Hidden;
             runes_list_grid.Visibility = Visibility.Hidden;
             settings_screen_grid.Visibility = Visibility.Hidden;
+            web_view_screen_grid.Visibility = Visibility.Hidden;
             weapons_grid.Visibility = Visibility.Visible;
         }
 
@@ -147,6 +144,7 @@ namespace Elden_Ring_Builder
             weapons_grid.Visibility = Visibility.Hidden;
             runes_list_grid.Visibility = Visibility.Hidden;
             settings_screen_grid.Visibility = Visibility.Hidden;
+            web_view_screen_grid.Visibility = Visibility.Hidden;
             main_screen_grid.Visibility = Visibility.Visible;
         }
 
@@ -155,7 +153,17 @@ namespace Elden_Ring_Builder
             main_screen_grid.Visibility = Visibility.Hidden;
             weapons_grid.Visibility = Visibility.Hidden;
             settings_screen_grid.Visibility = Visibility.Hidden;
+            web_view_screen_grid.Visibility = Visibility.Hidden;
             runes_list_grid.Visibility = Visibility.Visible;
+        }
+
+        private void Wiki_web_Click(object sender, RoutedEventArgs e)
+        {
+            main_screen_grid.Visibility = Visibility.Hidden;
+            weapons_grid.Visibility = Visibility.Hidden;
+            runes_list_grid.Visibility = Visibility.Hidden;
+            settings_screen_grid.Visibility = Visibility.Hidden;
+            web_view_screen_grid.Visibility = Visibility.Visible;
         }
 
         private static BitmapImage GenerateQr(string text)
@@ -189,6 +197,7 @@ namespace Elden_Ring_Builder
             main_screen_grid.Visibility = Visibility.Hidden;
             weapons_grid.Visibility = Visibility.Hidden;
             runes_list_grid.Visibility = Visibility.Hidden;
+            web_view_screen_grid.Visibility = Visibility.Hidden;
             settings_screen_grid.Visibility = Visibility.Visible;
         }
 
@@ -233,6 +242,26 @@ namespace Elden_Ring_Builder
             {
                 MessageBox.Show("Error, while opening");
             }
+        }
+
+        private void web_open (string url)
+        {
+            webView2.Source = new Uri(url);
+            webView2.ZoomFactor = 0.8;
+        }
+
+        private void adress_input_btn_Click(object sender, RoutedEventArgs e)
+        {
+            string url = adress_input.Text.Trim();
+            if (!string.IsNullOrEmpty(url))
+            {
+                if (!url.StartsWith("http://") && !url.StartsWith("https://"))
+                {
+                    url = "http://" + url;
+                }
+                web_open(url);
+                webView2.Visibility = Visibility.Visible;
+            } 
         }
     }
 }

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Elden_Ring_Builder"
+        xmlns:local="clr-namespace:Elden_Ring_Builder" xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -70,10 +70,6 @@
                     <MenuItem Header="Check for UPDATES" Click="check_for_updates_btn_Click" Foreground="White"/>
                 </MenuItem>
             </Menu>
-
-            <!--<TextBlock x:Name="date_and_time_txt" Text="Time" HorizontalAlignment="Right" Foreground="White" FontSize="15" Margin="0,20,10,0" Grid.Column="2"/> -->
-
-            <Button Visibility="Hidden"  HorizontalAlignment="Right" Margin="0,0,30,0" Background="White" BorderBrush="{x:Null}" x:Name="apptheme_btn" Click="apptheme_btn_Click"/>
         </Grid>
 
         <!--Left tools side 1x0-->
@@ -98,7 +94,7 @@
                     <ImageBrush Stretch="Uniform" ImageSource="/img/icons/sword.png"/>
                 </Button.Background>
             </Button>
-            <Button BorderBrush="{x:Null}" Width="30" Height="32" VerticalAlignment="Bottom" Margin="0,0,0,310" Cursor="Hand" Click="change_to_mainscreen_click">
+            <Button BorderBrush="{x:Null}" Width="30" Height="32" VerticalAlignment="Bottom" Margin="0,0,0,360" Cursor="Hand" Click="change_to_mainscreen_click">
                 <Button.Background>
                     <ImageBrush Stretch="Uniform" ImageSource="/img/icons/house-chimney.png"/>
                 </Button.Background>
@@ -111,6 +107,11 @@
             <Button x:Name="settings_btn" BorderBrush="{x:Null}" VerticalAlignment="Bottom" Margin="0,0,0,260" Cursor="Hand" Click="settings_btn_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="/img/icons/settings.png" Stretch="Uniform"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="Wiki_web" VerticalAlignment="Bottom" BorderBrush="{x:Null}" HorizontalAlignment="Center" Margin="0,0,0,310" Cursor="Hand" Click="Wiki_web_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/img/icons/globe.png" Stretch="Uniform"/>
                 </Button.Background>
             </Button>
         </Grid>
@@ -385,8 +386,15 @@
         </Grid>
 
         <!--settings  -->
-        <Grid Grid.Row="1" Grid.Column="1" x:Name="settings_screen_grid" Visibility="Visible">
+        <Grid Grid.Row="1" Grid.Column="1" x:Name="settings_screen_grid" Visibility="Hidden">
             <Image x:Name="QrImage" Grid.Row="1" Grid.Column="1" Width="200" Height="200"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1" x:Name="web_view_screen_grid" Visibility="Hidden">
+            <TextBox  x:Name="adress_input" Height="25" Width="500"  VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,10" />
+            <Button Content="Go" Height="25" Width="50" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="510,15,0,0" Click="adress_input_btn_Click"/>
+            <ProgressBar x:Name="ProgressBar" Width="250" Height="15" Foreground="#047DD3" Background="#333333" IsIndeterminate="True"/>
+            <wv2:WebView2 Name="webView2" Height="500" Width="800" Visibility="Hidden"/>
         </Grid>
     </Grid>
 </Window>

@@ -12,8 +12,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="img\weapons\**" />
+    <EmbeddedResource Remove="img\weapons\**" />
+    <None Remove="img\weapons\**" />
+    <Page Remove="img\weapons\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="img\elden_ring_logo.png" />
     <None Remove="img\icons\exit.png" />
+    <None Remove="img\icons\globe.png" />
     <None Remove="img\icons\house-chimney.png" />
     <None Remove="img\icons\ico33.png" />
     <None Remove="img\icons\info.png" />
@@ -25,11 +33,6 @@
     <None Remove="img\icons\sword.png" />
     <None Remove="img\knight1.png" />
     <None Remove="img\renni.jpg" />
-    <None Remove="img\weapons\aliketh_klinok.png" />
-    <None Remove="img\weapons\carian_weapon.png" />
-    <None Remove="img\weapons\maliketh_klinok.png" />
-    <None Remove="img\weapons\reki_krofi.png" />
-    <None Remove="img\weapons\two_handed_sword.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +44,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3485.44" />
     <PackageReference Include="MySql.Data" Version="9.4.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
     <PackageReference Include="QRCoder" Version="1.6.0" />
@@ -51,6 +55,9 @@
   <ItemGroup>
     <Resource Include="img\elden_ring_logo.png" />
     <Resource Include="img\icons\exit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\icons\globe.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\icons\house-chimney.png">
@@ -83,10 +90,6 @@
     </Resource>
     <Resource Include="img\knight1.png" />
     <Resource Include="img\renni1.png" />
-    <Resource Include="img\weapons\carian_weapon.png" />
-    <Resource Include="img\weapons\maliketh_klinok.png" />
-    <Resource Include="img\weapons\reki_krofi.png" />
-    <Resource Include="img\weapons\two_handed_sword.png" />
   </ItemGroup>
 
   <ItemGroup>
