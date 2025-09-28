@@ -431,7 +431,7 @@
                             <DataTemplate>
                                 <Border Margin="10" Width="Auto" Height="Auto">
                                     <Grid>
-                                        <Image Source="{Binding path}" Height="Auto" Width="700" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                                        <Image Source="{Binding path}" Height="Auto" Width="750" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                                     </Grid>
                                 </Border>
                             </DataTemplate>
