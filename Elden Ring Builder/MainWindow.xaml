@@ -419,26 +419,32 @@
 
         <!-- Gallery -->
         <Grid Grid.Row="1" Grid.Column="1" x:Name="gallery_screen_grid" Visibility="Hidden">
-            <StackPanel>
-                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" CanContentScroll="True" Grid.Column="1" Grid.Row="1" PanningMode="VerticalOnly">
-                    <ListBox x:Name="GallerList" ItemsSource="{Binding gallery}" Background="Transparent" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Vertical"/>
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Border Margin="10" Width="Auto" Height="Auto">
-                                    <Grid>
-                                        <Image Source="{Binding path}" Height="Auto" Width="750" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </ScrollViewer>
-            </StackPanel>
+            <ListBox x:Name="GallerList" 
+             ItemsSource="{Binding gallery}" 
+             Background="Transparent" 
+             BorderThickness="0" 
+             ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="10" Width="Auto" Height="Auto">
+                            <Grid>
+                                <Image Source="{Binding path}" 
+                               Height="Auto" 
+                               Width="790" 
+                               Stretch="Uniform" 
+                               HorizontalAlignment="Center" 
+                               Margin="0,0,0,10"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
 </Window>
