@@ -41,31 +41,42 @@
             </Grid.ColumnDefinitions>
             <Menu Grid.ColumnSpan="3">
                 <MenuItem Header="App" x:Name="app_btn" Foreground="White">
+                    <Separator/>
                     <MenuItem Header="About" Click="about_app_Click" Foreground="White"/>
+                    <MenuItem Header="Gallery" Click="gallery_grid_btn_Click" Foreground="White"/>
                     <MenuItem Header="Hide App" Click="hide_app_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Settings" Click="settings_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Updates" Click="check_for_updates_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Exit" Click="exit_btn_Click" Foreground="White"/>
                 </MenuItem>
 
                 <MenuItem Header="Steam" x:Name="steam_btn" Foreground="White">
+                    <Separator/>
                     <MenuItem Header="Open Steam" Click="steam_btn_Click" Foreground="White"/>
                     <MenuItem Header="Author Steam" Click="author_steam_btn_Click" Foreground="White"/>
                 </MenuItem>
 
                 <MenuItem Header="GitHub" x:Name="github_btn" Foreground="White">
+                    <Separator/>
                     <MenuItem Header="Open GitHub" Click="github_btn_Click" Foreground="White"/>
                     <MenuItem Header="Project's GitHub" Click="author_github_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Last Version" Click="check_for_updates_btn_Click" Foreground="White"/>
                 </MenuItem>
 
                 <MenuItem Header="Support" x:Name="support_btn" Foreground="White">
+                    <Separator/>
                     <MenuItem Header="Telegram" Click="telegram_btn_Click" Foreground="White"/>
                     <MenuItem Header="Telegram Bot" Click="tg_bot_Click" Foreground="White"/>
                     <MenuItem Header="Send Email" Click="send_email_btn_Click" Foreground="White"/>
                 </MenuItem>
 
                 <MenuItem Header="Code" x:Name="redeemcode_btn" Foreground="White">
+                    <Separator/>
                     <MenuItem Header="Redeem Code" Click="redeemcode_btn_Click" Foreground="White"/>
                 </MenuItem>
 
                 <MenuItem Header="Rrefresh" x:Name="refresh_data_btn" Foreground="White">
+                    <Separator/>
                     <MenuItem Header="Refresh Data" Click="refresh_data_btn_Click" Foreground="White"/>
                     <MenuItem Header="Check for UPDATES" Click="check_for_updates_btn_Click" Foreground="White"/>
                 </MenuItem>
@@ -74,44 +85,52 @@
 
         <!--Left tools side 1x0-->
         <Grid Grid.Row="1" Grid.Column="0">
-            <Button x:Name="exit_btn" Content="" Margin="5,2,2,10" VerticalAlignment="Bottom" BorderBrush="{x:Null}" Click="exit_btn_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="/img/icons/exit.png" Stretch="Uniform"/>
-                </Button.Background>
-            </Button>
-            <Button x:Name="email_btn" VerticalAlignment="Bottom" Margin="0,0,0,60" Click="send_email_btn_Click" Cursor="Hand" BorderBrush="{x:Null}">
-                <Button.Background>
-                    <ImageBrush Stretch="Uniform" ImageSource="/img/icons/letter.png"/>
-                </Button.Background>
-            </Button>
-            <Button BorderBrush="{x:Null}" VerticalAlignment="Bottom" Margin="0,0,0,110" Width="30" Height="32" Cursor="Hand" Click="steam_btn_Click">
-                <Button.Background>
-                    <ImageBrush Stretch="Uniform" ImageSource="/img/icons/steam_icon.png"/>
-                </Button.Background>
-            </Button>
-            <Button BorderBrush="{x:Null}" VerticalAlignment="Bottom" Margin="0,0,0,160" Width="30" Height="32" Cursor="Hand" Click="weapons_screen_Click">
-                <Button.Background>
-                    <ImageBrush Stretch="Uniform" ImageSource="/img/icons/sword.png"/>
-                </Button.Background>
-            </Button>
             <Button BorderBrush="{x:Null}" Width="30" Height="32" VerticalAlignment="Bottom" Margin="0,0,0,360" Cursor="Hand" Click="change_to_mainscreen_click">
                 <Button.Background>
                     <ImageBrush Stretch="Uniform" ImageSource="/img/icons/house-chimney.png"/>
                 </Button.Background>
             </Button>
-            <Button Width="30" Height="32" VerticalAlignment="Bottom" Margin="0,0,0,210" BorderBrush="{x:Null}" Click="runeslist_btn_Click" Cursor="Hand">
+
+            <Button BorderBrush="{x:Null}" VerticalAlignment="Bottom" Margin="0,0,0,310" Width="30" Height="32" Cursor="Hand" Click="weapons_screen_Click">
+                <Button.Background>
+                    <ImageBrush Stretch="Uniform" ImageSource="/img/icons/sword.png"/>
+                </Button.Background>
+            </Button>
+
+            <Button Width="30" Height="32" VerticalAlignment="Bottom" Margin="0,0,0,260" BorderBrush="{x:Null}" Click="runeslist_btn_Click" Cursor="Hand">
                 <Button.Background>
                     <ImageBrush ImageSource="/img/icons/rectangle-list.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="settings_btn" BorderBrush="{x:Null}" VerticalAlignment="Bottom" Margin="0,0,0,260" Cursor="Hand" Click="settings_btn_Click">
+
+            <Button x:Name="web" VerticalAlignment="Bottom" BorderBrush="{x:Null}" HorizontalAlignment="Center" Margin="0,0,0,210" Cursor="Hand" Click="web_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/img/icons/globe.png" Stretch="Uniform"/>
+                </Button.Background>
+            </Button>
+
+            <Button x:Name="settings_btn" BorderBrush="{x:Null}" VerticalAlignment="Bottom" Margin="0,0,0,160" Cursor="Hand" Click="settings_btn_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="/img/icons/settings.png" Stretch="Uniform"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Wiki_web" VerticalAlignment="Bottom" BorderBrush="{x:Null}" HorizontalAlignment="Center" Margin="0,0,0,310" Cursor="Hand" Click="Wiki_web_Click">
+
+            <Button BorderBrush="{x:Null}" VerticalAlignment="Bottom" Margin="0,0,0,110" Width="30" Height="32" Cursor="Hand" Click="steam_btn_Click">
                 <Button.Background>
-                    <ImageBrush ImageSource="/img/icons/globe.png" Stretch="Uniform"/>
+                    <ImageBrush Stretch="Uniform" ImageSource="/img/icons/steam_icon.png"/>
+                </Button.Background>
+            </Button>
+
+            <Button x:Name="email_btn" VerticalAlignment="Bottom" Margin="0,0,0,60" Click="send_email_btn_Click" Cursor="Hand" BorderBrush="{x:Null}">
+                <Button.Background>
+                    <ImageBrush Stretch="Uniform" ImageSource="/img/icons/letter.png"/>
+                </Button.Background>
+            </Button>
+
+
+            <Button x:Name="exit_btn" Content="" Margin="5,2,2,10" VerticalAlignment="Bottom" BorderBrush="{x:Null}" Click="exit_btn_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/img/icons/exit.png" Stretch="Uniform"/>
                 </Button.Background>
             </Button>
         </Grid>
@@ -130,18 +149,18 @@
                     <TextBlock x:Name="welcome_user_txt" HorizontalAlignment="Center" FontSize="30" Foreground="#047DD3" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold"/>
                 </StackPanel>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
-              VerticalScrollBarVisibility="Disabled"
-              CanContentScroll="False"
-              Grid.Column="1"
-              Grid.Row="1"
-              PanningMode="HorizontalOnly">
+                      VerticalScrollBarVisibility="Disabled"
+                      CanContentScroll="False"
+                      Grid.Column="1"
+                      Grid.Row="1"
+                      PanningMode="HorizontalOnly">
                     <ListBox x:Name="BuildsList"
-             Margin="10"
-             ItemsSource="{Binding builds}"
-             Background="Transparent"
-             BorderThickness="0"
-             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-             ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                         Margin="10"
+                         ItemsSource="{Binding builds}"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ScrollViewer.VerticalScrollBarVisibility="Disabled">
 
                         <!-- Горизонтальная раскладка -->
                         <ListBox.ItemsPanel>
@@ -154,28 +173,28 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Border Margin="10"
-                        Padding="10"
-                        Background="#005592"
-                        CornerRadius="10"
-                        BorderBrush="Transparent"
-                        Width="150">
+                                    Padding="10"
+                                    Background="#005592"
+                                    CornerRadius="10"
+                                    BorderBrush="Transparent"
+                                    Width="150">
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
                                         <!-- img -->
                                         <Image Source="{Binding img_path}"
-                               Height="120"
-                               Width="220"
-                               Stretch="Uniform"
-                               Margin="0,0,0,10"
-                               HorizontalAlignment="Center"/>
+                                           Height="120"
+                                           Width="220"
+                                           Stretch="Uniform"
+                                           Margin="0,0,0,10"
+                                           HorizontalAlignment="Center"/>
 
                                         <!-- name -->
                                         <TextBlock Text="{Binding Name}"
-                                   Foreground="#D9D9D9"
-                                   FontSize="13"
-                                   FontWeight="Bold"
-                                   TextAlignment="Center"
-                                   Margin="0,0,0,5"/>
+                                           Foreground="#D9D9D9"
+                                           FontSize="13"
+                                           FontWeight="Bold"
+                                           TextAlignment="Center"
+                                           Margin="0,0,0,5"/>
 
                                         <!-- stats table -->
                                         <Grid Margin="0,5,0,0">
@@ -390,11 +409,36 @@
             <Image x:Name="QrImage" Grid.Row="1" Grid.Column="1" Width="200" Height="200"/>
         </Grid>
 
+        <!-- web -->
         <Grid Grid.Row="1" Grid.Column="1" x:Name="web_view_screen_grid" Visibility="Hidden">
             <TextBox  x:Name="adress_input" Height="25" Width="500"  VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,10" />
             <Button Content="Go" Height="25" Width="50" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="510,15,0,0" Click="adress_input_btn_Click"/>
             <ProgressBar x:Name="ProgressBar" Width="250" Height="15" Foreground="#047DD3" Background="#333333" IsIndeterminate="True"/>
             <wv2:WebView2 Name="webView2" Height="500" Width="800" Visibility="Hidden"/>
+        </Grid>
+
+        <!-- Gallery -->
+        <Grid Grid.Row="1" Grid.Column="1" x:Name="gallery_screen_grid" Visibility="Hidden">
+            <StackPanel>
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" CanContentScroll="True" Grid.Column="1" Grid.Row="1" PanningMode="VerticalOnly">
+                    <ListBox x:Name="GallerList" ItemsSource="{Binding gallery}" Background="Transparent" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="10" Width="Auto" Height="Auto">
+                                    <Grid>
+                                        <Image Source="{Binding path}" Height="Auto" Width="700" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

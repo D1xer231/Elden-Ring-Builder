@@ -12,6 +12,8 @@ namespace Elden_Ring_Builder
         public DbSet<builds> Builds { get; set; }
         public DbSet<weapons> Weapons { get; set; }
         public DbSet<runes> Runes { get; set; }
+
+        public DbSet<gallery> Gallery { get; set; }
         //public DbSet<requests> Applications { get; set; }
 
         public AppDbContext()
