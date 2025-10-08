@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Printing;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -25,33 +26,35 @@ namespace Elden_Ring_Builder
             InitializeComponent();
             AppDbContext db = new AppDbContext();
 
+
+
             welcome_user_text();
 
             web_open("https://en.bandainamcoent.eu/elden-ring/elden-ring");
             webView2.Visibility = Visibility.Visible;
 
+
             List<builds> builds = db.Builds.ToList();
             List<weapons> weapons = db.Weapons.ToList();
             List<runes> runes = db.Runes.ToList();
             List<gallery> gallery = db.Gallery.ToList();
+
             BuildsList.ItemsSource = builds;
             WeaponsList.ItemsSource = weapons;
             RunesList.ItemsSource = runes;
             GallerList.ItemsSource = gallery;
         }
 
-
         private void welcome_user_text() => welcome_user_txt.Text = Environment.UserName;
-
-        private void exit_btn_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
+        }
+
+        private void exit_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
 
         private void about_app_Click(object sender, RoutedEventArgs e)
@@ -134,45 +137,92 @@ namespace Elden_Ring_Builder
 
         private void weapons_screen_Click(object sender, RoutedEventArgs e)
         {
-            main_screen_grid.Visibility = Visibility.Hidden;
-            runes_list_grid.Visibility = Visibility.Hidden;
-            settings_screen_grid.Visibility = Visibility.Hidden;
-            web_view_screen_grid.Visibility = Visibility.Hidden;
-            gallery_screen_grid.Visibility = Visibility.Hidden;
-
-            weapons_grid.Visibility = Visibility.Visible;
+            ShowScreen(ScreenType.Weapons);
         }
 
         private void change_to_mainscreen_click(object sender, RoutedEventArgs e)
         {
-            weapons_grid.Visibility = Visibility.Hidden;
-            runes_list_grid.Visibility = Visibility.Hidden;
-            settings_screen_grid.Visibility = Visibility.Hidden;
-            web_view_screen_grid.Visibility = Visibility.Hidden;
-            gallery_screen_grid.Visibility = Visibility.Hidden;
-            main_screen_grid.Visibility = Visibility.Visible;
+            ShowScreen(ScreenType.Main);
         }
 
         private void runeslist_btn_Click(object sender, RoutedEventArgs e)
         {
-            main_screen_grid.Visibility = Visibility.Hidden;
-            weapons_grid.Visibility = Visibility.Hidden;
-            settings_screen_grid.Visibility = Visibility.Hidden;
-            web_view_screen_grid.Visibility = Visibility.Hidden;
-            gallery_screen_grid.Visibility = Visibility.Hidden;
-
-            runes_list_grid.Visibility = Visibility.Visible;
+            ShowScreen(ScreenType.Runes);
         }
 
         private void web_Click(object sender, RoutedEventArgs e)
         {
+            ShowScreen(ScreenType.WebView);
+        }
+
+        private void settings_btn_Click(object sender, RoutedEventArgs e)
+        {
+            QrImage.Source = GenerateQr("https://i.pinimg.com/736x/2a/f1/cd/2af1cde161d06fe92a1239f70c01154a.jpg");
+
+            ShowScreen(ScreenType.Settings);
+        }
+
+        private void refresh_data_btn_Click(object sender, RoutedEventArgs e)
+        {
+            refreshData();
+        }
+
+        private void hide_app_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void check_for_updates_btn_Click(object sender, RoutedEventArgs e)
+        {
+            url_openning("https://github.com/D1xer231/Elden-Ring-Builder/releases");
+        }
+
+        private void adress_input_btn_Click(object sender, RoutedEventArgs e)
+        {
+            string url = adress_input.Text.Trim();
+            if (!string.IsNullOrEmpty(url))
+            {
+                if (!url.StartsWith("http://") && !url.StartsWith("https://"))
+                {
+                    url = "http://" + url;
+                }
+                web_open(url);
+                webView2.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void gallery_grid_btn_Click(object sender, RoutedEventArgs e)
+        {
+            ShowScreen(ScreenType.Gallery);
+        }
+
+        private void ShowScreen(ScreenType type)
+        {
             main_screen_grid.Visibility = Visibility.Hidden;
-            weapons_grid.Visibility = Visibility.Hidden;
             runes_list_grid.Visibility = Visibility.Hidden;
             settings_screen_grid.Visibility = Visibility.Hidden;
+            web_view_screen_grid.Visibility = Visibility.Hidden;
             gallery_screen_grid.Visibility = Visibility.Hidden;
+            weapons_grid.Visibility = Visibility.Hidden;
 
-            web_view_screen_grid.Visibility = Visibility.Visible;
+            switch (type)
+            {
+                case ScreenType.Main: main_screen_grid.Visibility = Visibility.Visible; break;
+                case ScreenType.Runes: runes_list_grid.Visibility = Visibility.Visible; break;
+                case ScreenType.Settings: settings_screen_grid.Visibility = Visibility.Visible; break;
+                case ScreenType.WebView: web_view_screen_grid.Visibility = Visibility.Visible; break;
+                case ScreenType.Gallery: gallery_screen_grid.Visibility = Visibility.Visible; break;
+                case ScreenType.Weapons: weapons_grid.Visibility = Visibility.Visible; break;
+            }
+        }
+        public enum ScreenType
+        {
+            Main,
+            Runes,
+            Settings,
+            WebView,
+            Gallery,
+            Weapons
         }
 
         private static BitmapImage GenerateQr(string text)
@@ -199,47 +249,6 @@ namespace Elden_Ring_Builder
             return img;
         }
 
-        private void settings_btn_Click(object sender, RoutedEventArgs e)
-        {
-            QrImage.Source = GenerateQr("https://i.pinimg.com/736x/2a/f1/cd/2af1cde161d06fe92a1239f70c01154a.jpg");
-
-            main_screen_grid.Visibility = Visibility.Hidden;
-            weapons_grid.Visibility = Visibility.Hidden;
-            runes_list_grid.Visibility = Visibility.Hidden;
-            web_view_screen_grid.Visibility = Visibility.Hidden;
-            gallery_screen_grid.Visibility = Visibility.Hidden;
-
-            settings_screen_grid.Visibility = Visibility.Visible;
-        }
-
-        private void refresh_data_btn_Click(object sender, RoutedEventArgs e)
-        {
-            refreshData();
-        }
-
-        private void refreshData()
-        {
-            using (var db = new AppDbContext())
-            {
-                BuildsList.ItemsSource = db.Builds.ToList();
-                WeaponsList.ItemsSource = db.Weapons.ToList();
-                RunesList.ItemsSource = db.Runes.ToList();
-                GallerList.ItemsSource = db.Gallery.ToList();
-
-                MessageBox.Show("Updated!\n\nUse support button\nif any problems", "Elden Ring Builder", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
-
-        private void hide_app_btn_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
-
-        private void check_for_updates_btn_Click(object sender, RoutedEventArgs e)
-        {
-            url_openning("https://github.com/D1xer231/Elden-Ring-Builder/releases");
-        }
-
         private void url_openning(string url)
         {
             try
@@ -262,29 +271,17 @@ namespace Elden_Ring_Builder
             webView2.ZoomFactor = 0.8;
         }
 
-        private void adress_input_btn_Click(object sender, RoutedEventArgs e)
+        private void refreshData()
         {
-            string url = adress_input.Text.Trim();
-            if (!string.IsNullOrEmpty(url))
+            using (var db = new AppDbContext())
             {
-                if (!url.StartsWith("http://") && !url.StartsWith("https://"))
-                {
-                    url = "http://" + url;
-                }
-                web_open(url);
-                webView2.Visibility = Visibility.Visible;
+                BuildsList.ItemsSource = db.Builds.ToList();
+                WeaponsList.ItemsSource = db.Weapons.ToList();
+                RunesList.ItemsSource = db.Runes.ToList();
+                GallerList.ItemsSource = db.Gallery.ToList();
+
+                MessageBox.Show("Updated!\n\nUse support button\nif any problems", "Elden Ring Builder", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-        }
-
-        private void gallery_grid_btn_Click(object sender, RoutedEventArgs e)
-        {
-            main_screen_grid.Visibility = Visibility.Hidden;
-            weapons_grid.Visibility = Visibility.Hidden;
-            runes_list_grid.Visibility = Visibility.Hidden;
-            web_view_screen_grid.Visibility = Visibility.Hidden;
-            settings_screen_grid.Visibility = Visibility.Hidden;
-
-            gallery_screen_grid.Visibility = Visibility.Visible;
         }
     }
 }
