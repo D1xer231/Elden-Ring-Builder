@@ -1,16 +1,11 @@
 ﻿using Elden_Ring_Builder.models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
+using Elden_Ring_Builder.ViewModels;
 using QRCoder;
 using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
-using System.Printing;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Elden_Ring_Builder
@@ -24,11 +19,9 @@ namespace Elden_Ring_Builder
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
+
             AppDbContext db = new AppDbContext();
-
-
-
-            welcome_user_text();
 
             web_open("https://en.bandainamcoent.eu/elden-ring/elden-ring");
             webView2.Visibility = Visibility.Visible;
@@ -44,8 +37,11 @@ namespace Elden_Ring_Builder
             RunesList.ItemsSource = runes;
             GallerList.ItemsSource = gallery;
         }
+        private void hide_app_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
 
-        private void welcome_user_text() => welcome_user_txt.Text = Environment.UserName;
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -55,16 +51,6 @@ namespace Elden_Ring_Builder
         private void exit_btn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
-        }
-
-        private void about_app_Click(object sender, RoutedEventArgs e)
-        {
-            string aboutText = "Elden Ring Builder\n" +
-                               "Version: 1.3\n";
-            string descriptionText = "A simple application to help you build your character in Elden Ring.\n" +
-                                     "This application is not affiliated with FromSoftware or Bandai Namco Entertainment.";
-            DateTime dateTime = DateTime.Now;
-            MessageBox.Show(aboutText + "\n" + descriptionText + "\n\n" + dateTime);
         }
 
         private void steam_btn_Click(object sender, RoutedEventArgs e)
@@ -94,30 +80,6 @@ namespace Elden_Ring_Builder
                     MessageBox.Show("Error, while steam opening");
                 }
             }
-        }
-
-        private void author_steam_btn_Click(object sender, RoutedEventArgs e)
-        {
-            url_openning("steam://openurl/https://steamcommunity.com/profiles/76561199220453620/");
-        }
-
-        private void github_btn_Click(object sender, RoutedEventArgs e)
-        {
-            url_openning("https://github.com/D1xer231");
-        }
-
-        private void author_github_btn_Click(object sender, RoutedEventArgs e)
-        {
-            url_openning("https://github.com/D1xer231/Elden-Ring-Builder");
-        }
-
-        private void telegram_btn_Click(object sender, RoutedEventArgs e)
-        {
-            url_openning("https://t.me/d1xer_231");
-        }
-        private void tg_bot_Click(object sender, RoutedEventArgs e)
-        {
-            url_openning("https://t.me/elden_builder_bot");
         }
 
         private void redeemcode_btn_Click(object sender, RoutedEventArgs e)
@@ -162,19 +124,33 @@ namespace Elden_Ring_Builder
             ShowScreen(ScreenType.Settings);
         }
 
+        private static BitmapImage GenerateQr(string text)
+        {
+            using var qrGenerator = new QRCodeGenerator();
+            using var qrData = qrGenerator.CreateQrCode(text, QRCodeGenerator.ECCLevel.Q);
+            using var qrCode = new QRCode(qrData);
+            using Bitmap qrBitmap = qrCode.GetGraphic(20);
+
+            return BitmapToImageSource(qrBitmap);
+        }
+
+        private static BitmapImage BitmapToImageSource(Bitmap bitmap)
+        {
+            using MemoryStream ms = new MemoryStream();
+            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+
+            BitmapImage img = new BitmapImage();
+            img.BeginInit();
+            img.CacheOption = BitmapCacheOption.OnLoad;
+            img.StreamSource = ms;
+            img.EndInit();
+            return img;
+        }
+
         private void refresh_data_btn_Click(object sender, RoutedEventArgs e)
         {
             refreshData();
-        }
-
-        private void hide_app_btn_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
-
-        private void check_for_updates_btn_Click(object sender, RoutedEventArgs e)
-        {
-            url_openning("https://github.com/D1xer231/Elden-Ring-Builder/releases");
         }
 
         private void adress_input_btn_Click(object sender, RoutedEventArgs e)
@@ -223,46 +199,6 @@ namespace Elden_Ring_Builder
             WebView,
             Gallery,
             Weapons
-        }
-
-        private static BitmapImage GenerateQr(string text)
-        {
-            using var qrGenerator = new QRCodeGenerator();
-            using var qrData = qrGenerator.CreateQrCode(text, QRCodeGenerator.ECCLevel.Q);
-            using var qrCode = new QRCode(qrData);
-            using Bitmap qrBitmap = qrCode.GetGraphic(20);
-
-            return BitmapToImageSource(qrBitmap);
-        }
-
-        private static BitmapImage BitmapToImageSource(Bitmap bitmap)
-        {
-            using MemoryStream ms = new MemoryStream();
-            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            ms.Position = 0;
-
-            BitmapImage img = new BitmapImage();
-            img.BeginInit();
-            img.CacheOption = BitmapCacheOption.OnLoad;
-            img.StreamSource = ms;
-            img.EndInit();
-            return img;
-        }
-
-        private void url_openning(string url)
-        {
-            try
-            {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = url,
-                    UseShellExecute = true
-                });
-            }
-            catch
-            {
-                MessageBox.Show("Error, while opening");
-            }
         }
 
         private void web_open(string url)

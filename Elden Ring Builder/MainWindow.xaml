@@ -42,31 +42,31 @@
             <Menu Grid.ColumnSpan="3">
                 <MenuItem Header="App" x:Name="app_btn" Foreground="White">
                     <Separator/>
-                    <MenuItem Header="About" Click="about_app_Click" Foreground="White"/>
+                    <MenuItem Header="About" Command="{Binding AboutAppCommand}" Foreground="White"/>
                     <MenuItem Header="Gallery" Click="gallery_grid_btn_Click" Foreground="White"/>
-                    <MenuItem Header="Hide App" Click="hide_app_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Hide App" Click="hide_app_Click" Foreground="White"/>
                     <MenuItem Header="Settings" Click="settings_btn_Click" Foreground="White"/>
-                    <MenuItem Header="Updates" Click="check_for_updates_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Updates" Command="{Binding UrlOpenningCommand}" CommandParameter="https://github.com/D1xer231/Elden-Ring-Builder/releases" Foreground="White"/>
                     <MenuItem Header="Exit" Click="exit_btn_Click" Foreground="White"/>
                 </MenuItem>
 
                 <MenuItem Header="Steam" x:Name="steam_btn" Foreground="White">
                     <Separator/>
                     <MenuItem Header="Open Steam" Click="steam_btn_Click" Foreground="White"/>
-                    <MenuItem Header="Author Steam" Click="author_steam_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Author Steam" Command="{Binding UrlOpenningCommand}" CommandParameter="steam://openurl/https://steamcommunity.com/profiles/76561199220453620/" Foreground="White"/>
                 </MenuItem>
 
                 <MenuItem Header="GitHub" x:Name="github_btn" Foreground="White">
                     <Separator/>
-                    <MenuItem Header="Open GitHub" Click="github_btn_Click" Foreground="White"/>
-                    <MenuItem Header="Project's GitHub" Click="author_github_btn_Click" Foreground="White"/>
-                    <MenuItem Header="Last Version" Click="check_for_updates_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Open GitHub" Command="{Binding UrlOpenningCommand}" CommandParameter="https://github.com/D1xer231" Foreground="White"/>
+                    <MenuItem Header="Project's GitHub" Command="{Binding UrlOpenningCommand}" CommandParameter="https://github.com/D1xer231/Elden-Ring-Builder" Foreground="White"/>
+                    <MenuItem Header="Last Version" Command="{Binding UrlOpenningCommand}" CommandParameter="https://github.com/D1xer231/Elden-Ring-Builder/releases" Foreground="White"/>
                 </MenuItem>
 
                 <MenuItem Header="Support" x:Name="support_btn" Foreground="White">
                     <Separator/>
-                    <MenuItem Header="Telegram" Click="telegram_btn_Click" Foreground="White"/>
-                    <MenuItem Header="Telegram Bot" Click="tg_bot_Click" Foreground="White"/>
+                    <MenuItem Header="Telegram" Command="{Binding UrlOpenningCommand}" CommandParameter="https://t.me/d1xer_231" Foreground="White"/>
+                    <MenuItem Header="Telegram Bot" Command="{Binding UrlOpenningCommand}" CommandParameter="https://t.me/elden_builder_bot" Foreground="White"/>
                     <MenuItem Header="Send Email" Click="send_email_btn_Click" Foreground="White"/>
                 </MenuItem>
 
@@ -78,7 +78,7 @@
                 <MenuItem Header="Rrefresh" x:Name="refresh_data_btn" Foreground="White">
                     <Separator/>
                     <MenuItem Header="Refresh Data" Click="refresh_data_btn_Click" Foreground="White"/>
-                    <MenuItem Header="Check for UPDATES" Click="check_for_updates_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Check for UPDATES" Command="{Binding UrlOpenningCommand}" CommandParameter="https://github.com/D1xer231/Elden-Ring-Builder/releases" Foreground="White"/>
                 </MenuItem>
             </Menu>
         </Grid>
@@ -144,9 +144,9 @@
                 <ColumnDefinition Width="110*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Margin="0,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
-                <StackPanel x:Name="welcome_text" Visibility="Visible">
+                <StackPanel Visibility="Visible">
                     <TextBlock Text="Welcome to Elden Ring Builder" HorizontalAlignment="Center" FontSize="30" Foreground="White" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold"/>
-                    <TextBlock x:Name="welcome_user_txt" HorizontalAlignment="Center" FontSize="30" Foreground="#047DD3" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold"/>
+                    <TextBlock Text="{Binding UserName}" HorizontalAlignment="Center" FontSize="30" Foreground="#047DD3" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold"/>
                 </StackPanel>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                       VerticalScrollBarVisibility="Disabled"
@@ -240,12 +240,12 @@
 
                                         <!-- lvl -->
                                         <TextBlock Text="{Binding LVL}"
-                                   Foreground="#D9D9D9"
-                                   FontSize="10"
-                                   FontWeight="Bold"
-                                   Margin="0,10,0,0"
-                                   HorizontalAlignment="Center"
-                                                   x:Name="lvl_build_text"/>
+                                           Foreground="#D9D9D9"
+                                           FontSize="10"
+                                           FontWeight="Bold"
+                                           Margin="0,10,0,0"
+                                           HorizontalAlignment="Center"
+                                           x:Name="lvl_build_text"/>
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
