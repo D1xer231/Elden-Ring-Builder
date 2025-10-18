@@ -23,10 +23,6 @@ namespace Elden_Ring_Builder
 
             AppDbContext db = new AppDbContext();
 
-            web_open("https://en.bandainamcoent.eu/elden-ring/elden-ring");
-            webView2.Visibility = Visibility.Visible;
-
-
             List<builds> builds = db.Builds.ToList();
             List<weapons> weapons = db.Weapons.ToList();
             List<runes> runes = db.Runes.ToList();
@@ -115,6 +111,8 @@ namespace Elden_Ring_Builder
         private void web_Click(object sender, RoutedEventArgs e)
         {
             ShowScreen(ScreenType.WebView);
+            web_open("https://en.bandainamcoent.eu/elden-ring/elden-ring");
+            webView2.Visibility = Visibility.Visible;
         }
 
         private void settings_btn_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Elden_Ring_Builder.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,8 @@ namespace Elden_Ring_Builder
         {
             
             InitializeComponent();
-            Task.Delay(3000).ContinueWith(_ => Dispatcher.Invoke(ShowMainWindow));
+            DataContext = new MainViewModel();
+            Task.Delay(2000).ContinueWith(_ => Dispatcher.Invoke(ShowMainWindow));
         }
 
         private void ShowMainWindow()
