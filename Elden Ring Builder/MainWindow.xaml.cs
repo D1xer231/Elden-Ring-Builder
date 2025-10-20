@@ -5,8 +5,10 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using static Elden_Ring_Builder.ViewModels.MainViewModel;
 
 namespace Elden_Ring_Builder
 {
@@ -32,6 +34,7 @@ namespace Elden_Ring_Builder
             WeaponsList.ItemsSource = weapons;
             RunesList.ItemsSource = runes;
             GallerList.ItemsSource = gallery;
+
         }
         private void hide_app_Click(object sender, RoutedEventArgs e)
         {
@@ -112,6 +115,7 @@ namespace Elden_Ring_Builder
         {
             ShowScreen(ScreenType.WebView);
             web_open("https://en.bandainamcoent.eu/elden-ring/elden-ring");
+            adress_input.Text = "";
             webView2.Visibility = Visibility.Visible;
         }
 
@@ -151,18 +155,25 @@ namespace Elden_Ring_Builder
             refreshData();
         }
 
-        private void adress_input_btn_Click(object sender, RoutedEventArgs e)
+        private void OpenUrlFromInput()
         {
             string url = adress_input.Text.Trim();
-            if (!string.IsNullOrEmpty(url))
-            {
-                if (!url.StartsWith("http://") && !url.StartsWith("https://"))
-                {
-                    url = "http://" + url;
-                }
-                web_open(url);
-                webView2.Visibility = Visibility.Visible;
-            }
+            if (string.IsNullOrEmpty(url)) return;
+
+            if (!url.StartsWith("http://") && !url.StartsWith("https://"))
+                url = "http://" + url;
+
+            web_open(url);
+            webView2.Visibility = Visibility.Visible;
+        }
+        private void adress_input_btn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenUrlFromInput();
+        }
+        private void adress_input_btn_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                OpenUrlFromInput();
         }
 
         private void gallery_grid_btn_Click(object sender, RoutedEventArgs e)
@@ -201,8 +212,16 @@ namespace Elden_Ring_Builder
 
         private void web_open(string url)
         {
-            webView2.Source = new Uri(url);
             webView2.ZoomFactor = 0.8;
+            try 
+            {
+                webView2.Source = new System.Uri(url);
+            }
+            catch (System.UriFormatException)
+            {
+                adress_input.Text = "";
+                MessageBox.Show("Invalid URL format. Please check the address and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void refreshData()
@@ -214,8 +233,21 @@ namespace Elden_Ring_Builder
                 RunesList.ItemsSource = db.Runes.ToList();
                 GallerList.ItemsSource = db.Gallery.ToList();
 
+                web_open("https://en.bandainamcoent.eu/elden-ring/elden-ring");
+                adress_input.Text = "";
+
                 MessageBox.Show("Updated!\n\nUse support button\nif any problems", "Elden Ring Builder", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
+
+        private void webview_nav_Click(object sender, RoutedEventArgs e)
+        {
+            //var tag = (sender as Button)?.Tag?.ToString();
+            //if (tag == "back" && webView2.CanGoBack) webView2.GoBack();
+            //else if (tag == "forward" && webView2.CanGoForward) webView2.GoForward(); by tags Tag="back" or Tag="forward"
+
+            if (sender == webview_back && webView2.CanGoBack) webView2.GoBack();
+            else if (sender == webview_forward && webView2.CanGoForward) webView2.GoForward();
         }
     }
 }

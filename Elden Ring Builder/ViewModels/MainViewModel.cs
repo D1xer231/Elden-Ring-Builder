@@ -18,7 +18,7 @@ namespace Elden_Ring_Builder.ViewModels
             string descriptionText = "A simple application to help you build your character in Elden Ring.\n" +
                                      "This application is not affiliated with FromSoftware or Bandai Namco Entertainment.";
             DateTime dateTime = DateTime.Now;
-            MessageBox.Show(aboutText + "\n" + descriptionText + "\n\n" + dateTime);
+            MessageBox.Show(aboutText + "\n" + descriptionText + "\n\n" + dateTime + "\n\n" + userName);
         }
 
         [RelayCommand]

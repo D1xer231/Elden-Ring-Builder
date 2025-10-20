@@ -19,7 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="img\back.png" />
     <None Remove="img\elden_ring_logo.png" />
+    <None Remove="img\forward.png" />
     <None Remove="img\icons\exit.png" />
     <None Remove="img\icons\globe.png" />
     <None Remove="img\icons\house-chimney.png" />
@@ -54,7 +56,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="img\back.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\elden_ring_logo.png" />
+    <Resource Include="img\forward.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\icons\exit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
