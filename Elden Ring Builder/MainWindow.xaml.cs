@@ -4,6 +4,9 @@ using QRCoder;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Net.Http;
+using System.Printing;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -34,7 +37,7 @@ namespace Elden_Ring_Builder
             WeaponsList.ItemsSource = weapons;
             RunesList.ItemsSource = runes;
             GallerList.ItemsSource = gallery;
-
+            SteamInfo();
         }
         private void hide_app_Click(object sender, RoutedEventArgs e)
         {
@@ -52,7 +55,7 @@ namespace Elden_Ring_Builder
             Application.Current.Shutdown();
         }
 
-        private void steam_btn_Click(object sender, RoutedEventArgs e)
+        private void open_steam_btn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -189,6 +192,7 @@ namespace Elden_Ring_Builder
             web_view_screen_grid.Visibility = Visibility.Hidden;
             gallery_screen_grid.Visibility = Visibility.Hidden;
             weapons_grid.Visibility = Visibility.Hidden;
+            users_steam_grid.Visibility = Visibility.Hidden;
 
             switch (type)
             {
@@ -198,6 +202,7 @@ namespace Elden_Ring_Builder
                 case ScreenType.WebView: web_view_screen_grid.Visibility = Visibility.Visible; break;
                 case ScreenType.Gallery: gallery_screen_grid.Visibility = Visibility.Visible; break;
                 case ScreenType.Weapons: weapons_grid.Visibility = Visibility.Visible; break;
+                case ScreenType.Steam: users_steam_grid.Visibility = Visibility.Visible; break;
             }
         }
         public enum ScreenType
@@ -207,7 +212,8 @@ namespace Elden_Ring_Builder
             Settings,
             WebView,
             Gallery,
-            Weapons
+            Weapons,
+            Steam
         }
 
         private void web_open(string url)
@@ -248,6 +254,32 @@ namespace Elden_Ring_Builder
 
             if (sender == webview_back && webView2.CanGoBack) webView2.GoBack();
             else if (sender == webview_forward && webView2.CanGoForward) webView2.GoForward();
+        }
+
+        private async Task SteamInfo()
+        {
+            string apiKey = "094CE8E87EDC019D60FB290A482AEDD2"; // вставь свой ключ
+            string steamId = "76561199220453620"; // вставь нужный SteamID
+
+            string url = $"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={apiKey}&steamids={steamId}";
+
+            using HttpClient client = new HttpClient();
+            try
+            {
+                string response = await client.GetStringAsync(url);
+                var jsonDoc = JsonDocument.Parse(response);
+                var player = jsonDoc.RootElement.GetProperty("response").GetProperty("players")[0];
+
+                string personaName = player.GetProperty("personaname").GetString();
+                string profileUrl = player.GetProperty("profileurl").GetString();
+
+                Debug.WriteLine($"Игрок: {personaName}");
+                Debug.WriteLine($"Профиль: {profileUrl}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка при запросе: " + ex.Message);
+            }
         }
     }
 }
