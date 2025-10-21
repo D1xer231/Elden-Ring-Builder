@@ -21,7 +21,7 @@ namespace Elden_Ring_Builder
     /// </summary>
     public partial class MainWindow : Window
     {
-        private AppDbContext db;
+        private AppDbContext? db;
         public MainWindow()
         {
             InitializeComponent();
@@ -82,18 +82,18 @@ namespace Elden_Ring_Builder
             }
         }
 
-        private void users_steam_btn_Click(object sender, RoutedEventArgs e)
+        private async void users_steam_btn_Click(object sender, RoutedEventArgs e)
         {
             ShowScreen(ScreenType.Steam);
             //steam_Api.SteamInfo();
             string id = insert_steam_id.Text;
-            SteamInfo(id);
+            await SteamInfo(id);
 
         }
-        private void get_steam_info(object sender, RoutedEventArgs e) 
+        private async void get_steam_info(object sender, RoutedEventArgs e) 
         { 
             string id = insert_steam_id.Text;
-            SteamInfo(id);
+            await SteamInfo(id);
         }
 
         private void redeemcode_btn_Click(object sender, RoutedEventArgs e)
@@ -272,7 +272,7 @@ namespace Elden_Ring_Builder
         private async Task SteamInfo(string steamId)
         {
             DotEnv.Load(options: new DotEnvOptions(envFilePaths: new[] { @"D:\c# projects\MyProjectsC#\Elden Ring  Builder\Elden Ring Builder\Elden Ring Builder\.env" }));
-            string apiKey = Environment.GetEnvironmentVariable("STEAM_API_KEY");
+            string? apiKey = Environment.GetEnvironmentVariable("STEAM_API_KEY");
 
             //string steamId = "76561199220453620";
 
@@ -292,10 +292,10 @@ namespace Elden_Ring_Builder
                 var jsonDoc = JsonDocument.Parse(response);
                 var player = jsonDoc.RootElement.GetProperty("response").GetProperty("players")[0];
 
-                string personaName = player.GetProperty("personaname").GetString();
-                string profileid = player.GetProperty("steamid").GetString();
+                string? personaName = player.GetProperty("personaname").GetString();
+                string? profileid = player.GetProperty("steamid").GetString();
 
-                string user_img = player.GetProperty("avatarfull").GetString();
+                string? user_img = player.GetProperty("avatarfull").GetString();
 
                 BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();

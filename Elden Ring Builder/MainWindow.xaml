@@ -493,13 +493,11 @@
                     <!-- info right -->
                     <StackPanel VerticalAlignment="Center">
                         <TextBlock x:Name="steam_name"
-                           Text="Имя пользователя"
                            FontSize="26"
                            FontWeight="Bold"
                            Foreground="White"
                            Margin="0,0,0,5"/>
                         <TextBlock x:Name="steam_id"
-                           Text="Steam ID"
                            FontSize="16"
                            Foreground="Gray"/>
                     </StackPanel>
