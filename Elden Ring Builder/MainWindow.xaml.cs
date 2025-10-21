@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using dotenv.net;
 using static Elden_Ring_Builder.ViewModels.MainViewModel;
 
 namespace Elden_Ring_Builder
@@ -25,7 +26,7 @@ namespace Elden_Ring_Builder
         {
             InitializeComponent();
             DataContext = new MainViewModel();
-
+            steam_api steam_Api = new steam_api();
             AppDbContext db = new AppDbContext();
 
             List<builds> builds = db.Builds.ToList();
@@ -37,7 +38,6 @@ namespace Elden_Ring_Builder
             WeaponsList.ItemsSource = weapons;
             RunesList.ItemsSource = runes;
             GallerList.ItemsSource = gallery;
-            SteamInfo();
         }
         private void hide_app_Click(object sender, RoutedEventArgs e)
         {
@@ -55,7 +55,7 @@ namespace Elden_Ring_Builder
             Application.Current.Shutdown();
         }
 
-        private void open_steam_btn_Click(object sender, RoutedEventArgs e)
+        private void open_steam_app_btn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -82,6 +82,20 @@ namespace Elden_Ring_Builder
                     MessageBox.Show("Error, while steam opening");
                 }
             }
+        }
+
+        private void users_steam_btn_Click(object sender, RoutedEventArgs e)
+        {
+            ShowScreen(ScreenType.Steam);
+            //steam_Api.SteamInfo();
+            string id = insert_steam_id.Text;
+            SteamInfo(id);
+
+        }
+        private void get_steam_info(object sender, RoutedEventArgs e) 
+        { 
+            string id = insert_steam_id.Text;
+            SteamInfo(id);
         }
 
         private void redeemcode_btn_Click(object sender, RoutedEventArgs e)
@@ -256,10 +270,19 @@ namespace Elden_Ring_Builder
             else if (sender == webview_forward && webView2.CanGoForward) webView2.GoForward();
         }
 
-        private async Task SteamInfo()
+        private async Task SteamInfo(string steamId)
         {
-            string apiKey = "094CE8E87EDC019D60FB290A482AEDD2"; // вставь свой ключ
-            string steamId = "76561199220453620"; // вставь нужный SteamID
+            DotEnv.Load(options: new DotEnvOptions(envFilePaths: new[] { @"D:\c# projects\MyProjectsC#\Elden Ring  Builder\Elden Ring Builder\Elden Ring Builder\.env" }));
+            string apiKey = Environment.GetEnvironmentVariable("STEAM_API_KEY");
+
+            //string steamId = "76561199220453620";
+
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                Debug.WriteLine("Error: variable STEAM_API_KEY not found. Check .env file.");
+                return;
+            }
+
 
             string url = $"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={apiKey}&steamids={steamId}";
 
@@ -271,14 +294,26 @@ namespace Elden_Ring_Builder
                 var player = jsonDoc.RootElement.GetProperty("response").GetProperty("players")[0];
 
                 string personaName = player.GetProperty("personaname").GetString();
-                string profileUrl = player.GetProperty("profileurl").GetString();
+                string profileid = player.GetProperty("steamid").GetString();
 
-                Debug.WriteLine($"Игрок: {personaName}");
-                Debug.WriteLine($"Профиль: {profileUrl}");
+                string user_img = player.GetProperty("avatarfull").GetString();
+
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(user_img, UriKind.Absolute);
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+
+                steam_img.Source = bitmap;
+                steam_name.Text = personaName;
+                steam_id.Text = profileid;
+
+                Debug.WriteLine($"player: {personaName}");
+                Debug.WriteLine($"profile: {profileid}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Ошибка при запросе: " + ex.Message);
+                Console.WriteLine("Error while request: " + ex.Message);
             }
         }
     }

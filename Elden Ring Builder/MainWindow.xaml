@@ -52,8 +52,9 @@
 
                 <MenuItem Header="Steam" x:Name="steam_btn" Foreground="White">
                     <Separator/>
-                    <MenuItem Header="Open Steam" Click="open_steam_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Open Steam" Click="open_steam_app_btn_Click" Foreground="White"/>
                     <MenuItem Header="Author Steam" Command="{Binding UrlOpenningCommand}" CommandParameter="steam://openurl/https://steamcommunity.com/profiles/76561199220453620/" Foreground="White"/>
+                    <MenuItem Header="User Info" Command="{Binding }" Foreground="White" Click="users_steam_btn_Click"/>
                 </MenuItem>
 
                 <MenuItem Header="GitHub" x:Name="github_btn" Foreground="White">
@@ -115,7 +116,7 @@
                 </Button.Background>
             </Button>
 
-            <Button BorderBrush="{x:Null}" VerticalAlignment="Bottom" Margin="0,0,0,110" Width="30" Height="32" Cursor="Hand" Click="open_steam_btn_Click">
+            <Button BorderBrush="{x:Null}" VerticalAlignment="Bottom" Margin="0,0,0,110" Width="30" Height="32" Cursor="Hand" Click="users_steam_btn_Click">
                 <Button.Background>
                     <ImageBrush Stretch="Uniform" ImageSource="/img/icons/steam_icon.png"/>
                 </Button.Background>
@@ -457,10 +458,54 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        
+
         <!-- user's steam page -->
-        <Grid Grid.Column="1" Grid.Row="1" x:Name="users_steam_grid" Visibility="Hidden">
-            
+        <Grid Grid.Column="1" Grid.Row="1"
+      x:Name="users_steam_grid"
+      Visibility="Hidden"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Top"
+      Margin="100,60,0,0">
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+
+                <!-- top input -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBox x:Name="insert_steam_id" Width="250" FontSize="20" FontWeight="Bold" Foreground="White" Padding="8" MaxLength="17"/>
+                    <Button Content="Get Info"
+                    Width="120"
+                    Height="40"
+                    Click="get_steam_info"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    BorderThickness="0"
+                    Cursor="Hand"/>
+                </StackPanel>
+
+                <!-- info user -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <!-- img -->
+                    <Image x:Name="steam_img"
+                   Width="180"
+                   Height="180"
+                   VerticalAlignment="Center"/>
+
+                    <!-- info right -->
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock x:Name="steam_name"
+                           Text="Имя пользователя"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Margin="0,0,0,5"/>
+                        <TextBlock x:Name="steam_id"
+                           Text="Steam ID"
+                           FontSize="16"
+                           Foreground="Gray"/>
+                    </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
