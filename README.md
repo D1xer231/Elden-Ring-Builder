@@ -9,7 +9,7 @@
 **Elden Ring Builder** is a practical application designed to help players create optimal builds in *Elden Ring*. Experiment with different stats, weapons, and spells to craft the most effective builds for your playstyle.
 
 
-For DB connection FILE go to https://t.me/d1xer_231
+For DB connection FILE and .env go to https://t.me/d1xer_231
 ---
 
 ## 📄 Overview

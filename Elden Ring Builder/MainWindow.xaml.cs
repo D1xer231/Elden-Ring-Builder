@@ -26,18 +26,16 @@ namespace Elden_Ring_Builder
         {
             InitializeComponent();
             DataContext = new MainViewModel();
-            steam_api steam_Api = new steam_api();
             AppDbContext db = new AppDbContext();
 
             List<builds> builds = db.Builds.ToList();
-            List<weapons> weapons = db.Weapons.ToList();
-            List<runes> runes = db.Runes.ToList();
-            List<gallery> gallery = db.Gallery.ToList();
-
             BuildsList.ItemsSource = builds;
-            WeaponsList.ItemsSource = weapons;
-            RunesList.ItemsSource = runes;
+            List<gallery> gallery = db.Gallery.ToList();
             GallerList.ItemsSource = gallery;
+            List<weapons> weapons = db.Weapons.ToList();
+            WeaponsList.ItemsSource = weapons;
+            List<runes> runes = db.Runes.ToList();
+            RunesList.ItemsSource = runes;
         }
         private void hide_app_Click(object sender, RoutedEventArgs e)
         {
@@ -126,6 +124,7 @@ namespace Elden_Ring_Builder
         private void runeslist_btn_Click(object sender, RoutedEventArgs e)
         {
             ShowScreen(ScreenType.Runes);
+            AppDbContext db = new AppDbContext();
         }
 
         private void web_Click(object sender, RoutedEventArgs e)
