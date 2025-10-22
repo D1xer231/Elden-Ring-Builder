@@ -460,50 +460,86 @@
         </Grid>
 
         <!-- user's steam page -->
-        <Grid Grid.Column="1" Grid.Row="1"
-      x:Name="users_steam_grid"
-      Visibility="Hidden"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Top"
-      Margin="100,60,0,0">
+        <Grid Grid.Column="1" Grid.Row="1" x:Name="users_steam_grid" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="250"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="300"/>
+            </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-
-                <!-- top input -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBox x:Name="insert_steam_id" Width="250" FontSize="20" FontWeight="Bold" Foreground="White" Padding="8" MaxLength="17"/>
-                    <Button Content="Get Info"
-                    Width="120"
-                    Height="40"
-                    Click="get_steam_info"
-                    FontWeight="Bold"
-                    Foreground="White"
-                    BorderThickness="0"
-                    Cursor="Hand"/>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Image x:Name="steam_img" Width="180" Height="180"/>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="1">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock x:Name="steam_name" FontSize="26" FontWeight="Bold" Foreground="White" Margin="0,0,0,5"/>
+                    <TextBlock x:Name="steam_id" FontSize="16" Foreground="Gray"/>
                 </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="2" Visibility="Hidden" x:Name="statsTable">
+                <Border BorderBrush="#047DD3" BorderThickness="1" Margin="10">
+                    <Grid>
+                        <!-- 2 колонки -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                <!-- info user -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <!-- img -->
-                    <Image x:Name="steam_img"
-                   Width="180"
-                   Height="180"
-                   VerticalAlignment="Center"/>
+                        <!-- 5 строк -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
-                    <!-- info right -->
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock x:Name="steam_name"
-                           FontSize="26"
-                           FontWeight="Bold"
-                           Foreground="White"
-                           Margin="0,0,0,5"/>
-                        <TextBlock x:Name="steam_id"
-                           FontSize="16"
-                           Foreground="Gray"/>
-                    </StackPanel>
-                </StackPanel>
+                        <!-- Таблица 5x2 с рамками для каждой ячейки -->
+                        <Border Grid.Row="0" Grid.Column="0" BorderThickness="1" BorderBrush="#047DD3">
+                            <TextBlock Text="Games" Foreground="White" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="#047DD3">
+                            <TextBlock x:Name="steam_gameCount" Foreground="White" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
 
-            </StackPanel>
+                        <Border Grid.Row="1" Grid.Column="0" BorderThickness="1" BorderBrush="#047DD3">
+                            <TextBlock Text="Elden Ring" Foreground="White" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="1" BorderThickness="1" BorderBrush="#047DD3">
+                            <TextBlock x:Name="hrs_played_elden_ring" Foreground="White" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+
+                        <Border Grid.Row="2" Grid.Column="0" BorderThickness="1" BorderBrush="#047DD3">
+                            <TextBlock Text="Friends" Foreground="White" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Row="2" Grid.Column="1" BorderThickness="1" BorderBrush="#047DD3">
+                            <TextBlock x:Name="friends_count" Foreground="White" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+
+                        <Border Grid.Row="3" Grid.Column="0" BorderThickness="1" BorderBrush="#047DD3">
+                            <TextBlock Text="Total" Foreground="White" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Row="3" Grid.Column="1" BorderThickness="1" BorderBrush="#047DD3">
+                            <TextBlock x:Name="total_hrs_count" Foreground="White" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+
+                        <Border Grid.Row="4" Grid.Column="0" BorderThickness="1" BorderBrush="#047DD3">
+                            <TextBlock Text="" Foreground="White" FontSize="30" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Row="4" Grid.Column="1" BorderThickness="1" BorderBrush="#047DD3">
+                            <TextBlock Text="" Foreground="White" FontSize="30" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <TextBox x:Name="insert_steam_id" Width="250" FontSize="20" FontWeight="Bold" Foreground="White" Padding="8" MaxLength="17" Grid.Column="1" Grid.Row="1"/>
+            <Button Content="Get Info" Width="120" Height="40" Click="get_steam_info" FontWeight="Bold" Foreground="White" BorderThickness="0,0,0,0" Cursor="Hand" Grid.Column="1" Grid.Row="1"/>
         </Grid>
     </Grid>
 </Window>

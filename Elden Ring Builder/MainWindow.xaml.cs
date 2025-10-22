@@ -85,14 +85,12 @@ namespace Elden_Ring_Builder
         private async void users_steam_btn_Click(object sender, RoutedEventArgs e)
         {
             ShowScreen(ScreenType.Steam);
-            //steam_Api.SteamInfo();
-            string id = insert_steam_id.Text;
-            await SteamInfo(id);
-
         }
         private async void get_steam_info(object sender, RoutedEventArgs e) 
-        { 
+        {
+            statsTable.Visibility = Visibility.Visible;
             string id = insert_steam_id.Text;
+            //string id = "76561199220453620";
             await SteamInfo(id);
         }
 
@@ -273,21 +271,21 @@ namespace Elden_Ring_Builder
         {
             DotEnv.Load(options: new DotEnvOptions(envFilePaths: new[] { @"D:\c# projects\MyProjectsC#\Elden Ring  Builder\Elden Ring Builder\Elden Ring Builder\.env" }));
             string? apiKey = Environment.GetEnvironmentVariable("STEAM_API_KEY");
-
             //string steamId = "76561199220453620";
-
             if (string.IsNullOrEmpty(apiKey))
             {
                 Debug.WriteLine("Error: variable STEAM_API_KEY not found. Check .env file.");
                 return;
             }
 
-
-            string url = $"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={apiKey}&steamids={steamId}";
+            string url = $"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={apiKey}&steamids={steamId}"; // img name id
+            string url_games= $"https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key={apiKey}&steamid={steamId}&include_appinfo=true";
+            string url_friends = $"https://api.steampowered.com/ISteamUser/GetFriendList/v1/?key={apiKey}&steamid={steamId}&relationship=friend";
 
             using HttpClient client = new HttpClient();
             try
             {
+                //------------------User Info Request----------------------------------------//
                 string response = await client.GetStringAsync(url);
                 var jsonDoc = JsonDocument.Parse(response);
                 var player = jsonDoc.RootElement.GetProperty("response").GetProperty("players")[0];
@@ -306,7 +304,66 @@ namespace Elden_Ring_Builder
                 steam_img.Source = bitmap;
                 steam_name.Text = personaName;
                 steam_id.Text = profileid;
+                //--------------------------------------------------------------------------//
 
+
+                //------------------User Games Request---------------------------------------//
+                string response_games = await client.GetStringAsync(url_games);
+                var jsonDoc_games = JsonDocument.Parse(response_games);
+                if (jsonDoc_games.RootElement.TryGetProperty("response", out JsonElement gamesRoot))
+                {
+
+                    int game_count = gamesRoot.GetProperty("game_count").GetInt32();
+                    steam_gameCount.Text = game_count.ToString();
+
+                    int totalMinutes = 0;
+                    bool eldenRingFound = false;
+
+                    if (gamesRoot.TryGetProperty("games", out JsonElement gamesArray))
+                    {
+                        foreach (var game in gamesArray.EnumerateArray())
+                        {
+                            // sum total playtime
+                            if (game.TryGetProperty("playtime_forever", out JsonElement playtime))
+                                totalMinutes += playtime.GetInt32();
+
+                            // find ELDEN RING
+                            if (!eldenRingFound && game.TryGetProperty("name", out JsonElement nameElement) &&
+                                nameElement.GetString() == "ELDEN RING" &&
+                                game.TryGetProperty("playtime_forever", out JsonElement playtimeER))
+                            {
+                                hrs_played_elden_ring.Text = $"{playtimeER.GetInt32() / 60} hrs";
+                                eldenRingFound = true;
+                            }
+                        }
+                    }
+
+                    total_hrs_count.Text = $"{totalMinutes / 60} hrs";
+
+                    if (!eldenRingFound)
+                        hrs_played_elden_ring.Text = "0 hrs";
+                }
+                //--------------------------------------------------------------------------//
+
+
+                //------------------User Friends Request-------------------------------------//
+                string response_friends = await client.GetStringAsync(url_friends);
+
+                var jsonDoc_friends = JsonDocument.Parse(response_friends);
+                var friendsRoot = jsonDoc_friends.RootElement.GetProperty("friendslist");
+
+                if (friendsRoot.TryGetProperty("friends", out JsonElement friendsArray))
+                {
+                    int friendCount = friendsArray.GetArrayLength();
+                    friends_count.Text = friendCount.ToString();
+                }
+                else
+                {
+                    friends_count.Text = "0";
+                }
+                //--------------------------------------------------------------------------//
+
+                // check if works
                 Debug.WriteLine($"player: {personaName}");
                 Debug.WriteLine($"profile: {profileid}");
             }
