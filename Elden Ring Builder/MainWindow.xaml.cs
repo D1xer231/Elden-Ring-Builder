@@ -37,15 +37,10 @@ namespace Elden_Ring_Builder
             List<runes> runes = db.Runes.ToList();
             RunesList.ItemsSource = runes;
         }
+        //--------------- Buttons Clicks ---------------//
         private void hide_app_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
-        }
-
-        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
         }
 
         private void exit_btn_Click(object sender, RoutedEventArgs e)
@@ -82,16 +77,9 @@ namespace Elden_Ring_Builder
             }
         }
 
-        private async void users_steam_btn_Click(object sender, RoutedEventArgs e)
+        private void users_steam_btn_Click(object sender, RoutedEventArgs e)
         {
             ShowScreen(ScreenType.Steam);
-        }
-        private async void get_steam_info(object sender, RoutedEventArgs e) 
-        {
-            statsTable.Visibility = Visibility.Visible;
-            string id = insert_steam_id.Text;
-            //string id = "76561199220453620";
-            await SteamInfo(id);
         }
 
         private void redeemcode_btn_Click(object sender, RoutedEventArgs e)
@@ -140,6 +128,63 @@ namespace Elden_Ring_Builder
             ShowScreen(ScreenType.Settings);
         }
 
+        private void refresh_data_btn_Click(object sender, RoutedEventArgs e)
+        {
+            refreshData();
+        }
+
+        private void adress_input_btn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenUrlFromInput();
+        }
+        private void adress_input_btn_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                OpenUrlFromInput();
+        }
+
+        private void gallery_grid_btn_Click(object sender, RoutedEventArgs e)
+        {
+            ShowScreen(ScreenType.Gallery);
+        }
+
+        private void webview_nav_Click(object sender, RoutedEventArgs e)
+        {
+            //var tag = (sender as Button)?.Tag?.ToString();
+            //if (tag == "back" && webView2.CanGoBack) webView2.GoBack();
+            //else if (tag == "forward" && webView2.CanGoForward) webView2.GoForward(); by tags Tag="back" or Tag="forward"
+
+            if (sender == webview_back && webView2.CanGoBack) webView2.GoBack();
+            else if (sender == webview_forward && webView2.CanGoForward) webView2.GoForward();
+        }
+
+        // ------------------------------------------------//
+
+        
+        //----------------- Methods ------------------//
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+        
+        private async void get_steam_info(object sender, RoutedEventArgs e)
+        {
+            string id = insert_steam_id.Text;
+            //string id = "76561199220453620";
+            while (string.IsNullOrEmpty(id))
+            {
+                insert_steam_id.Text = "steam-id";
+                statsTable.Visibility = Visibility.Hidden;
+                steam_logo.Visibility = Visibility.Hidden;
+                cat_img.Visibility = Visibility.Hidden;
+                nameId.Visibility = Visibility.Hidden;
+                steam_img.Visibility = Visibility.Hidden;
+                return;
+            }
+            await SteamInfo(id);
+        }
+        
         private static BitmapImage GenerateQr(string text)
         {
             using var qrGenerator = new QRCodeGenerator();
@@ -164,11 +209,6 @@ namespace Elden_Ring_Builder
             return img;
         }
 
-        private void refresh_data_btn_Click(object sender, RoutedEventArgs e)
-        {
-            refreshData();
-        }
-
         private void OpenUrlFromInput()
         {
             string url = adress_input.Text.Trim();
@@ -179,20 +219,6 @@ namespace Elden_Ring_Builder
 
             web_open(url);
             webView2.Visibility = Visibility.Visible;
-        }
-        private void adress_input_btn_Click(object sender, RoutedEventArgs e)
-        {
-            OpenUrlFromInput();
-        }
-        private void adress_input_btn_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                OpenUrlFromInput();
-        }
-
-        private void gallery_grid_btn_Click(object sender, RoutedEventArgs e)
-        {
-            ShowScreen(ScreenType.Gallery);
         }
 
         private void ShowScreen(ScreenType type)
@@ -230,7 +256,7 @@ namespace Elden_Ring_Builder
         private void web_open(string url)
         {
             webView2.ZoomFactor = 0.8;
-            try 
+            try
             {
                 webView2.Source = new System.Uri(url);
             }
@@ -257,16 +283,6 @@ namespace Elden_Ring_Builder
             }
         }
 
-        private void webview_nav_Click(object sender, RoutedEventArgs e)
-        {
-            //var tag = (sender as Button)?.Tag?.ToString();
-            //if (tag == "back" && webView2.CanGoBack) webView2.GoBack();
-            //else if (tag == "forward" && webView2.CanGoForward) webView2.GoForward(); by tags Tag="back" or Tag="forward"
-
-            if (sender == webview_back && webView2.CanGoBack) webView2.GoBack();
-            else if (sender == webview_forward && webView2.CanGoForward) webView2.GoForward();
-        }
-
         private async Task SteamInfo(string steamId)
         {
             DotEnv.Load(options: new DotEnvOptions(envFilePaths: new[] { @"D:\c# projects\MyProjectsC#\Elden Ring  Builder\Elden Ring Builder\Elden Ring Builder\.env" }));
@@ -279,8 +295,9 @@ namespace Elden_Ring_Builder
             }
 
             string url = $"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={apiKey}&steamids={steamId}"; // img name id
-            string url_games= $"https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key={apiKey}&steamid={steamId}&include_appinfo=true";
+            string url_games = $"https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key={apiKey}&steamid={steamId}&include_appinfo=true";
             string url_friends = $"https://api.steampowered.com/ISteamUser/GetFriendList/v1/?key={apiKey}&steamid={steamId}&relationship=friend";
+            string url_badges = $"https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1/?key={apiKey}&steamid={steamId}&appid=1245620";
 
             using HttpClient client = new HttpClient();
             try
@@ -323,11 +340,9 @@ namespace Elden_Ring_Builder
                     {
                         foreach (var game in gamesArray.EnumerateArray())
                         {
-                            // sum total playtime
                             if (game.TryGetProperty("playtime_forever", out JsonElement playtime))
                                 totalMinutes += playtime.GetInt32();
 
-                            // find ELDEN RING
                             if (!eldenRingFound && game.TryGetProperty("name", out JsonElement nameElement) &&
                                 nameElement.GetString() == "ELDEN RING" &&
                                 game.TryGetProperty("playtime_forever", out JsonElement playtimeER))
@@ -345,6 +360,40 @@ namespace Elden_Ring_Builder
                 }
                 //--------------------------------------------------------------------------//
 
+                //----------------Total badge count----------------------------------//
+                try
+                {
+                    string response_badge = await client.GetStringAsync(url_badges);
+                    using JsonDocument json = JsonDocument.Parse(response_badge);
+
+                    if (!json.RootElement.TryGetProperty("playerstats", out JsonElement playerStats))
+                    {
+                        Debug.WriteLine("No achievements found for this player.");
+                        return;
+                    }
+
+                    if (playerStats.TryGetProperty("achievements", out JsonElement achievements))
+                    {
+                        int total = achievements.GetArrayLength();
+                        int unlocked = achievements.EnumerateArray().Count(a =>
+                            a.TryGetProperty("achieved", out var ach) && ach.GetInt32() == 1);
+
+                        Debug.WriteLine($"{unlocked}/{total} achievements unlocked!");
+
+                        total_badges_count.Text = $"{unlocked}/{total}";
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Player has no achievements data for this game.");
+                        total_badges_count.Text = "0/0";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error while getting achievements: {ex.Message}");
+                }
+
+                //------------------------------------------------------------------//
 
                 //------------------User Friends Request-------------------------------------//
                 string response_friends = await client.GetStringAsync(url_friends);
@@ -366,11 +415,20 @@ namespace Elden_Ring_Builder
                 // check if works
                 Debug.WriteLine($"player: {personaName}");
                 Debug.WriteLine($"profile: {profileid}");
+
+                // show ui elements
+                statsTable.Visibility = Visibility.Visible;
+                steam_logo.Visibility = Visibility.Visible;
+                cat_img.Visibility = Visibility.Visible;
+                nameId.Visibility = Visibility.Visible;
+                steam_img.Visibility = Visibility.Visible;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error while request: " + ex.Message);
             }
         }
+
+        //------------------------------------------------//
     }
 }
