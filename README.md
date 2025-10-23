@@ -6,7 +6,7 @@
 ![Material Design](https://img.shields.io/badge/Material_Design-lightgrey) 
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-**Elden Ring Builder** is a practical application designed to help players create optimal builds in *Elden Ring*. Experiment with different stats, weapons, and spells to craft the most effective builds for your playstyle.
+**Elden Ring Builder** is a practical application designed to help players create optimal builds in *Elden Ring*. Experiment with different stats, weapons, description of great runes and steam stats to craft the most effective builds for your playstyle.
 
 
 For DB connection FILE and .env go to https://t.me/d1xer_231
