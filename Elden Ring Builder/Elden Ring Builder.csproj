@@ -21,6 +21,8 @@
   <ItemGroup>
     <None Remove=".env" />
     <None Remove="img\back.png" />
+    <None Remove="img\dualsence-black.png" />
+    <None Remove="img\dualSence-white.png" />
     <None Remove="img\elden_ring_logo.png" />
     <None Remove="img\forward.png" />
     <None Remove="img\icons\exit.png" />
@@ -45,6 +47,7 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="dotenv.net" Version="4.0.0" />
+    <PackageReference Include="HidSharp" Version="2.6.4" />
     <PackageReference Include="MaterialDesignThemes" Version="5.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
@@ -62,6 +65,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\back.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\dualsence-black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\dualsence-white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\elden_ring_logo.png" />

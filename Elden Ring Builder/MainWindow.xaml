@@ -406,8 +406,25 @@
         </Grid>
 
         <!--settings  -->
-        <Grid Grid.Row="1" Grid.Column="1" x:Name="settings_screen_grid" Visibility="Hidden">
-            <Image x:Name="QrImage" Grid.Row="1" Grid.Column="1" Width="200" Height="200"/>
+        <Grid Grid.Column="1" Grid.Row="1" x:Name="settings_screen_grid" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="300"/>
+            </Grid.RowDefinitions>
+
+            <Image x:Name="QrImage" Grid.Row="1" Grid.Column="2" Width="150" Height="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,50,20"/>
+
+            <StackPanel Grid.Row="0" Grid.Column="1" x:Name="dualsence_connection_stackpanel" Grid.RowSpan="2">
+                <Image x:Name="DualSence_img" Source="/img/dualsence-black.png" Height="180" HorizontalAlignment="Center" Margin="0,100,0,0"/>
+                <TextBlock x:Name="DualSence_status" Text="connected" Foreground="White" FontWeight="Bold" FontSize="28" HorizontalAlignment="Center"/>
+                <ToggleButton IsChecked="True" Width="50" Margin="5" Checked="Balck_DualSence_Checked" Unchecked="White_DualSence_UnChecked"/>
+            </StackPanel>
+            
         </Grid>
 
         <!-- web -->

@@ -1,18 +1,27 @@
-﻿using Elden_Ring_Builder.models;
+﻿using dotenv.net;
+using Elden_Ring_Builder.models;
+using Elden_Ring_Builder.Services;
 using Elden_Ring_Builder.ViewModels;
+using EldenRingBuilder.Services;
+using HidSharp;
+using Microsoft.Extensions.FileSystemGlobbing;
 using QRCoder;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net.Http;
 using System.Printing;
+using System.Reflection;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media.Imaging;
-using dotenv.net;
+using Telegram.Bot.Types;
 using static Elden_Ring_Builder.ViewModels.MainViewModel;
+using static System.Net.Mime.MediaTypeNames;
+using Application = System.Windows.Application;
 
 namespace Elden_Ring_Builder
 {
@@ -22,9 +31,30 @@ namespace Elden_Ring_Builder
     public partial class MainWindow : Window
     {
         private AppDbContext? db;
+        private SteamService _steamService;
+        private DualSenceFinder _finder;
         public MainWindow()
         {
             InitializeComponent();
+            Loaded += MainWindow_Loaded;
+            
+            _steamService = new SteamService(
+               @"D:\c# projects\MyProjectsC#\Elden Ring  Builder\Elden Ring Builder\Elden Ring Builder\.env",
+               steam_img,
+               steam_name,
+               steam_id,
+               steam_gameCount,
+               total_hrs_count,
+               hrs_played_elden_ring,
+               total_badges_count,
+               friends_count,
+               statsTable,
+               steam_logo,
+               cat_img,
+               nameId
+           );
+            _finder = new DualSenceFinder(DualSence_status, DualSence_img);
+
             DataContext = new MainViewModel();
             AppDbContext db = new AppDbContext();
 
@@ -123,8 +153,7 @@ namespace Elden_Ring_Builder
 
         private void settings_btn_Click(object sender, RoutedEventArgs e)
         {
-            QrImage.Source = GenerateQr("https://i.pinimg.com/736x/2a/f1/cd/2af1cde161d06fe92a1239f70c01154a.jpg");
-
+            QrImage.Source = QrGenerator.GenerateQr("https://i.pinimg.com/736x/84/a5/ca/84a5ca952332030fa8a91600e9ecd239.jpg");
             ShowScreen(ScreenType.Settings);
         }
 
@@ -158,9 +187,22 @@ namespace Elden_Ring_Builder
             else if (sender == webview_forward && webView2.CanGoForward) webView2.GoForward();
         }
 
+        private void Balck_DualSence_Checked(object sender, RoutedEventArgs e)
+        {
+            string path = "pack://application:,,,/img/dualsence-black.png";
+            BitmapImage bitmap = new BitmapImage(new Uri(path, UriKind.Absolute));
+            DualSence_img.Source = bitmap;
+        }
+        private void White_DualSence_UnChecked(object sender, RoutedEventArgs e)
+        {
+            string path = "pack://application:,,,/img/dualsence-white.png";
+            BitmapImage bitmap = new BitmapImage(new Uri(path, UriKind.Absolute));
+            DualSence_img.Source = bitmap;
+        }
+
         // ------------------------------------------------//
 
-        
+
         //----------------- Methods ------------------//
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -170,43 +212,40 @@ namespace Elden_Ring_Builder
         
         private async void get_steam_info(object sender, RoutedEventArgs e)
         {
-            string id = insert_steam_id.Text;
-            //string id = "76561199220453620";
-            while (string.IsNullOrEmpty(id))
+            string? id = insert_steam_id.Text?.Trim();
+
+            if (string.IsNullOrEmpty(id))
             {
                 insert_steam_id.Text = "steam-id";
+
                 statsTable.Visibility = Visibility.Hidden;
                 steam_logo.Visibility = Visibility.Hidden;
                 cat_img.Visibility = Visibility.Hidden;
                 nameId.Visibility = Visibility.Hidden;
                 steam_img.Visibility = Visibility.Hidden;
+
+                Debug.WriteLine("⚠️ Steam ID not found!");
                 return;
             }
-            await SteamInfo(id);
-        }
-        
-        private static BitmapImage GenerateQr(string text)
-        {
-            using var qrGenerator = new QRCodeGenerator();
-            using var qrData = qrGenerator.CreateQrCode(text, QRCodeGenerator.ECCLevel.Q);
-            using var qrCode = new QRCode(qrData);
-            using Bitmap qrBitmap = qrCode.GetGraphic(20);
 
-            return BitmapToImageSource(qrBitmap);
-        }
+            try
+            {
+                (sender as Button)!.IsEnabled = false;
+                steam_name.Text = "";
+                steam_id.Text = "";
 
-        private static BitmapImage BitmapToImageSource(Bitmap bitmap)
-        {
-            using MemoryStream ms = new MemoryStream();
-            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            ms.Position = 0;
+                await _steamService.LoadSteamInfoAsync(id);
 
-            BitmapImage img = new BitmapImage();
-            img.BeginInit();
-            img.CacheOption = BitmapCacheOption.OnLoad;
-            img.StreamSource = ms;
-            img.EndInit();
-            return img;
+                Debug.WriteLine($"✅ Data for SteamID {id} loaded.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"❌ Error while Steam data loading: {ex.Message}");
+            }
+            finally
+            {
+                (sender as Button)!.IsEnabled = true;
+            }
         }
 
         private void OpenUrlFromInput()
@@ -283,152 +322,14 @@ namespace Elden_Ring_Builder
             }
         }
 
-        private async Task SteamInfo(string steamId)
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            DotEnv.Load(options: new DotEnvOptions(envFilePaths: new[] { @"D:\c# projects\MyProjectsC#\Elden Ring  Builder\Elden Ring Builder\Elden Ring Builder\.env" }));
-            string? apiKey = Environment.GetEnvironmentVariable("STEAM_API_KEY");
-            //string steamId = "76561199220453620";
-            if (string.IsNullOrEmpty(apiKey))
-            {
-                Debug.WriteLine("Error: variable STEAM_API_KEY not found. Check .env file.");
-                return;
-            }
-
-            string url = $"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={apiKey}&steamids={steamId}"; // img name id
-            string url_games = $"https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key={apiKey}&steamid={steamId}&include_appinfo=true";
-            string url_friends = $"https://api.steampowered.com/ISteamUser/GetFriendList/v1/?key={apiKey}&steamid={steamId}&relationship=friend";
-            string url_badges = $"https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1/?key={apiKey}&steamid={steamId}&appid=1245620";
-
-            using HttpClient client = new HttpClient();
-            try
-            {
-                //------------------User Info Request----------------------------------------//
-                string response = await client.GetStringAsync(url);
-                var jsonDoc = JsonDocument.Parse(response);
-                var player = jsonDoc.RootElement.GetProperty("response").GetProperty("players")[0];
-
-                string? personaName = player.GetProperty("personaname").GetString();
-                string? profileid = player.GetProperty("steamid").GetString();
-
-                string? user_img = player.GetProperty("avatarfull").GetString();
-
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(user_img, UriKind.Absolute);
-                bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                bitmap.EndInit();
-
-                steam_img.Source = bitmap;
-                steam_name.Text = personaName;
-                steam_id.Text = profileid;
-                //--------------------------------------------------------------------------//
-
-
-                //------------------User Games Request---------------------------------------//
-                string response_games = await client.GetStringAsync(url_games);
-                var jsonDoc_games = JsonDocument.Parse(response_games);
-                if (jsonDoc_games.RootElement.TryGetProperty("response", out JsonElement gamesRoot))
-                {
-
-                    int game_count = gamesRoot.GetProperty("game_count").GetInt32();
-                    steam_gameCount.Text = game_count.ToString();
-
-                    int totalMinutes = 0;
-                    bool eldenRingFound = false;
-
-                    if (gamesRoot.TryGetProperty("games", out JsonElement gamesArray))
-                    {
-                        foreach (var game in gamesArray.EnumerateArray())
-                        {
-                            if (game.TryGetProperty("playtime_forever", out JsonElement playtime))
-                                totalMinutes += playtime.GetInt32();
-
-                            if (!eldenRingFound && game.TryGetProperty("name", out JsonElement nameElement) &&
-                                nameElement.GetString() == "ELDEN RING" &&
-                                game.TryGetProperty("playtime_forever", out JsonElement playtimeER))
-                            {
-                                hrs_played_elden_ring.Text = $"{playtimeER.GetInt32() / 60} hrs";
-                                eldenRingFound = true;
-                            }
-                        }
-                    }
-
-                    total_hrs_count.Text = $"{totalMinutes / 60} hrs";
-
-                    if (!eldenRingFound)
-                        hrs_played_elden_ring.Text = "0 hrs";
-                }
-                //--------------------------------------------------------------------------//
-
-                //----------------Total badge count----------------------------------//
-                try
-                {
-                    string response_badge = await client.GetStringAsync(url_badges);
-                    using JsonDocument json = JsonDocument.Parse(response_badge);
-
-                    if (!json.RootElement.TryGetProperty("playerstats", out JsonElement playerStats))
-                    {
-                        Debug.WriteLine("No achievements found for this player.");
-                        return;
-                    }
-
-                    if (playerStats.TryGetProperty("achievements", out JsonElement achievements))
-                    {
-                        int total = achievements.GetArrayLength();
-                        int unlocked = achievements.EnumerateArray().Count(a =>
-                            a.TryGetProperty("achieved", out var ach) && ach.GetInt32() == 1);
-
-                        Debug.WriteLine($"{unlocked}/{total} achievements unlocked!");
-
-                        total_badges_count.Text = $"{unlocked}/{total}";
-                    }
-                    else
-                    {
-                        Debug.WriteLine("Player has no achievements data for this game.");
-                        total_badges_count.Text = "0/0";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"Error while getting achievements: {ex.Message}");
-                }
-
-                //------------------------------------------------------------------//
-
-                //------------------User Friends Request-------------------------------------//
-                string response_friends = await client.GetStringAsync(url_friends);
-
-                var jsonDoc_friends = JsonDocument.Parse(response_friends);
-                var friendsRoot = jsonDoc_friends.RootElement.GetProperty("friendslist");
-
-                if (friendsRoot.TryGetProperty("friends", out JsonElement friendsArray))
-                {
-                    int friendCount = friendsArray.GetArrayLength();
-                    friends_count.Text = friendCount.ToString();
-                }
-                else
-                {
-                    friends_count.Text = "0";
-                }
-                //--------------------------------------------------------------------------//
-
-                // check if works
-                Debug.WriteLine($"player: {personaName}");
-                Debug.WriteLine($"profile: {profileid}");
-
-                // show ui elements
-                statsTable.Visibility = Visibility.Visible;
-                steam_logo.Visibility = Visibility.Visible;
-                cat_img.Visibility = Visibility.Visible;
-                nameId.Visibility = Visibility.Visible;
-                steam_img.Visibility = Visibility.Visible;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error while request: " + ex.Message);
-            }
+            IntPtr handle = new WindowInteropHelper(this).Handle;
+            _finder.Initialize(handle);
         }
 
         //------------------------------------------------//
+
+
     }
 }
