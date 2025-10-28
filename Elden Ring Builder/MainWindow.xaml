@@ -9,8 +9,8 @@
         ResizeMode="NoResize"
         Style="{StaticResource MaterialDesignWindow}"
         Icon="/img/icons/ico100.png"
-        
         Title="Elden Ring Builder" Height="600" Width="900" Cursor="">
+    
     <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" x:Name="MainSCREEN_1">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -270,14 +270,16 @@
                          Grid.Column="1"
                          Grid.Row="1"
                          PanningMode="HorizontalOnly"
-                         Margin="20">
+                         Margin="20"
+                         >
                     <ListBox x:Name="WeaponsList"
                         Margin="40"
                         ItemsSource="{Binding weapons}"
                         Background="Transparent"
                         BorderThickness="0"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                        ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                        ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                        >
 
                         <!-- Горизонтальная раскладка -->
                         <ListBox.ItemsPanel>
@@ -290,11 +292,13 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Border Margin="10"
-                                           Padding="10"
-                                           Background="#005592"
-                                           CornerRadius="10"
-                                           BorderBrush="Transparent"
-                                           Width="150" >
+                                        Padding="10"
+                                        Background="#005592"
+                                        CornerRadius="10"
+                                        BorderBrush="Transparent"
+                                        Width="150" 
+                                        MouseLeftButtonUp="Weapon_info_LeftBtnUp"
+                                        Focusable="False">
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
                                         <!-- img -->

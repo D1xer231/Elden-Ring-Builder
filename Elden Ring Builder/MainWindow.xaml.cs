@@ -210,13 +210,45 @@ namespace Elden_Ring_Builder
                 this.DragMove();
         }
         
+        private WeaponInfo? currentWeaponInfoWindow = null;
+        private void Weapon_info_LeftBtnUp(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border border && border.DataContext is weapons weapon)
+            {
+                // Закрываем старое окно, если оно есть
+                if (currentWeaponInfoWindow != null)
+                {
+                    currentWeaponInfoWindow.Close();
+                }
+
+                // Создаём и показываем новое окно
+                currentWeaponInfoWindow = new WeaponInfo(weapon);
+                currentWeaponInfoWindow.Show();
+            }
+            //e.Handled = true;
+
+            //if (sender is Border border && border.DataContext is weapons weapon)
+            //{
+            //    // Закрываем старое окно
+            //    if (currentWeaponInfoWindow != null)
+            //        currentWeaponInfoWindow.Close();
+
+            //    // Открываем новое окно
+            //    currentWeaponInfoWindow = new WeaponInfo(weapon);
+            //    currentWeaponInfoWindow.Show();
+
+            //    // Сброс выделения
+            //    WeaponsList.SelectedItem = null;
+            //}
+        }
+
         private async void get_steam_info(object sender, RoutedEventArgs e)
         {
             string? id = insert_steam_id.Text?.Trim();
 
             if (string.IsNullOrEmpty(id))
             {
-                insert_steam_id.Text = "steam-id";
+                insert_steam_id.Text = "76561199220453620";
 
                 statsTable.Visibility = Visibility.Hidden;
                 steam_logo.Visibility = Visibility.Hidden;
@@ -329,7 +361,5 @@ namespace Elden_Ring_Builder
         }
 
         //------------------------------------------------//
-
-
     }
 }

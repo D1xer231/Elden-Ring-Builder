@@ -31,6 +31,7 @@
     <None Remove="img\icons\ico33.png" />
     <None Remove="img\icons\info.png" />
     <None Remove="img\icons\letter.png" />
+    <None Remove="img\icons\position.png" />
     <None Remove="img\icons\rectangle-list.png" />
     <None Remove="img\icons\settings.png" />
     <None Remove="img\icons\show.png" />
@@ -42,6 +43,12 @@
 
   <ItemGroup>
     <Content Include="img\icons\ico100.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="img\icons\position.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

@@ -13,7 +13,13 @@
         Style="{StaticResource MaterialDesignWindow}"
         Title="RedeemCode" Height="400" Width="300">
     <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
-        <Border Background="#111111" CornerRadius="15" Padding="20" BorderBrush="#047DD3" BorderThickness="2">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF131521"/>
+                <GradientStop Color="Black" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Border CornerRadius="15" Padding="20" BorderBrush="#047DD3" BorderThickness="2">
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
                 <StackPanel.Background>
                     <ImageBrush Stretch="Uniform"/>
