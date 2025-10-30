@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 
 namespace Elden_Ring_Builder.ViewModels
@@ -34,7 +35,21 @@ namespace Elden_Ring_Builder.ViewModels
             }
             catch
             {
-                MessageBox.Show("Error, while opening");
+                try
+                {
+                    string currentDir = Directory.GetCurrentDirectory();
+                    string path = Path.Combine(currentDir, url);
+                    path = Path.GetFullPath(path);
+
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = path,
+                        UseShellExecute = true
+                    });
+                } catch
+                {
+                    MessageBox.Show($"Unable to open the link or file.\n\nError while {url} opening");
+                }
             }
         }
 

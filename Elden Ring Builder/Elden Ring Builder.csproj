@@ -39,6 +39,7 @@
     <None Remove="img\icons\sword.png" />
     <None Remove="img\knight1.png" />
     <None Remove="img\renni.jpg" />
+    <None Remove="README.md" />
   </ItemGroup>
 
   <ItemGroup>
@@ -120,6 +121,9 @@
     </Resource>
     <Resource Include="img\knight1.png" />
     <Resource Include="img\renni1.png" />
+    <Resource Include="README.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

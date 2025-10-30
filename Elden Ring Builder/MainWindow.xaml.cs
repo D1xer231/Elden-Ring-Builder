@@ -3,6 +3,7 @@ using Elden_Ring_Builder.Services;
 using Elden_Ring_Builder.ViewModels;
 using EldenRingBuilder.Services;
 using System.Diagnostics;
+using System.Reflection.Metadata;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,9 +13,6 @@ using Application = System.Windows.Application;
 
 namespace Elden_Ring_Builder
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private AppDbContext? db;
@@ -49,35 +47,6 @@ namespace Elden_Ring_Builder
         private void hide_app_Click(object sender, RoutedEventArgs e) => this.WindowState = WindowState.Minimized;
 
         private void exit_btn_Click(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
-
-        private void open_steam_app_btn_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = "steam://open/main",
-                    UseShellExecute = true
-                });
-            }
-            catch
-            {
-                MessageBox.Show("Error, while steam opening");
-                var url = "https://store.steampowered.com/login/";
-                try
-                {
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = url,
-                        UseShellExecute = true
-                    });
-                }
-                catch
-                {
-                    MessageBox.Show("Error, while steam opening");
-                }
-            }
-        }
 
         private void users_steam_btn_Click(object sender, RoutedEventArgs e) => ShowScreen(ScreenType.Steam);
 
@@ -145,6 +114,11 @@ namespace Elden_Ring_Builder
             string path = "pack://application:,,,/img/dualsence-white.png";
             BitmapImage bitmap = new BitmapImage(new Uri(path, UriKind.Absolute));
             DualSence_img.Source = bitmap;
+        }
+
+        private void ReadMe_Open_btn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         // ------------------------------------------------//
@@ -339,5 +313,6 @@ namespace Elden_Ring_Builder
         }
 
         //------------------------------------------------//
+
     }
 }

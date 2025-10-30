@@ -47,12 +47,13 @@
                     <MenuItem Header="Hide App" Click="hide_app_Click" Foreground="White"/>
                     <MenuItem Header="Settings" Click="settings_btn_Click" Foreground="White"/>
                     <MenuItem Header="Updates" Command="{Binding UrlOpenningCommand}" CommandParameter="https://github.com/D1xer231/Elden-Ring-Builder/releases" Foreground="White"/>
+                    <MenuItem Header="README" Command="{Binding UrlOpenningCommand}" CommandParameter="README.md" Foreground="White"/>
                     <MenuItem Header="Exit" Click="exit_btn_Click" Foreground="White"/>
                 </MenuItem>
 
                 <MenuItem Header="Steam" x:Name="steam_btn" Foreground="White">
                     <Separator/>
-                    <MenuItem Header="Open Steam" Click="open_steam_app_btn_Click" Foreground="White"/>
+                    <MenuItem Header="Open Steam" Command="{Binding UrlOpenningCommand}"  CommandParameter="steam://open/main" Foreground="White"/>
                     <MenuItem Header="Author Steam" Command="{Binding UrlOpenningCommand}" CommandParameter="steam://openurl/https://steamcommunity.com/profiles/76561199220453620/" Foreground="White"/>
                     <MenuItem Header="User Info" Command="{Binding }" Foreground="White" Click="users_steam_btn_Click"/>
                 </MenuItem>
@@ -291,10 +292,10 @@
                                         </Grid.RowDefinitions>
 
                                         <!-- weapon name -->
-                                        <TextBlock Grid.Row="0" Text="{Binding name}" Foreground="#FFD700" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,20" TextWrapping="Wrap"/>
+                                        <TextBlock Grid.Row="0" Text="{Binding name}" Foreground="#FFD700" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,25" TextWrapping="Wrap"/>
 
                                         <!-- weapon image -->
-                                        <Image Grid.Row="1" Source="{Binding image_path}" Height="120" Width="220" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                                        <Image Grid.Row="1" Source="{Binding image_path}" Height="120" Width="220" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,15"/>
 
                                         <!-- stats table -->
                                         <Grid Grid.Row="2" Margin="0,5,0,0">
