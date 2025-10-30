@@ -13,7 +13,13 @@
         Topmost="True"
         Title="LoadScreen" Height="400" Width="300">
     <Grid>
-        <Border Background="#111111" CornerRadius="15" Padding="20" BorderBrush="#047DD3" BorderThickness="2">
+        <Border CornerRadius="15" Padding="20" BorderBrush="#047DD3" BorderThickness="2">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF131521"/>
+                    <GradientStop Color="Black" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Image Source="/img/icons/ico100.png"  Width="100" Height="100"/>
 

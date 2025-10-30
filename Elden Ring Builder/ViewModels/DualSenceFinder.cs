@@ -60,7 +60,6 @@ namespace Elden_Ring_Builder.ViewModels
                 {
                     Debug.WriteLine("🎮 DualSense found!");
                     _connectionStatus.Text = "DualSense Connected";
-                    //_dualSenceImg.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/dualsense-black.png"));
                 }
                 else
                 {

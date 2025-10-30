@@ -4,6 +4,7 @@ using Elden_Ring_Builder.Services;
 using Elden_Ring_Builder.ViewModels;
 using EldenRingBuilder.Services;
 using HidSharp;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileSystemGlobbing;
 using QRCoder;
 using System.Diagnostics;
@@ -58,14 +59,21 @@ namespace Elden_Ring_Builder
             DataContext = new MainViewModel();
             AppDbContext db = new AppDbContext();
 
-            List<builds> builds = db.Builds.ToList();
-            BuildsList.ItemsSource = builds;
-            List<gallery> gallery = db.Gallery.ToList();
-            GallerList.ItemsSource = gallery;
-            List<weapons> weapons = db.Weapons.ToList();
-            WeaponsList.ItemsSource = weapons;
-            List<runes> runes = db.Runes.ToList();
-            RunesList.ItemsSource = runes;
+            //List<builds> builds = db.Builds.ToList();
+            ////BuildsList.ItemsSource = builds;
+            //List<gallery> gallery = db.Gallery.ToList();
+            ////GallerList.ItemsSource = gallery;
+            //List<weapons> weapons = db.Weapons.ToList();
+            ////WeaponsList.ItemsSource = weapons;
+            //List<runes> runes = db.Runes.ToList();
+            ////RunesList.ItemsSource = runes;
+
+            //Parallel.Invoke(
+            //    () => BuildsList.ItemsSource = builds,
+            //    () => GallerList.ItemsSource = gallery,
+            //    () => WeaponsList.ItemsSource = weapons,
+            //    () => RunesList.ItemsSource = runes 
+            //    );
         }
         //--------------- Buttons Clicks ---------------//
         private void hide_app_Click(object sender, RoutedEventArgs e)
@@ -140,7 +148,6 @@ namespace Elden_Ring_Builder
         private void runeslist_btn_Click(object sender, RoutedEventArgs e)
         {
             ShowScreen(ScreenType.Runes);
-            AppDbContext db = new AppDbContext();
         }
 
         private void web_Click(object sender, RoutedEventArgs e)
@@ -354,10 +361,37 @@ namespace Elden_Ring_Builder
             }
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             IntPtr handle = new WindowInteropHelper(this).Handle;
             _finder.Initialize(handle);
+
+            var buildsTask = Task.Run(() => {
+                using var db = new AppDbContext();
+                return db.Builds.ToList();
+            });
+
+            var galleryTask = Task.Run(() => {
+                using var db = new AppDbContext();
+                return db.Gallery.ToList();
+            });
+
+            var weaponsTask = Task.Run(() => {
+                using var db = new AppDbContext();
+                return db.Weapons.ToList();
+            });
+
+            var runesTask = Task.Run(() => {
+                using var db = new AppDbContext();
+                return db.Runes.ToList();
+            });
+
+            await Task.WhenAll(buildsTask, galleryTask, weaponsTask, runesTask);
+
+            BuildsList.ItemsSource = buildsTask.Result;
+            GallerList.ItemsSource = galleryTask.Result;
+            WeaponsList.ItemsSource = weaponsTask.Result;
+            RunesList.ItemsSource = runesTask.Result;
         }
 
         //------------------------------------------------//
