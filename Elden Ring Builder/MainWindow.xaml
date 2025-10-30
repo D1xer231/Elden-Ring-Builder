@@ -383,7 +383,7 @@
 
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border Margin="10" Padding="10" Background="#005592" CornerRadius="10" BorderBrush="Transparent" Width="300">
+                                <Border Margin="10" Padding="10" Background="#005592" CornerRadius="10" BorderBrush="Transparent" Width="300" MouseLeftButtonUp="Runes_info_LeftBtnUp">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -393,13 +393,20 @@
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Text="{Binding name}" Foreground="#FFD700" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,5"/>
+                                        <Image Grid.Row="1" Source="{Binding image_path}" Height="300" Width="220" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                                        <TextBlock Grid.Row="2" Text="{Binding description}" Foreground="#D9D9D9" FontSize="13" TextAlignment="Center" TextWrapping="Wrap" Margin="0,5,0,0" FontWeight="Bold"/>
 
+                                        <!-- <wv2:WebView2 Source="{Binding map_link}" Height="400" ZoomFactor="0.5"/> -->
+                                        
+                                        <!--
                                         <Image Grid.Row="0" Source="{Binding image_path}" Height="120" Width="220" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-                                        <TextBlock Grid.Row="1" Text="{Binding name}" Foreground="#FFD700" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,5"/>
-                                        <TextBlock Grid.Row="2" Text="{Binding description}" Foreground="#D9D9D9" FontSize="13" TextAlignment="Center" TextWrapping="Wrap" Margin="0,5,0,0"/>
-                                        <TextBlock Grid.Row="3" Text="{Binding location}" Foreground="#D9D9D9" FontSize="13" TextAlignment="Center" TextWrapping="Wrap" Margin="0,5,0,0"/>
-                                        <TextBlock Grid.Row="4" Text="{Binding type}" Foreground="#D9D9D9" FontSize="13" TextAlignment="Center" TextWrapping="Wrap" Margin="0,5,0,0"/>
-                                        <TextBlock Grid.Row="5" Text="{Binding effect}" Foreground="#FFD700" FontSize="13" TextAlignment="Center" TextWrapping="Wrap" Margin="0,5,0,0"/>
+<TextBlock Grid.Row="1" Text="{Binding name}" Foreground="#FFD700" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,5"/>
+<TextBlock Grid.Row="2" Text="{Binding description}" Foreground="#D9D9D9" FontSize="13" TextAlignment="Center" TextWrapping="Wrap" Margin="0,5,0,0"/>
+<TextBlock Grid.Row="3" Text="{Binding location}" Foreground="#D9D9D9" FontSize="13" TextAlignment="Center" TextWrapping="Wrap" Margin="0,5,0,0"/>
+<TextBlock Grid.Row="4" Text="{Binding type}" Foreground="#D9D9D9" FontSize="13" TextAlignment="Center" TextWrapping="Wrap" Margin="0,5,0,0"/>
+<TextBlock Grid.Row="5" Text="{Binding effect}" Foreground="#FFD700" FontSize="13" TextAlignment="Center" TextWrapping="Wrap" Margin="0,5,0,0"/>
+                                        -->
                                     </Grid>
                                 </Border>
                             </DataTemplate>

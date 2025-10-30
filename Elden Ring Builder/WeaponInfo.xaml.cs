@@ -24,10 +24,7 @@ namespace Elden_Ring_Builder
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
-        private void close_window_btn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+        private void close_window_btn_Click(object sender, RoutedEventArgs e) => this.Close();
 
         //private void show_loc_btn_Click (object sender, RoutedEventArgs e)
         //{

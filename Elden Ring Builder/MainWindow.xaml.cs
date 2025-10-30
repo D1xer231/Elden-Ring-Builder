@@ -1,27 +1,13 @@
-﻿using dotenv.net;
-using Elden_Ring_Builder.models;
+﻿using Elden_Ring_Builder.models;
 using Elden_Ring_Builder.Services;
 using Elden_Ring_Builder.ViewModels;
 using EldenRingBuilder.Services;
-using HidSharp;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileSystemGlobbing;
-using QRCoder;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Net.Http;
-using System.Printing;
-using System.Reflection;
-using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
-using Telegram.Bot.Types;
-using static Elden_Ring_Builder.ViewModels.MainViewModel;
-using static System.Net.Mime.MediaTypeNames;
 using Application = System.Windows.Application;
 
 namespace Elden_Ring_Builder
@@ -58,33 +44,11 @@ namespace Elden_Ring_Builder
 
             DataContext = new MainViewModel();
             AppDbContext db = new AppDbContext();
-
-            //List<builds> builds = db.Builds.ToList();
-            ////BuildsList.ItemsSource = builds;
-            //List<gallery> gallery = db.Gallery.ToList();
-            ////GallerList.ItemsSource = gallery;
-            //List<weapons> weapons = db.Weapons.ToList();
-            ////WeaponsList.ItemsSource = weapons;
-            //List<runes> runes = db.Runes.ToList();
-            ////RunesList.ItemsSource = runes;
-
-            //Parallel.Invoke(
-            //    () => BuildsList.ItemsSource = builds,
-            //    () => GallerList.ItemsSource = gallery,
-            //    () => WeaponsList.ItemsSource = weapons,
-            //    () => RunesList.ItemsSource = runes 
-            //    );
         }
         //--------------- Buttons Clicks ---------------//
-        private void hide_app_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
+        private void hide_app_Click(object sender, RoutedEventArgs e) => this.WindowState = WindowState.Minimized;
 
-        private void exit_btn_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
+        private void exit_btn_Click(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
 
         private void open_steam_app_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -115,10 +79,7 @@ namespace Elden_Ring_Builder
             }
         }
 
-        private void users_steam_btn_Click(object sender, RoutedEventArgs e)
-        {
-            ShowScreen(ScreenType.Steam);
-        }
+        private void users_steam_btn_Click(object sender, RoutedEventArgs e) => ShowScreen(ScreenType.Steam);
 
         private void redeemcode_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -135,20 +96,11 @@ namespace Elden_Ring_Builder
             });
         }
 
-        private void weapons_screen_Click(object sender, RoutedEventArgs e)
-        {
-            ShowScreen(ScreenType.Weapons);
-        }
+        private void weapons_screen_Click(object sender, RoutedEventArgs e) => ShowScreen(ScreenType.Weapons);
 
-        private void change_to_mainscreen_click(object sender, RoutedEventArgs e)
-        {
-            ShowScreen(ScreenType.Main);
-        }
+        private void change_to_mainscreen_click(object sender, RoutedEventArgs e) => ShowScreen(ScreenType.Main);
 
-        private void runeslist_btn_Click(object sender, RoutedEventArgs e)
-        {
-            ShowScreen(ScreenType.Runes);
-        }
+        private void runeslist_btn_Click(object sender, RoutedEventArgs e) => ShowScreen(ScreenType.Runes);
 
         private void web_Click(object sender, RoutedEventArgs e)
         {
@@ -164,32 +116,20 @@ namespace Elden_Ring_Builder
             ShowScreen(ScreenType.Settings);
         }
 
-        private void refresh_data_btn_Click(object sender, RoutedEventArgs e)
-        {
-            refreshData();
-        }
+        private void refresh_data_btn_Click(object sender, RoutedEventArgs e) => refreshData();
 
-        private void adress_input_btn_Click(object sender, RoutedEventArgs e)
-        {
-            OpenUrlFromInput();
-        }
+        private void adress_input_btn_Click(object sender, RoutedEventArgs e)  => OpenUrlFromInput();
+
         private void adress_input_btn_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
                 OpenUrlFromInput();
         }
 
-        private void gallery_grid_btn_Click(object sender, RoutedEventArgs e)
-        {
-            ShowScreen(ScreenType.Gallery);
-        }
+        private void gallery_grid_btn_Click(object sender, RoutedEventArgs e) => ShowScreen(ScreenType.Gallery);
 
         private void webview_nav_Click(object sender, RoutedEventArgs e)
         {
-            //var tag = (sender as Button)?.Tag?.ToString();
-            //if (tag == "back" && webView2.CanGoBack) webView2.GoBack();
-            //else if (tag == "forward" && webView2.CanGoForward) webView2.GoForward(); by tags Tag="back" or Tag="forward"
-
             if (sender == webview_back && webView2.CanGoBack) webView2.GoBack();
             else if (sender == webview_forward && webView2.CanGoForward) webView2.GoForward();
         }
@@ -222,31 +162,29 @@ namespace Elden_Ring_Builder
         {
             if (sender is Border border && border.DataContext is weapons weapon)
             {
-                // Закрываем старое окно, если оно есть
                 if (currentWeaponInfoWindow != null)
                 {
                     currentWeaponInfoWindow.Close();
                 }
 
-                // Создаём и показываем новое окно
                 currentWeaponInfoWindow = new WeaponInfo(weapon);
                 currentWeaponInfoWindow.Show();
             }
-            //e.Handled = true;
+        }
 
-            //if (sender is Border border && border.DataContext is weapons weapon)
-            //{
-            //    // Закрываем старое окно
-            //    if (currentWeaponInfoWindow != null)
-            //        currentWeaponInfoWindow.Close();
+        private RuneInfo? currentRuneInfoWindow = null;
+        private void Runes_info_LeftBtnUp(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border border && border.DataContext is runes rune)
+            {
+                if (currentRuneInfoWindow != null)
+                {
+                    currentRuneInfoWindow.Close();
+                }
 
-            //    // Открываем новое окно
-            //    currentWeaponInfoWindow = new WeaponInfo(weapon);
-            //    currentWeaponInfoWindow.Show();
-
-            //    // Сброс выделения
-            //    WeaponsList.SelectedItem = null;
-            //}
+                currentRuneInfoWindow = new RuneInfo(rune);
+                currentRuneInfoWindow.Show();
+            }
         }
 
         private async void get_steam_info(object sender, RoutedEventArgs e)
@@ -349,10 +287,16 @@ namespace Elden_Ring_Builder
         {
             using (var db = new AppDbContext())
             {
-                BuildsList.ItemsSource = db.Builds.ToList();
-                WeaponsList.ItemsSource = db.Weapons.ToList();
-                RunesList.ItemsSource = db.Runes.ToList();
-                GallerList.ItemsSource = db.Gallery.ToList();
+                var collections = new (ItemsControl list, IEnumerable<object> data)[]
+                {
+                    (BuildsList, db.Builds),
+                    (WeaponsList, db.Weapons),
+                    (RunesList, db.Runes),
+                    (GallerList, db.Gallery)
+                };
+                foreach (var (list, data) in collections)
+                    list.ItemsSource = data.ToList();
+
 
                 web_open("https://en.bandainamcoent.eu/elden-ring/elden-ring");
                 adress_input.Text = "";
