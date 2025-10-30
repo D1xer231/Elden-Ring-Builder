@@ -195,7 +195,7 @@
                                            FontSize="13"
                                            FontWeight="Bold"
                                            TextAlignment="Center"
-                                           Margin="0,0,0,5"/>
+                                           Margin="0,0,0,5" TextWrapping="Wrap"/>
 
                                         <!-- stats table -->
                                         <Grid Margin="0,5,0,0">
@@ -265,63 +265,40 @@
             <StackPanel>
                 <TextBlock Text="Weapons and Stats" HorizontalAlignment="Center" FontSize="30" Foreground="White" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold" Margin="0,30,0,0"/>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                         VerticalScrollBarVisibility="Disabled"
-                         CanContentScroll="False"
-                         Grid.Column="1"
-                         Grid.Row="1"
-                         PanningMode="HorizontalOnly"
-                         Margin="20"
-                         >
-                    <ListBox x:Name="WeaponsList"
-                        Margin="40"
-                        ItemsSource="{Binding weapons}"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                        ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                        >
+                      VerticalScrollBarVisibility="Disabled"
+                      CanContentScroll="False"
+                      PanningMode="HorizontalOnly"
+                      Margin="20">
+                    <ListBox x:Name="WeaponsList" ItemsSource="{Binding weapons}" Background="Transparent" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
 
-                        <!-- Горизонтальная раскладка -->
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"/>
+                                <WrapPanel Orientation="Horizontal"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
 
-                        <!-- layaout -->
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border Margin="10"
-                                        Padding="10"
-                                        Background="#005592"
-                                        CornerRadius="10"
-                                        BorderBrush="Transparent"
-                                        Width="150" 
-                                        MouseLeftButtonUp="Weapon_info_LeftBtnUp"
-                                        Focusable="False">
-                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                <Border Margin="10" Padding="10,40, 10, 40" Background="#005592" CornerRadius="10" BorderBrush="Transparent" Width="150" MouseLeftButtonUp="Weapon_info_LeftBtnUp" BorderThickness="0">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
 
-                                        <!-- img -->
-                                        <Image Source="{Binding image_path}"
-                                          Height="120"
-                                          Width="220"
-                                          Stretch="Uniform"
-                                          Margin="0,0,0,10"
-                                          HorizontalAlignment="Center"/>
+                                        <!-- weapon name -->
+                                        <TextBlock Grid.Row="0" Text="{Binding name}" Foreground="#FFD700" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,20" TextWrapping="Wrap"/>
 
-                                        <!-- name -->
-                                        <TextBlock Text="{Binding name}"
-                                              Foreground="#D9D9D9"
-                                              FontSize="13"
-                                              FontWeight="Bold"
-                                              TextAlignment="Center"
-                                              Margin="0,0,0,5"/>
+                                        <!-- weapon image -->
+                                        <Image Grid.Row="1" Source="{Binding image_path}" Height="120" Width="220" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
                                         <!-- stats table -->
-                                        <Grid Margin="0,5,0,0">
+                                        <Grid Grid.Row="2" Margin="0,5,0,0">
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="Auto"/>
@@ -352,7 +329,7 @@
                                             <TextBlock Grid.Row="5" Grid.Column="0" Text="Critical:" Foreground="#D9D9D9" FontSize="13"/>
                                             <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding crift}" Foreground="#FFD700" FontSize="13" Margin="5,0,0,0"/>
                                         </Grid>
-                                    </StackPanel>
+                                    </Grid>
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -361,6 +338,7 @@
             </StackPanel>
             <TextBlock Text="*Weapon stats are approximate and may vary based on upgrades and player stats." HorizontalAlignment="Center" FontSize="10" Foreground="White" VerticalAlignment="Bottom" FontFamily="Sitka Heading Semibold" Margin="0,0,0,20"/>
         </Grid>
+
 
         <!-- runes info screen 1x1-->
         <Grid Grid.Column="1" Grid.Row="1" Visibility="Hidden" x:Name="runes_list_grid">
