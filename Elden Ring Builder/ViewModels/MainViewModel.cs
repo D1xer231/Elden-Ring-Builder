@@ -1,15 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Web.WebView2.WinForms;
+using Org.BouncyCastle.Asn1.Mozilla;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Elden_Ring_Builder.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string userName = Environment.UserName;
+        private string? userName = Environment.UserName;
 
         [RelayCommand]
         private void AboutApp()
@@ -52,6 +55,7 @@ namespace Elden_Ring_Builder.ViewModels
                 }
             }
         }
+
 
     }
 }

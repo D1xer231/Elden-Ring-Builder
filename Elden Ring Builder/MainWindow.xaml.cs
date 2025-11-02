@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Application = System.Windows.Application;
 
@@ -18,11 +19,12 @@ namespace Elden_Ring_Builder
         private AppDbContext? db;
         private SteamService _steamService;
         private DualSenceFinder _finder;
+        private WebOpen _webOpen;
         public MainWindow()
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
-            
+
             _steamService = new SteamService(
                @"D:\c# projects\MyProjectsC#\Elden Ring  Builder\Elden Ring Builder\Elden Ring Builder\.env",
                steam_img,
@@ -119,6 +121,12 @@ namespace Elden_Ring_Builder
         private void ReadMe_Open_btn_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void go_github_webview_Click(object sender, RoutedEventArgs e)
+        {
+            //_webOpen = new WebOpen(webView2, adress_input);
+            //_webOpen.web_open("https://github.com/D1xer231/Elden-Ring-Builder");
+            web_open("https://github.com/D1xer231/Elden-Ring-Builder");
         }
 
         // ------------------------------------------------//

@@ -421,6 +421,7 @@
         <Grid Grid.Row="1" Grid.Column="1" x:Name="web_view_screen_grid" Visibility="Hidden">
             <TextBox  Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" x:Name="adress_input" Height="25" Width="500"  VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,10" KeyDown="adress_input_btn_KeyDown"/>
             <Button Content="Go" Height="25" Width="50" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="510,15,0,0" Click="adress_input_btn_Click"/>
+            <Button VerticalAlignment="Top" HorizontalAlignment="Center" Margin="700,15,0,0" Height="25" Width="90" Content="GitHub" Click="go_github_webview_Click"/>
             <ProgressBar x:Name="ProgressBar" Width="250" Height="15" Foreground="#047DD3" Background="#333333" IsIndeterminate="True"/>
             <wv2:WebView2 Name="webView2" Height="495" Width="800" Visibility="Hidden"/>
             <Button BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,5,0,0"  Click="webview_nav_Click" x:Name="webview_back">
