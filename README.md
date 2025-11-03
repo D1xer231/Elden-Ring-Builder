@@ -1,6 +1,6 @@
 # Elden Ring Builder
 
-![.NET](https://img.shields.io/badge/.NET-9.0-blue) 
+![.NET](https://img.shields.io/badge/.NET-8.0-blue) 
 ![MySQL](https://img.shields.io/badge/MySQL-9.0-orange) 
 ![Entity Framework](https://img.shields.io/badge/Entity_Framework-Core-green) 
 ![Material Design](https://img.shields.io/badge/Material_Design-lightgrey) 
