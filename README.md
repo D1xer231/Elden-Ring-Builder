@@ -28,8 +28,8 @@ Elden Ring Builder helps players create, test, and optimize character builds. Us
 
 ## 🛠️ Tech Stack
 
-- **.NET 9** – backend logic and app framework  
-- **MySQL 9** – database storage for builds and user data  
+- **.NET 8** – backend logic and app framework  
+- **MySQL** – database storage for builds and user data  
 - **Entity Framework Core** – ORM for database interactions  
 - **Material Design** – UI framework for a modern look  
 
