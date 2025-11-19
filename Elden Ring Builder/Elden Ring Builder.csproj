@@ -26,6 +26,7 @@
     <None Remove="img\elden_ring_logo.png" />
     <None Remove="img\forward.png" />
     <None Remove="img\icons\exit.png" />
+    <None Remove="img\icons\github-sign.png" />
     <None Remove="img\icons\globe.png" />
     <None Remove="img\icons\house-chimney.png" />
     <None Remove="img\icons\ico33.png" />
@@ -37,6 +38,7 @@
     <None Remove="img\icons\show.png" />
     <None Remove="img\icons\steam_icon.png" />
     <None Remove="img\icons\sword.png" />
+    <None Remove="img\icons\telegram.png" />
     <None Remove="img\knight1.png" />
     <None Remove="img\renni.jpg" />
   </ItemGroup>
@@ -46,6 +48,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="img\icons\github-sign.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\icons\position.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -116,6 +121,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\icons\sword.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\icons\telegram.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\knight1.png" />
