@@ -280,7 +280,7 @@
 
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border Margin="10" Padding="10,40, 10, 40" Background="#005592" CornerRadius="10" BorderBrush="Transparent" Width="150" MouseLeftButtonUp="Weapon_info_LeftBtnUp" BorderThickness="0">
+                                <Border Margin="10" Padding="10,40, 10, 40" Background="#011d30" CornerRadius="10" BorderBrush="Transparent" Width="150" MouseLeftButtonUp="Weapon_info_LeftBtnUp" BorderThickness="0">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -362,7 +362,7 @@
 
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border Margin="10" Padding="10" Background="#005592" CornerRadius="10" BorderBrush="Transparent" Width="300" MouseLeftButtonUp="Runes_info_LeftBtnUp">
+                                <Border Margin="10" Padding="10" Background="#011d30" CornerRadius="10" BorderBrush="Transparent" Width="300" MouseLeftButtonUp="Runes_info_LeftBtnUp">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
