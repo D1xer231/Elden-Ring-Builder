@@ -3,7 +3,9 @@ using Elden_Ring_Builder.Services;
 using Elden_Ring_Builder.ViewModels;
 using EldenRingBuilder.Services;
 using System.Diagnostics;
+using System.Net.Http;
 using System.Reflection.Metadata;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,10 +22,12 @@ namespace Elden_Ring_Builder
         private SteamService _steamService;
         private DualSenceFinder _finder;
         private WebOpen _webOpen;
+        private readonly WeaponApiService _service = new();
         public MainWindow()
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
+            LoadWeapons();
 
             _steamService = new SteamService(
                @"D:\c# projects\MyProjectsC#\Elden Ring  Builder\Elden Ring Builder\Elden Ring Builder\.env",
@@ -140,19 +144,19 @@ namespace Elden_Ring_Builder
         }
         
         private WeaponInfo? currentWeaponInfoWindow = null;
-        private void Weapon_info_LeftBtnUp(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is Border border && border.DataContext is weapons weapon)
-            {
-                if (currentWeaponInfoWindow != null)
-                {
-                    currentWeaponInfoWindow.Close();
-                }
+        //private void Weapon_info_LeftBtnUp(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (sender is Border border && border.DataContext is weapons weapon)
+        //    {
+        //        if (currentWeaponInfoWindow != null)
+        //        {
+        //            currentWeaponInfoWindow.Close();
+        //        }
 
-                currentWeaponInfoWindow = new WeaponInfo(weapon);
-                currentWeaponInfoWindow.Show();
-            }
-        }
+        //        currentWeaponInfoWindow = new WeaponInfo(weapon);
+        //        currentWeaponInfoWindow.Show();
+        //    }
+        //}
 
         private RuneInfo? currentRuneInfoWindow = null;
         private void Runes_info_LeftBtnUp(object sender, MouseButtonEventArgs e)
@@ -272,7 +276,6 @@ namespace Elden_Ring_Builder
                 var collections = new (ItemsControl list, IEnumerable<object> data)[]
                 {
                     (BuildsList, db.Builds),
-                    (WeaponsList, db.Weapons),
                     (RunesList, db.Runes),
                     (GallerList, db.Gallery)
                 };
@@ -302,25 +305,29 @@ namespace Elden_Ring_Builder
                 return db.Gallery.ToList();
             });
 
-            var weaponsTask = Task.Run(() => {
-                using var db = new AppDbContext();
-                return db.Weapons.ToList();
-            });
+            //var weaponsTask = Task.Run(() => {
+            //    using var db = new AppDbContext();
+            //    return db.Weapons.ToList();
+            //});
 
             var runesTask = Task.Run(() => {
                 using var db = new AppDbContext();
                 return db.Runes.ToList();
             });
 
-            await Task.WhenAll(buildsTask, galleryTask, weaponsTask, runesTask);
+            await Task.WhenAll(buildsTask, galleryTask, runesTask);
 
             BuildsList.ItemsSource = buildsTask.Result;
             GallerList.ItemsSource = galleryTask.Result;
-            WeaponsList.ItemsSource = weaponsTask.Result;
+            //WeaponsList.ItemsSource = weaponsTask.Result;
             RunesList.ItemsSource = runesTask.Result;
         }
 
         //------------------------------------------------//
-
+        private async void LoadWeapons()
+        {
+            var weapons = await _service.GetWeaponsAsync();
+            WeaponsList.ItemsSource = weapons;
+        }
     }
 }

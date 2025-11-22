@@ -12,13 +12,13 @@ namespace Elden_Ring_Builder
     /// </summary>
     public partial class WeaponInfo : Window
     {
-        public WeaponInfo(weapons selectedWeapon)
-        {
-            InitializeComponent();
-            DataContext = new MainViewModel();
-            this.DataContext = selectedWeapon;
+        //public WeaponInfo(weapons selectedWeapon)
+        //{
+        //    InitializeComponent();
+        //    DataContext = new MainViewModel();
+        //    this.DataContext = selectedWeapon;
 
-        }
+        //}
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)

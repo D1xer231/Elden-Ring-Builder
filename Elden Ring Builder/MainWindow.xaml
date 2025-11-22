@@ -280,7 +280,7 @@
 
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border Margin="10" Padding="10,40, 10, 40" Background="#011d30" CornerRadius="10" BorderBrush="Transparent" Width="150" MouseLeftButtonUp="Weapon_info_LeftBtnUp" BorderThickness="0">
+                                <Border Margin="10" Padding="10,40, 10, 40" Background="#011d30" CornerRadius="10" BorderBrush="Transparent" Width="150" BorderThickness="0">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -292,10 +292,10 @@
                                         </Grid.RowDefinitions>
 
                                         <!-- weapon name -->
-                                        <TextBlock Grid.Row="0" Text="{Binding name}" Foreground="#FFD700" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,25" TextWrapping="Wrap"/>
+                                        <TextBlock Grid.Row="0" Text="{Binding Name}" Foreground="#FFD700" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,25" TextWrapping="Wrap"/>
 
                                         <!-- weapon image -->
-                                        <Image Grid.Row="1" Source="{Binding image_path}" Height="120" Width="220" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,15"/>
+                                        <Image Grid.Row="1" Source="{Binding Image}" Height="120" Width="220" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,15"/>
 
                                         <!-- stats table -->
                                         <Grid Grid.Row="2" Margin="0,5,0,0">
@@ -313,22 +313,22 @@
                                             </Grid.ColumnDefinitions>
 
                                             <TextBlock Grid.Row="0" Grid.Column="0" Text="Physical:" Foreground="#D9D9D9" FontSize="13"/>
-                                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding physic}" Foreground="#FFD700" FontSize="13" Margin="5,0,0,0"/>
+                                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Attack.Physical}" Foreground="#FFD700" FontSize="13" Margin="5,0,0,0"/>
 
                                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Magic:" Foreground="#D9D9D9" FontSize="13"/>
-                                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding magic}" Foreground="#FFD700" FontSize="13" Margin="5,0,0,0"/>
+                                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Attack.Magic}" Foreground="#FFD700" FontSize="13" Margin="5,0,0,0"/>
 
                                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Fire:" Foreground="#D9D9D9" FontSize="13"/>
-                                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding fire}" Foreground="#FFD700" FontSize="13" Margin="5,0,0,0"/>
+                                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Attack.Fire}" Foreground="#FFD700" FontSize="13" Margin="5,0,0,0"/>
 
                                             <TextBlock Grid.Row="3" Grid.Column="0" Text="Lightning:" Foreground="#D9D9D9" FontSize="13"/>
-                                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ligt}" Foreground="#FFD700" FontSize="13" Margin="5,0,0,0"/>
+                                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Attack.Lightning}" Foreground="#FFD700" FontSize="13" Margin="5,0,0,0"/>
 
                                             <TextBlock Grid.Row="4" Grid.Column="0" Text="Holy:" Foreground="#D9D9D9" FontSize="13"/>
-                                            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding holy}" Foreground="#FFD700" FontSize="13" Margin="5,0,0,0"/>
+                                            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Attack.Holy}" Foreground="#FFD700" FontSize="13" Margin="5,0,0,0"/>
 
                                             <TextBlock Grid.Row="5" Grid.Column="0" Text="Critical:" Foreground="#D9D9D9" FontSize="13"/>
-                                            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding crift}" Foreground="#FFD700" FontSize="13" Margin="5,0,0,0"/>
+                                            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Attack.Critical}" Foreground="#FFD700" FontSize="13" Margin="5,0,0,0"/>
                                         </Grid>
                                     </Grid>
                                 </Border>
