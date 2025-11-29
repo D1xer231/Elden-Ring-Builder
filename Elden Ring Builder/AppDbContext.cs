@@ -2,8 +2,12 @@
 using Elden_Ring_Builder.telegram;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.VisualBasic;
+using MySql.Data.MySqlClient;
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Windows;
 
 namespace Elden_Ring_Builder
 {
@@ -31,10 +35,28 @@ namespace Elden_Ring_Builder
 
             var connectionString = configuration.GetConnectionString("DefaultDb");
 
-            options.UseMySql(
+            try
+            {
+                options.UseMySql(
                 connectionString,
                 ServerVersion.AutoDetect(connectionString)
             );
+            }catch(MySqlConnector.MySqlException ex)
+            {
+                MessageBox.Show("Error during connection to db. Check connection settings.\n" + ex.Message, "Elden Ring Builder - Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                string user_input = Interaction.InputBox(
+                    "Tell us if u find any problems, Thank You!",
+                    "Elden Ring Builder - Report",
+                    ""
+                );
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = $"mailto:aalexandr397@gmail.com?subject=AppReport&body={user_input}",
+                    UseShellExecute = true
+                });
+                MessageBox.Show("Application will be closed.", "Elden Ring Builder - Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                Environment.Exit(0);
+            }
         }
 
     }
