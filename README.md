@@ -46,7 +46,7 @@ Elden Ring Builder helps players create, test, and optimize character builds. Us
    ```bash
       https://t.me/d1xer_231
 
-3. **download .net 8 if doesn't have**
+3. **Download .net 8 if doesn't have**
 
    ```bash
    https://dotnet.microsoft.com/en-us/download/dotnet/8.0
