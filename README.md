@@ -41,3 +41,12 @@ Elden Ring Builder helps players create, test, and optimize character builds. Us
 
    ```bash
    git clone https://github.com/D1xer231/Elden-Ring-Builder.git
+
+2. **Go to following link to get key or neded files**:
+   ```bash
+      https://t.me/d1xer_231
+
+3. **Download .net 8 if doesn't have**
+
+   ```bash
+   https://dotnet.microsoft.com/en-us/download/dotnet/8.0
