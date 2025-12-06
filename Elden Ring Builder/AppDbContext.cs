@@ -49,12 +49,18 @@ namespace Elden_Ring_Builder
                     "Elden Ring Builder - Report",
                     ""
                 );
-                Process.Start(new ProcessStartInfo
+                if (user_input.Length < 5 || user_input == null || user_input == "")
                 {
-                    FileName = $"mailto:aalexandr397@gmail.com?subject=AppReport&body={user_input}",
-                    UseShellExecute = true
-                });
-                MessageBox.Show("Application will be closed.", "Elden Ring Builder - Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("No message was sent", "Elden Ring Builder - Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                } else
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = $"mailto:aalexandr397@gmail.com?subject=AppReport&body={user_input}",
+                        UseShellExecute = true
+                    });
+                }
+                    MessageBox.Show("Application will be closed.", "Elden Ring Builder - Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 Environment.Exit(0);
             }
         }
