@@ -19,7 +19,7 @@ namespace Elden_Ring_Builder
         private AppDbContext? db;
         private SteamService _steamService;
         private DualSenceFinder _finder;
-        private WebOpen _webOpen;
+        //private WebOpen _webOpen;
         private WebView2Settings webViewSettings;
         public MainWindow()
         {
