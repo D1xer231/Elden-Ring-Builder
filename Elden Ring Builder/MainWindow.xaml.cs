@@ -20,6 +20,7 @@ namespace Elden_Ring_Builder
         private SteamService _steamService;
         private DualSenceFinder _finder;
         private WebOpen _webOpen;
+        private WebView2Settings webViewSettings;
         public MainWindow()
         {
             InitializeComponent();
@@ -76,6 +77,7 @@ namespace Elden_Ring_Builder
         private void web_Click(object sender, RoutedEventArgs e)
         {
             ShowScreen(ScreenType.WebView);
+            //webViewSettings.Web_Link_Open(webView2, adress_input, "https://en.bandainamcoent.eu/elden-ring/elden-ring");
             web_open("https://en.bandainamcoent.eu/elden-ring/elden-ring");
             adress_input.Text = "";
             webView2.Visibility = Visibility.Visible;
@@ -124,8 +126,6 @@ namespace Elden_Ring_Builder
         }
         private void go_github_webview_Click(object sender, RoutedEventArgs e)
         {
-            //_webOpen = new WebOpen(webView2, adress_input);
-            //_webOpen.web_open("https://github.com/D1xer231/Elden-Ring-Builder");
             web_open("https://github.com/D1xer231/Elden-Ring-Builder");
         }
 
@@ -253,6 +253,9 @@ namespace Elden_Ring_Builder
 
         private void web_open(string url)
         {
+            //WebView2Settings webViewSettings = new WebView2Settings();
+            //webViewSettings.WebView_PreeSet(webView2);
+            //webViewSettings.Web_Link_Open(webView2, adress_input, url);
             webView2.ZoomFactor = 0.8;
             try
             {

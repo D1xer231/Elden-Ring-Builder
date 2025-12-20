@@ -56,6 +56,5 @@ namespace Elden_Ring_Builder.ViewModels
             }
         }
 
-
     }
 }
