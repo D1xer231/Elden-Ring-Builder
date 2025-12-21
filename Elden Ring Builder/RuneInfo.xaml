@@ -29,7 +29,11 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="{Binding name}" Foreground="#FFD700" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding name}" Foreground="#FFD700" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" TextWrapping="Wrap">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#FFD700" BlurRadius="35" Opacity="1"/>
+                    </TextBlock.Effect>
+                </TextBlock>
                 <Button HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20" BorderBrush="{x:Null}" Click="close_window_btn_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="/img/icons/exit.png" Stretch="Uniform"/>

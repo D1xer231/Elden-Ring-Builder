@@ -12,11 +12,29 @@
         Title="Elden Ring Builder" Height="600" Width="900" Cursor="">
     <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" x:Name="MainSCREEN_1">
         <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF131521"/>
-                <GradientStop Color="Black" Offset="1"/>
+            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStop Color="#FF05060C" Offset="0.0"/>
+                <GradientStop Color="#FF0A0C16" Offset="0.35"/>
+                <GradientStop Color="#FF000000" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
+
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard RepeatBehavior="Forever"
+                            AutoReverse="True"
+                            Duration="0:0:8">
+
+                        <ColorAnimation
+                        Storyboard.TargetProperty="Background.(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)"
+                        To="#FF0E1020"
+                        Duration="0:0:8"/>
+
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
             <ColumnDefinition/>
@@ -154,7 +172,7 @@
                             <EventTrigger RoutedEvent="Loaded">
                                 <BeginStoryboard>
                                     <Storyboard RepeatBehavior="Forever" AutoReverse="True">
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:2"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0.3" Duration="0:0:3"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </EventTrigger>
@@ -207,13 +225,11 @@
                                            HorizontalAlignment="Center"/>
 
                                         <!-- name -->
-                                        <TextBlock Text="{Binding Name}"
-                                           Foreground="#D9D9D9"
-                                           FontSize="13"
-                                           FontWeight="Bold"
-                                           TextAlignment="Center"
-                                           Margin="0,0,0,5" TextWrapping="Wrap"/>
-
+                                        <TextBlock Text="{Binding Name}" Foreground="#D9D9D9" FontSize="13" FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,5" TextWrapping="Wrap">
+                                            <TextBlock.Effect>
+                                                <DropShadowEffect Color="#047DD3" BlurRadius="35" Opacity="1"/>
+                                            </TextBlock.Effect>
+                                        </TextBlock>
                                         <!-- stats table -->
                                         <Grid Margin="0,5,0,0">
                                             <Grid.RowDefinitions>
@@ -257,13 +273,11 @@
                                         </Grid>
 
                                         <!-- lvl -->
-                                        <TextBlock Text="{Binding LVL}"
-                                           Foreground="#D9D9D9"
-                                           FontSize="10"
-                                           FontWeight="Bold"
-                                           Margin="0,10,0,0"
-                                           HorizontalAlignment="Center"
-                                           x:Name="lvl_build_text"/>
+                                        <TextBlock Text="{Binding LVL}" Foreground="#D9D9D9" FontSize="10" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center" x:Name="lvl_build_text">
+                                            <TextBlock.Effect>
+                                                <DropShadowEffect Color="Yellow" BlurRadius="35" Opacity="1"/>
+                                            </TextBlock.Effect>
+                                        </TextBlock>
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
@@ -280,7 +294,11 @@
         <!-- weapons screen + stats -->
         <Grid Grid.Row="1" Grid.Column="1" x:Name="weapons_grid" Visibility="Hidden">
             <StackPanel>
-                <TextBlock Text="Weapons and Stats" HorizontalAlignment="Center" FontSize="30" Foreground="White" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold" Margin="0,30,0,0"/>
+                <TextBlock Text="Weapons and Stats" HorizontalAlignment="Center" FontSize="30" Foreground="White" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold" Margin="0,30,0,0">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" BlurRadius="35" Opacity="0.9"/>
+                    </TextBlock.Effect>
+                </TextBlock>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                       VerticalScrollBarVisibility="Disabled"
                       CanContentScroll="False"
@@ -308,7 +326,11 @@
                                         </Grid.RowDefinitions>
 
                                         <!-- weapon name -->
-                                        <TextBlock Grid.Row="0" Text="{Binding name}" Foreground="#FFD700" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,25" TextWrapping="Wrap"/>
+                                        <TextBlock Grid.Row="0" Text="{Binding name}" Foreground="#FFD700" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,25" TextWrapping="Wrap">
+                                            <TextBlock.Effect>
+                                                <DropShadowEffect Color="#FFD700" BlurRadius="35" Opacity="0.9"/>
+                                            </TextBlock.Effect>
+                                        </TextBlock>
 
                                         <!-- weapon image -->
                                         <Image Grid.Row="1" Source="{Binding image_path}" Height="120" Width="220" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,15"/>
@@ -360,7 +382,11 @@
         <!-- runes info screen 1x1-->
         <Grid Grid.Column="1" Grid.Row="1" Visibility="Hidden" x:Name="runes_list_grid">
             <StackPanel>
-                <TextBlock Text="Runes" HorizontalAlignment="Center" FontSize="30" Foreground="White" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold" Margin="0,10,0,0"/>
+                <TextBlock Text="Runes" HorizontalAlignment="Center" FontSize="30" Foreground="White" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold" Margin="0,10,0,0">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" BlurRadius="35" Opacity="0.9"/>
+                    </TextBlock.Effect>
+                </TextBlock>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                          VerticalScrollBarVisibility="Disabled"
                          CanContentScroll="False"
@@ -388,7 +414,11 @@
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Grid.Row="0" Text="{Binding name}" Foreground="#FFD700" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,5"/>
+                                        <TextBlock Grid.Row="0" Text="{Binding name}" Foreground="#FFD700" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,5">
+                                            <TextBlock.Effect>
+                                                <DropShadowEffect Color="#FFD700" BlurRadius="35" Opacity="1"/>
+                                            </TextBlock.Effect>
+                                        </TextBlock>
                                         <Image Grid.Row="1" Source="{Binding image_path}" Height="300" Width="220" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                                         <TextBlock Grid.Row="2" Text="{Binding description}" Foreground="#D9D9D9" FontSize="13" TextAlignment="Center" TextWrapping="Wrap" Margin="0,5,0,0" FontWeight="Bold"/>
                                     </Grid>
@@ -416,7 +446,11 @@
 
             <StackPanel Grid.Row="0" Grid.Column="1" x:Name="dualsence_connection_stackpanel" Grid.RowSpan="2">
                 <Image x:Name="DualSence_img" Source="/img/dualsence-black.png" Height="180" HorizontalAlignment="Center" Margin="0,100,0,0"/>
-                <TextBlock x:Name="DualSence_status" Text="connected" Foreground="White" FontWeight="Bold" FontSize="28" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="DualSence_status" Text="connected" Foreground="White" FontWeight="Bold" FontSize="28" HorizontalAlignment="Center">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" BlurRadius="35" Opacity="0.9"/>
+                    </TextBlock.Effect>
+                </TextBlock>
                 <ToggleButton IsChecked="True" Width="50" Margin="5" Checked="Balck_DualSence_Checked" Unchecked="White_DualSence_UnChecked"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="0" Margin="50,50,0,0">

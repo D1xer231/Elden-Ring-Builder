@@ -46,7 +46,11 @@
                         <ImageBrush ImageSource="/img/icons/exit.png" Stretch="Uniform"/>
                     </Button.Background>
                 </Button>
-                <TextBlock Text="{Binding name}" Foreground="White" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding name}" Foreground="White" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" BlurRadius="35" Opacity="1"/>
+                    </TextBlock.Effect>
+                </TextBlock>
                 <Image Source="{Binding image_path}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2"/>
 
                 <!-- Scaling -->
