@@ -18,7 +18,7 @@ namespace Elden_Ring_Builder.ViewModels
         private void AboutApp()
         {
             string aboutText = "Elden Ring Builder\n" +
-                               "Version: 2.0\n";
+                               "Version: 2.5\n";
             string descriptionText = "A simple application to help you build your character in Elden Ring.\n" +
                                      "This application is not affiliated with FromSoftware or Bandai Namco Entertainment.";
             DateTime dateTime = DateTime.Now;

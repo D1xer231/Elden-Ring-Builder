@@ -395,7 +395,11 @@
                         <DropShadowEffect Color="#FFD700" BlurRadius="35" Opacity="0.9"/>
                     </TextBlock.Effect>
                 </TextBlock>
-                <Image Width="200" Margin="0,20,0,0" OpacityMask="#FFEF0404" x:Name="class_image"/>
+                <Image Width="200" Margin="0,20,0,0" OpacityMask="#FFEF0404" x:Name="class_image">
+                    <Image.Effect>
+                        <DropShadowEffect Color="#047DD3" BlurRadius="100" ShadowDepth="0" Opacity="0.3"/>
+                    </Image.Effect>
+                </Image>
             </StackPanel>
         </Grid>
         
