@@ -295,14 +295,6 @@
             <Image Source="/img/knight1.png" Width="100" HorizontalAlignment="Right" Margin="0,400,20,0" Grid.ColumnSpan="2"/>
             <Image Source="/img/renni1.png" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,400,0,0"/>
             <Image Source="/img/elden_ring_logo.png" Width="150" VerticalAlignment="Bottom" Margin="360,0,250,20"/>
-            <Button VerticalAlignment="Bottom" BorderBrush="{x:Null}" Width="60" Height="60" Margin="600,0,0,20" Click="second_main_screen_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="/img/icons/scrollbar.png" Stretch="Uniform"/>
-                </Button.Background>
-                <Button.Effect>
-                    <DropShadowEffect Color="White" BlurRadius="15" ShadowDepth="0" Opacity="0.8"/>
-                </Button.Effect>
-            </Button>
         </Grid>
         <!--second main screen-->
         <Grid Grid.Row="1" Grid.Column="1" x:Name="second_mainscreen_grid" Visibility="Hidden">
