@@ -9,6 +9,7 @@
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
+        Loaded="MainWindow_Loaded"
         Style="{StaticResource MaterialDesignWindow}"
         Icon="/img/icons/ico100.png"
         Title="Elden Ring Builder" Height="600" Width="900" Cursor="">
@@ -102,54 +103,62 @@
 
         <!--Left tools side 1x0-->
         <Grid Grid.Row="1" Grid.Column="0">
-            <Button BorderBrush="{x:Null}" Width="30" Height="32" VerticalAlignment="Bottom" Margin="0,0,0,360" Cursor="Hand" Click="change_to_mainscreen_click">
-                <Button.Background>
-                    <ImageBrush Stretch="Uniform" ImageSource="/img/icons/house-chimney.png"/>
-                </Button.Background>
-            </Button>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                <Button BorderBrush="{x:Null}" Width="30" Height="32" Cursor="Hand" Click="change_to_mainscreen_click" Margin="0,15,0,0">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="/img/icons/house-chimney.png"/>
+                    </Button.Background>
+                </Button>
 
-            <Button BorderBrush="{x:Null}" VerticalAlignment="Bottom" Margin="0,0,0,310" Width="30" Height="32" Cursor="Hand" Click="weapons_screen_Click">
-                <Button.Background>
-                    <ImageBrush Stretch="Uniform" ImageSource="/img/icons/sword.png"/>
-                </Button.Background>
-            </Button>
+                <Button BorderBrush="{x:Null}" Width="30" Height="32" Cursor="Hand" Click="second_main_screen_Click" Margin="0,15,0,0">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="/img/icons/calculator.png"/>
+                    </Button.Background>
+                </Button>
 
-            <Button Width="30" Height="32" VerticalAlignment="Bottom" Margin="0,0,0,260" BorderBrush="{x:Null}" Click="runeslist_btn_Click" Cursor="Hand">
-                <Button.Background>
-                    <ImageBrush ImageSource="/img/icons/rectangle-list.png"/>
-                </Button.Background>
-            </Button>
+                <Button BorderBrush="{x:Null}" Width="30" Height="32" Cursor="Hand" Click="weapons_screen_Click" Margin="0,15,0,0">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="/img/icons/sword.png"/>
+                    </Button.Background>
+                </Button>
 
-            <Button x:Name="web" VerticalAlignment="Bottom" BorderBrush="{x:Null}" HorizontalAlignment="Center" Margin="0,0,0,210" Cursor="Hand" Click="web_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="/img/icons/globe.png" Stretch="Uniform"/>
-                </Button.Background>
-            </Button>
+                <Button Width="30" Height="32" BorderBrush="{x:Null}" Click="runeslist_btn_Click" Cursor="Hand" Margin="0,15,0,0">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/img/icons/rectangle-list.png"/>
+                    </Button.Background>
+                </Button>
 
-            <Button x:Name="settings_btn" BorderBrush="{x:Null}" VerticalAlignment="Bottom" Margin="0,0,0,160" Cursor="Hand" Click="settings_btn_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="/img/icons/settings.png" Stretch="Uniform"/>
-                </Button.Background>
-            </Button>
+                <Button x:Name="web" BorderBrush="{x:Null}" HorizontalAlignment="Center" Cursor="Hand" Click="web_Click" Margin="0,15,0,0">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/img/icons/globe.png" Stretch="Uniform"/>
+                    </Button.Background>
+                </Button>
 
-            <Button BorderBrush="{x:Null}" VerticalAlignment="Bottom" Margin="0,0,0,110" Width="30" Height="32" Cursor="Hand" Click="users_steam_btn_Click">
-                <Button.Background>
-                    <ImageBrush Stretch="Uniform" ImageSource="/img/icons/steam_icon.png"/>
-                </Button.Background>
-            </Button>
+                <Button x:Name="settings_btn" BorderBrush="{x:Null}" Cursor="Hand" Click="settings_btn_Click" Margin="0,15,0,0">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/img/icons/settings.png" Stretch="Uniform"/>
+                    </Button.Background>
+                </Button>
 
-            <Button x:Name="email_btn" VerticalAlignment="Bottom" Margin="0,0,0,60" Click="send_email_btn_Click" Cursor="Hand" BorderBrush="{x:Null}">
-                <Button.Background>
-                    <ImageBrush Stretch="Uniform" ImageSource="/img/icons/letter.png"/>
-                </Button.Background>
-            </Button>
+                <Button BorderBrush="{x:Null}" Width="30" Height="32" Cursor="Hand" Click="users_steam_btn_Click" Margin="0,15,0,0">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="/img/icons/steam_icon.png"/>
+                    </Button.Background>
+                </Button>
+
+                <Button x:Name="email_btn" Click="send_email_btn_Click" Cursor="Hand" BorderBrush="{x:Null}" Margin="0,15,0,0">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="/img/icons/letter.png"/>
+                    </Button.Background>
+                </Button>
 
 
-            <Button x:Name="exit_btn" Content="" Margin="5,2,2,10" VerticalAlignment="Bottom" BorderBrush="{x:Null}" Click="exit_btn_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="/img/icons/exit.png" Stretch="Uniform"/>
-                </Button.Background>
-            </Button>
+                <Button x:Name="exit_btn" Content="" BorderBrush="{x:Null}" Click="exit_btn_Click" Margin="0,15,0,0">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/img/icons/exit.png" Stretch="Uniform"/>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
         </Grid>
 
 
@@ -286,7 +295,7 @@
             <Image Source="/img/knight1.png" Width="100" HorizontalAlignment="Right" Margin="0,400,20,0" Grid.ColumnSpan="2"/>
             <Image Source="/img/renni1.png" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,400,0,0"/>
             <Image Source="/img/elden_ring_logo.png" Width="150" VerticalAlignment="Bottom" Margin="360,0,250,20"/>
-            <Button VerticalAlignment="Bottom" BorderBrush="{x:Null}" Width="40" Height="40" Margin="600,0,0,20" Click="second_main_screen_Click">
+            <Button VerticalAlignment="Bottom" BorderBrush="{x:Null}" Width="60" Height="60" Margin="600,0,0,20" Click="second_main_screen_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="/img/icons/scrollbar.png" Stretch="Uniform"/>
                 </Button.Background>
@@ -296,7 +305,7 @@
             </Button>
         </Grid>
         <!--second main screen-->
-        <Grid Grid.Row="1" Grid.Column="1" x:Name="second_mainscreen_grid" Visibility="Visible">
+        <Grid Grid.Row="1" Grid.Column="1" x:Name="second_mainscreen_grid" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -306,38 +315,95 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Width="400">
-                <!-- Заголовок -->
-                <TextBlock Text="Character Status" FontSize="24" Foreground="White" Margin="0,0,0,20"/>
-
-                <!-- Стат: Vigor -->
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5">
-                    <TextBlock Text="Vigor" Width="100" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
-                    <Slider x:Name="vigorSlider" Minimum="1" Maximum="99" Value="18" TickFrequency="1" Width="200" 
-                IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
+            <StackPanel Width="400" VerticalAlignment="Center" Margin="50,0,0,0" Grid.Row="0" Grid.Column="0">
+                <TextBlock Text="Character Status" FontSize="24" Foreground="White" Margin="15,0,0,20">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" BlurRadius="35" Opacity="1"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <ComboBox x:Name="classComboBox" Width="200" Height="30" FontSize="16" Margin="0,0,0,10" SelectionChanged="ClassComboBox_SelectionChanged">
+                    <ComboBoxItem Content="Select your class:" IsEnabled="False" Focusable="True"/>
+                    <ComboBoxItem Content="Warrior" Tag="Warrior"/>
+                    <ComboBoxItem Content="Vagabond" Tag="Vagabond"/>
+                    <ComboBoxItem Content="Hero" Tag="Hero"/>
+                    <ComboBoxItem Content="Bandit" Tag="Bandit"/>
+                    <ComboBoxItem Content="Astrologer" Tag="Astrologer"/>
+                    <ComboBoxItem Content="Prophet" Tag="Prophet"/>
+                    <ComboBoxItem Content="Samurai" Tag="Samurai"/>
+                    <ComboBoxItem Content="Prisoner" Tag="Prisoner"/>
+                    <ComboBoxItem Content="Confessor" Tag="Confessor"/>
+                    <ComboBoxItem Content="Wretch" Tag="Wretch"/>
+                </ComboBox>
+                <!-- Vigor -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5,0,5">
+                    <TextBlock Text="Vigor" Width="110" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+                    <Slider x:Name="vigorSlider" ValueChanged="StatSlider_ValueChanged" Minimum="1" Maximum="99" Value="10" TickFrequency="1" Width="200" IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding ElementName=vigorSlider, Path=Value, StringFormat=N0}" 
                    Width="40" FontSize="20" Foreground="White" TextAlignment="Right" VerticalAlignment="Center"/>
                 </StackPanel>
 
-                <!-- Стат: Mind -->
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5">
-                    <TextBlock Text="Mind" Width="100" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
-                    <Slider x:Name="mindSlider" Minimum="1" Maximum="99" Value="10" TickFrequency="1" Width="200" 
+                <!-- Mind -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5,0,5">
+                    <TextBlock Text="Mind" Width="110" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+                    <Slider x:Name="mindSlider" ValueChanged="StatSlider_ValueChanged" Minimum="1" Maximum="99" Value="10" TickFrequency="1" Width="200" 
                 IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding ElementName=mindSlider, Path=Value, StringFormat=N0}" 
                    Width="40" FontSize="20" Foreground="White" TextAlignment="Right" VerticalAlignment="Center"/>
                 </StackPanel>
 
-                <!-- Стат: Endurance -->
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5">
-                    <TextBlock Text="Endurance" Width="100" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
-                    <Slider x:Name="enduranceSlider" Minimum="1" Maximum="99" Value="16" TickFrequency="1" Width="200" 
+                <!-- Endurance -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5,0,5">
+                    <TextBlock Text="Endurance" Width="110" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+                    <Slider x:Name="enduranceSlider" ValueChanged="StatSlider_ValueChanged" Minimum="1" Maximum="99" Value="10" TickFrequency="1" Width="200" 
                 IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding ElementName=enduranceSlider, Path=Value, StringFormat=N0}" 
                    Width="40" FontSize="20" Foreground="White" TextAlignment="Right" VerticalAlignment="Center"/>
                 </StackPanel>
 
-                <!-- Остальные статы можно добавить по аналогии -->
+                <!-- Strenght -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5,0,5">
+                    <TextBlock Text="Strenght" Width="110" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+                    <Slider x:Name="strenghtSlider" ValueChanged="StatSlider_ValueChanged" Minimum="1" Maximum="99" Value="10" TickFrequency="1" Width="200" IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding ElementName=strenghtSlider, Path=Value, StringFormat=N0}" Width="40" FontSize="20" Foreground="White" TextAlignment="Right" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Dexterity -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5,0,5">
+                    <TextBlock Text="Dexterity" Width="110" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+                    <Slider x:Name="dexteritySlider" ValueChanged="StatSlider_ValueChanged" Minimum="1" Maximum="99" Value="10" TickFrequency="1" Width="200" IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding ElementName=dexteritySlider, Path=Value, StringFormat=N0}" Width="40" FontSize="20" Foreground="White" TextAlignment="Right" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Intelligence -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5,0,5">
+                    <TextBlock Text="Intelligence" Width="110" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+                    <Slider x:Name="intelligenceSlider" ValueChanged="StatSlider_ValueChanged" Minimum="1" Maximum="99" Value="10" TickFrequency="1" Width="200" IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding ElementName=intelligenceSlider, Path=Value, StringFormat=N0}" Width="40" FontSize="20" Foreground="White" TextAlignment="Right" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Faith -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5,0,5">
+                    <TextBlock Text="Faith" Width="110" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+                    <Slider x:Name="faithSlider" ValueChanged="StatSlider_ValueChanged" Minimum="1" Maximum="99" Value="10" TickFrequency="1" Width="200" IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding ElementName=faithSlider, Path=Value, StringFormat=N0}" Width="40" FontSize="20" Foreground="White" TextAlignment="Right" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Arcane -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5,0,5">
+                    <TextBlock Text="Arcane" Width="110" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+                    <Slider x:Name="arcaneSlider" ValueChanged="StatSlider_ValueChanged" Minimum="1" Maximum="99" Value="10" TickFrequency="1" Width="200" IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding ElementName=arcaneSlider, Path=Value, StringFormat=N0}" Width="40" FontSize="20" Foreground="White" TextAlignment="Right" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+            
+            <StackPanel VerticalAlignment="Center" Grid.Column="1" Grid.Row="0">
+                <TextBlock Text="Estimated Level:" FontSize="24" Foreground="White" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="estimatedLevelTextBlock" Text="" FontSize="48" FontWeight="Bold" Foreground="#FFD700" HorizontalAlignment="Center">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#FFD700" BlurRadius="35" Opacity="0.9"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Image Width="200" Margin="0,20,0,0" OpacityMask="#FFEF0404" x:Name="class_image"/>
             </StackPanel>
         </Grid>
         

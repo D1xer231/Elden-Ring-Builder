@@ -25,6 +25,7 @@
     <None Remove="img\dualSence-white.png" />
     <None Remove="img\elden_ring_logo.png" />
     <None Remove="img\forward.png" />
+    <None Remove="img\icons\calculator.png" />
     <None Remove="img\icons\exit.png" />
     <None Remove="img\icons\github-sign.png" />
     <None Remove="img\icons\globe.png" />
@@ -48,6 +49,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="img\icons\calculator.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\icons\github-sign.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

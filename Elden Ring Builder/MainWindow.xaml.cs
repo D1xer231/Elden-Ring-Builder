@@ -132,6 +132,40 @@ namespace Elden_Ring_Builder
         {
             ShowScreen(ScreenType.SecondMain);
         }
+        private void StatSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            StatsCalculating statsCalculating = new StatsCalculating();
+            statsCalculating.CalculateLevel(
+                classComboBox,
+                vigorSlider,
+                mindSlider,
+                enduranceSlider,
+                strenghtSlider,
+                dexteritySlider,
+                intelligenceSlider,
+                faithSlider,
+                arcaneSlider,
+                estimatedLevelTextBlock
+            );
+        }
+        private void ClassComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            StatsCalculating statsCalculating = new StatsCalculating();
+            statsCalculating.ClassComboBox_Image(classComboBox, class_image);
+            statsCalculating.CalculateLevel(
+                classComboBox,
+                vigorSlider,
+                mindSlider,
+                enduranceSlider,
+                strenghtSlider,
+                dexteritySlider,
+                intelligenceSlider,
+                faithSlider,
+                arcaneSlider,
+                estimatedLevelTextBlock
+            );
+        }
 
         // ------------------------------------------------//
 
@@ -328,7 +362,30 @@ namespace Elden_Ring_Builder
             GallerList.ItemsSource = galleryTask.Result;
             WeaponsList.ItemsSource = weaponsTask.Result;
             RunesList.ItemsSource = runesTask.Result;
+
+            //CalculateLevel();
         }
+
+        //private void ClassComboBox_Image()
+        //{
+        //    if (classComboBox.SelectedItem is not ComboBoxItem selectedItem)
+        //        return;
+
+        //    if (selectedItem.Tag == null)
+        //        return;
+
+        //    string? tag = selectedItem.Tag.ToString();
+
+        //    switch (tag)
+        //    {
+        //        case "Hero":
+        //            class_image.Source = new BitmapImage(
+        //                new Uri(
+        //                    "https://eldenring.wiki.fextralife.com/file/Elden-Ring/hero_class_elden_ring_wiki_guide_200px.png",
+        //                    UriKind.Absolute));
+        //            break;
+        //    }
+        //}
 
         //------------------------------------------------//
 
