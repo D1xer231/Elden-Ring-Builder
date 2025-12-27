@@ -1,9 +1,11 @@
-﻿<Window x:Class="Elden_Ring_Builder.MainWindow"
+﻿<Window xmlns:Wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"  x:Class="Elden_Ring_Builder.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Elden_Ring_Builder" xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        xmlns:local="clr-namespace:Elden_Ring_Builder"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -22,15 +24,11 @@
         <Grid.Triggers>
             <EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard>
-                    <Storyboard RepeatBehavior="Forever"
-                            AutoReverse="True"
-                            Duration="0:0:8">
-
+                    <Storyboard RepeatBehavior="Forever" AutoReverse="True" Duration="0:0:8">
                         <ColorAnimation
                         Storyboard.TargetProperty="Background.(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)"
                         To="#FF0E1020"
                         Duration="0:0:8"/>
-
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
@@ -156,7 +154,7 @@
 
 
 
-        <!-- Main sscreen 1x1-->
+        <!-- Main screen 1x1-->
         <Grid Grid.Row="1" Grid.Column="1" x:Name="main_screen_grid" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="761*"/>
@@ -164,7 +162,7 @@
             </Grid.ColumnDefinitions>
             <StackPanel Margin="0,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
                 <StackPanel Visibility="Visible">
-                    <TextBlock x:Name="textBlock" Text="Welcome to Elden Ring Builder" HorizontalAlignment="Center" FontSize="30" Foreground="White" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold">
+                    <TextBlock Text="Welcome to Elden Ring Builder" HorizontalAlignment="Center" FontSize="30" Foreground="White" VerticalAlignment="Top" FontFamily="Sitka Heading Semibold">
                         <TextBlock.Effect>
                             <DropShadowEffect Color="White" BlurRadius="35" Opacity="0.9"/>
                         </TextBlock.Effect>
@@ -284,13 +282,65 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </ScrollViewer>
-
             </StackPanel>
             <Image Source="/img/knight1.png" Width="100" HorizontalAlignment="Right" Margin="0,400,20,0" Grid.ColumnSpan="2"/>
             <Image Source="/img/renni1.png" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,400,0,0"/>
             <Image Source="/img/elden_ring_logo.png" Width="150" VerticalAlignment="Bottom" Margin="360,0,250,20"/>
+            <Button VerticalAlignment="Bottom" BorderBrush="{x:Null}" Width="40" Height="40" Margin="600,0,0,20" Click="second_main_screen_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/img/icons/scrollbar.png" Stretch="Uniform"/>
+                </Button.Background>
+                <Button.Effect>
+                    <DropShadowEffect Color="White" BlurRadius="15" ShadowDepth="0" Opacity="0.8"/>
+                </Button.Effect>
+            </Button>
         </Grid>
+        <!--second main screen-->
+        <Grid Grid.Row="1" Grid.Column="1" x:Name="second_mainscreen_grid" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="500"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
+            <StackPanel Width="400">
+                <!-- Заголовок -->
+                <TextBlock Text="Character Status" FontSize="24" Foreground="White" Margin="0,0,0,20"/>
+
+                <!-- Стат: Vigor -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5">
+                    <TextBlock Text="Vigor" Width="100" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+                    <Slider x:Name="vigorSlider" Minimum="1" Maximum="99" Value="18" TickFrequency="1" Width="200" 
+                IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding ElementName=vigorSlider, Path=Value, StringFormat=N0}" 
+                   Width="40" FontSize="20" Foreground="White" TextAlignment="Right" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Стат: Mind -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5">
+                    <TextBlock Text="Mind" Width="100" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+                    <Slider x:Name="mindSlider" Minimum="1" Maximum="99" Value="10" TickFrequency="1" Width="200" 
+                IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding ElementName=mindSlider, Path=Value, StringFormat=N0}" 
+                   Width="40" FontSize="20" Foreground="White" TextAlignment="Right" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Стат: Endurance -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5">
+                    <TextBlock Text="Endurance" Width="100" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+                    <Slider x:Name="enduranceSlider" Minimum="1" Maximum="99" Value="16" TickFrequency="1" Width="200" 
+                IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding ElementName=enduranceSlider, Path=Value, StringFormat=N0}" 
+                   Width="40" FontSize="20" Foreground="White" TextAlignment="Right" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Остальные статы можно добавить по аналогии -->
+            </StackPanel>
+        </Grid>
+        
         <!-- weapons screen + stats -->
         <Grid Grid.Row="1" Grid.Column="1" x:Name="weapons_grid" Visibility="Hidden">
             <StackPanel>

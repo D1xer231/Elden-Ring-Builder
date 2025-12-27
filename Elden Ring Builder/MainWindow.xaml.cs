@@ -128,6 +128,10 @@ namespace Elden_Ring_Builder
         {
             web_open("https://github.com/D1xer231/Elden-Ring-Builder");
         }
+        private void second_main_screen_Click(object sender, RoutedEventArgs e)
+        {
+            ShowScreen(ScreenType.SecondMain);
+        }
 
         // ------------------------------------------------//
 
@@ -228,6 +232,7 @@ namespace Elden_Ring_Builder
             gallery_screen_grid.Visibility = Visibility.Hidden;
             weapons_grid.Visibility = Visibility.Hidden;
             users_steam_grid.Visibility = Visibility.Hidden;
+            second_mainscreen_grid.Visibility = Visibility.Hidden;
 
             switch (type)
             {
@@ -238,6 +243,7 @@ namespace Elden_Ring_Builder
                 case ScreenType.Gallery: gallery_screen_grid.Visibility = Visibility.Visible; break;
                 case ScreenType.Weapons: weapons_grid.Visibility = Visibility.Visible; break;
                 case ScreenType.Steam: users_steam_grid.Visibility = Visibility.Visible; break;
+                case ScreenType.SecondMain: second_mainscreen_grid.Visibility = Visibility.Visible; break;
             }
         }
         public enum ScreenType
@@ -248,7 +254,8 @@ namespace Elden_Ring_Builder
             WebView,
             Gallery,
             Weapons,
-            Steam
+            Steam,
+            SecondMain
         }
 
         private void web_open(string url)

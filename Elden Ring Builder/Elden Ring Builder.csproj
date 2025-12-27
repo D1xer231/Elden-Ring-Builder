@@ -59,6 +59,7 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="dotenv.net" Version="4.0.0" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="5.0.0" />
     <PackageReference Include="HidSharp" Version="2.6.4" />
     <PackageReference Include="MaterialDesignThemes" Version="5.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
@@ -69,7 +70,6 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
     <PackageReference Include="QRCoder" Version="1.6.0" />
     <PackageReference Include="QRCoder.Xaml" Version="1.6.0" />
-    <PackageReference Include="Telegram.Bot" Version="22.7.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -109,6 +109,9 @@
     </Resource>
     <Resource Include="img\icons\letter.png" />
     <Resource Include="img\icons\rectangle-list.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\icons\scrollbar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\icons\settings.png">
